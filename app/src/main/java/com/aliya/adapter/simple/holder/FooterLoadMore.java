@@ -15,15 +15,15 @@ import com.aliya.adapter.simple.callback.LoadingCallBack;
  * @author a_liYa
  * @date 2017/8/24 18:11.
  */
-public class FooterLoadMore<M> implements View.OnClickListener, View.OnAttachStateChangeListener,
-        LoadingCallBack<M> {
+public class FooterLoadMore<M> implements View.OnClickListener,
+        View.OnAttachStateChangeListener, LoadingCallBack<M> {
 
     /**
      * 加载中
      */
     public static final int TYPE_LOADING = 1;
     /**
-     * 没有更多的数据
+     * 没有更多数据
      */
     public static final int TYPE_NO_MORE = 2;
     /**
@@ -38,32 +38,39 @@ public class FooterLoadMore<M> implements View.OnClickListener, View.OnAttachSta
     private RelativeLayout mLoadMoreView;
     private RelativeLayout mErrorMoreView;
     private View mNoMoreView;
-    public View rootView;
+    public View itemView;
 
     public FooterLoadMore(ViewGroup parent, LoadMoreListener<M> loadMoreListener) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        rootView = inflater.inflate(R.layout.item_footer_load_more, parent, false);
-        mLoadMoreView = (RelativeLayout) rootView.findViewById(R.id.rl_more_loading);
-        mErrorMoreView = (RelativeLayout) rootView.findViewById(R.id.rl_more_error);
-        mNoMoreView = rootView.findViewById(R.id.layout_no_more);
+        itemView = inflater.inflate(R.layout.item_footer_load_more, parent, false);
+        mLoadMoreView = (RelativeLayout) itemView.findViewById(R.id.rl_more_loading);
+        mErrorMoreView = (RelativeLayout) itemView.findViewById(R.id.rl_more_error);
+        mNoMoreView = itemView.findViewById(R.id.layout_no_more);
 
         mErrorMoreView.setOnClickListener(this);
-        rootView.addOnAttachStateChangeListener(this);
+        itemView.addOnAttachStateChangeListener(this);
+
         this.loadMoreListener = loadMoreListener;
     }
 
     public View getView() {
-        return rootView;
+        return itemView;
     }
 
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.rl_more_error) {
-
+            loadMore();
         }
     }
 
     public void setLoadState(int state) {
+        this.state = state;
+        isLoading = state == TYPE_LOADING;
+        updateState();
+    }
+
+    protected void updateState() {
         mLoadMoreView.setVisibility(state == TYPE_LOADING ? View.VISIBLE : View.GONE);
         mErrorMoreView.setVisibility(state == TYPE_ERROR ? View.VISIBLE : View.GONE);
         mNoMoreView.setVisibility(state == TYPE_NO_MORE ? View.VISIBLE : View.GONE);
@@ -71,8 +78,8 @@ public class FooterLoadMore<M> implements View.OnClickListener, View.OnAttachSta
 
     @Override
     public void onViewAttachedToWindow(View view) {
-        if (rootView == view) {
-            if (!isLoading) {
+        if (itemView == view) {
+            if (!isLoading && state != TYPE_ERROR && state != TYPE_NO_MORE) {
                 loadMore();
             }
         }
@@ -86,32 +93,30 @@ public class FooterLoadMore<M> implements View.OnClickListener, View.OnAttachSta
     }
 
     @Override
-    public void onViewDetachedFromWindow(View view) {}
+    public void onViewDetachedFromWindow(View view) {
+    }
 
     @Override
     public void onCancel() {
         setLoadState(TYPE_ERROR);
-        isLoading = false;
     }
 
     @Override
     public void onError(String errMsg, int errCode) {
         setLoadState(TYPE_ERROR);
-        isLoading = false;
     }
 
     @Override
     public void onEmpty() {
         setLoadState(TYPE_NO_MORE);
-        isLoading = false;
     }
 
     @Override
     public void onSuccess(M data) {
+        isLoading = false;
         if (loadMoreListener != null) {
             loadMoreListener.onLoadMoreSuccess(data);
         }
-        isLoading = false;
     }
 
 }

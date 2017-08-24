@@ -10,7 +10,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.aliya.adapter.BaseRecyclerAdapter;
+import com.aliya.adapter.DecorAdapter;
 import com.aliya.adapter.divider.ListDivider;
+import com.aliya.adapter.simple.adapter.DemoAdapter;
 import com.aliya.adapter.simple.adapter.DiffDataSimpleAdapter;
 import com.aliya.adapter.simple.callback.LoadMoreListener;
 import com.aliya.adapter.simple.callback.LoadingCallBack;
@@ -18,12 +20,14 @@ import com.aliya.adapter.simple.holder.FooterLoadMore;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.StringTokenizer;
 
 public class MainActivity extends AppCompatActivity {
 
     RecyclerView recycle;
-    private BaseRecyclerAdapter mAdapter;
+    private DecorAdapter mAdapter;
+
+    private int count;
+    private List<String> mList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,26 +38,27 @@ public class MainActivity extends AppCompatActivity {
 
         recycle.setLayoutManager(new LinearLayoutManager(this));
 
-        List<Object> list = new ArrayList<>();
+        mList = new ArrayList<>();
 
-        for (int i = 0; i < 20; i++) {
-            switch (i % 3) {
-                case 0:
-                    list.add(String.valueOf(i));
-                    break;
-                case 1:
-                    list.add(Integer.valueOf(i));
-                    break;
-                case 2:
-                    list.add(null);
-                    break;
-                default:
-                    list.add(String.valueOf(i));
-                    break;
-            }
+        for (int i = 0; i < 10; i++) {
+            mList.add(String.valueOf(i));
+//            switch (i % 3 + 5) {
+//                case 0:
+//                    mList.add(String.valueOf(i));
+//                    break;
+//                case 1:
+//                    mList.add(Integer.valueOf(i));
+//                    break;
+//                case 2:
+//                    mList.add(null);
+//                    break;
+//                default:
+//                    mList.add(String.valueOf(i));
+//                    break;
+//            }
         }
 
-        mAdapter = new DiffDataSimpleAdapter(list);
+        mAdapter = new DecorAdapter(new DemoAdapter(mList));
 
         recycle.setAdapter(mAdapter);
 
@@ -89,21 +94,28 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onLoadMoreSuccess(String data) {
-                List datas = mAdapter.getDatas();
-                datas.add(data);
+//                List datas = mAdapter.getDatas();
+                mList.add(data);
                 mAdapter.notifyDataSetChanged();
                 Log.e("TAG", "notifyDataSetChanged");
             }
 
             @Override
-            public void onLoadMore(final LoadingCallBack<String> callBack) {
-                Log.e("TAG", "onLoadMore");
+            public void onLoadMore(final LoadingCallBack<String> callback) {
+                Log.e("TAG", "onLoadMore " + count);
                 recycle.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        callBack.onSuccess("成功");
+                        count++;
+                        if (count == 8) {
+                            callback.onEmpty();
+                        } else if (count % 3 == 0) {
+                            callback.onError("", 1);
+                        } else {
+                            callback.onSuccess("成功 " + count);
+                        }
                     }
-                }, 5000);
+                }, 2000);
             }
 
         }).getView());

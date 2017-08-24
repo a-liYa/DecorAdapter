@@ -10,13 +10,15 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.aliya.adapter.BaseRecyclerAdapter;
-import com.aliya.adapter.OnItemClickListener;
-import com.aliya.adapter.OnItemLongClickListener;
 import com.aliya.adapter.divider.ListDivider;
 import com.aliya.adapter.simple.adapter.DiffDataSimpleAdapter;
+import com.aliya.adapter.simple.callback.LoadMoreListener;
+import com.aliya.adapter.simple.callback.LoadingCallBack;
+import com.aliya.adapter.simple.holder.FooterLoadMore;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -55,19 +57,19 @@ public class MainActivity extends AppCompatActivity {
 
         recycle.setAdapter(mAdapter);
 
-        mAdapter.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(View itemView, int position) {
-                Log.e("TAG", "onItemClick " + mAdapter.getData(position));
-            }
-        });
-        mAdapter.setOnItemLongClickListener(new OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(View itemView, int position) {
-                Log.e("TAG", "onItemLongClick " + mAdapter.getData(position));
-                return true;
-            }
-        });
+//        mAdapter.setOnItemClickListener(new OnItemClickListener() {
+//            @Override
+//            public void onItemClick(View itemView, int position) {
+//                Log.e("TAG", "onItemClick " + mAdapter.getData(position));
+//            }
+//        });
+//        mAdapter.setOnItemLongClickListener(new OnItemLongClickListener() {
+//            @Override
+//            public boolean onItemLongClick(View itemView, int position) {
+//                Log.e("TAG", "onItemLongClick " + mAdapter.getData(position));
+//                return true;
+//            }
+//        });
 
         recycle.addItemDecoration(new ListDivider(5, Color.BLUE, 0, 0, true, false, false));
 
@@ -83,13 +85,28 @@ public class MainActivity extends AppCompatActivity {
         ((TextView) inflate2.findViewById(R.id.tv)).setText("第3个header");
         mAdapter.addHeaderView(inflate2);
 
-        View footer = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
-        ((TextView) footer.findViewById(R.id.tv)).setText("我是加载更多");
-        mAdapter.setFooterLoadMore(footer);
+        mAdapter.setFooterLoadMore(new FooterLoadMore(recycle, new LoadMoreListener<String>() {
 
-        View footer0 = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
-        ((TextView) footer0.findViewById(R.id.tv)).setText("我是覆盖加载更多");
-        mAdapter.setFooterLoadMore(footer0);
+            @Override
+            public void onLoadMoreSuccess(String data) {
+                List datas = mAdapter.getDatas();
+                datas.add(data);
+                mAdapter.notifyDataSetChanged();
+                Log.e("TAG", "notifyDataSetChanged");
+            }
+
+            @Override
+            public void onLoadMore(final LoadingCallBack<String> callBack) {
+                Log.e("TAG", "onLoadMore");
+                recycle.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        callBack.onSuccess("成功");
+                    }
+                }, 5000);
+            }
+
+        }).getView());
 
         View footer1 = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
         ((TextView) footer1.findViewById(R.id.tv)).setText("第1个footer");
@@ -102,10 +119,6 @@ public class MainActivity extends AppCompatActivity {
         View refresh = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
         ((TextView) refresh.findViewById(R.id.tv)).setText("我是下拉刷新");
         mAdapter.setHeaderRefresh(refresh);
-
-        View refresh1 = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
-        ((TextView) refresh1.findViewById(R.id.tv)).setText("我要覆盖下拉刷新");
-        mAdapter.setHeaderRefresh(refresh1);
 
     }
 }

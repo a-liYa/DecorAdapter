@@ -8,8 +8,6 @@ import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.View;
 import android.view.ViewGroup;
 
-import static android.support.v7.widget.RecyclerView.NO_ID;
-
 /**
  * Adapter的装饰器
  *
@@ -250,11 +248,12 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
         if (adapter != null) {
             return adapter.getItemId(position);
         }
-        return NO_ID;
+        return super.getItemId(position);
     }
 
     @Override
     public void onViewRecycled(RecyclerView.ViewHolder holder) {
+        super.onViewRecycled(holder);
         if (adapter != null) {
             adapter.onViewRecycled(holder);
         }
@@ -265,11 +264,12 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
         if (adapter != null) {
             return adapter.onFailedToRecycleView(holder);
         }
-        return false;
+        return super.onFailedToRecycleView(holder);
     }
 
     @Override
     public void onViewAttachedToWindow(RecyclerView.ViewHolder holder) {
+        super.onViewAttachedToWindow(holder);
         if (adapter != null) {
             adapter.onViewAttachedToWindow(holder);
         }
@@ -277,14 +277,15 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
 
     @Override
     public void onViewDetachedFromWindow(RecyclerView.ViewHolder holder) {
+        super.onViewDetachedFromWindow(holder);
         if (adapter != null) {
             adapter.onViewDetachedFromWindow(holder);
         }
-
     }
 
     @Override
     public void registerAdapterDataObserver(RecyclerView.AdapterDataObserver observer) {
+        super.registerAdapterDataObserver(observer);
         if (adapter != null) {
             adapter.registerAdapterDataObserver(observer);
         }
@@ -292,6 +293,7 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
 
     @Override
     public void unregisterAdapterDataObserver(RecyclerView.AdapterDataObserver observer) {
+        super.unregisterAdapterDataObserver(observer);
         if (adapter != null) {
             adapter.unregisterAdapterDataObserver(observer);
         }
@@ -301,6 +303,7 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
     @CallSuper
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
         if (adapter != null) {
             adapter.onAttachedToRecyclerView(recyclerView);
         }
@@ -315,6 +318,7 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
 
     @Override
     public void onDetachedFromRecyclerView(RecyclerView recyclerView) {
+        super.onDetachedFromRecyclerView(recyclerView);
         if (adapter != null) {
             adapter.onDetachedFromRecyclerView(recyclerView);
         }

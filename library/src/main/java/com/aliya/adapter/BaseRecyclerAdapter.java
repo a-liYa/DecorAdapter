@@ -43,6 +43,10 @@ public abstract class BaseRecyclerAdapter<T extends Object> extends DecorAdapter
         return null;
     }
 
+    public List<T> getDatas() {
+        return datas;
+    }
+
     @Override
     public final ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         ViewHolder holder = super.onCreateViewHolder(parent, viewType);

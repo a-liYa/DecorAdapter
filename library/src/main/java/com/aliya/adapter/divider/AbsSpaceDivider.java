@@ -1,4 +1,4 @@
-package divider;
+package com.aliya.adapter.divider;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -7,7 +7,6 @@ import android.support.annotation.AttrRes;
 import android.support.annotation.ColorInt;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
-
 
 /**
  * 主要是实现日夜间模式切换

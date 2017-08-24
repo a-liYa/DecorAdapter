@@ -1,4 +1,4 @@
-package divider;
+package com.aliya.adapter.divider;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -7,7 +7,6 @@ import android.graphics.Rect;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.LayoutParams;
-import android.util.Log;
 import android.view.View;
 
 import com.aliya.adapter.DecorAdapter;
@@ -18,7 +17,7 @@ import com.aliya.adapter.DecorAdapter;
  * @author a_liYa
  * @date 16/10/22 14:30.
  */
-public class GridSpaceDivider extends AbsSpaceDivider {
+public class GridDivider extends AbsSpaceDivider {
 
     /**
      * item间隔 单位 : px
@@ -34,7 +33,7 @@ public class GridSpaceDivider extends AbsSpaceDivider {
     /**
      * @param spaceDip 间隔距离 单位 : dip
      */
-    public GridSpaceDivider(float spaceDip) {
+    public GridDivider(float spaceDip) {
         this(spaceDip, Color.TRANSPARENT, false);
     }
 
@@ -43,7 +42,7 @@ public class GridSpaceDivider extends AbsSpaceDivider {
      * @param colorOrAttrId 分割线color或attrId
      * @param isAttrId      true:表示是attrId；false:表示是Color
      */
-    public GridSpaceDivider(float spaceDip, int colorOrAttrId, boolean isAttrId) {
+    public GridDivider(float spaceDip, int colorOrAttrId, boolean isAttrId) {
         this(spaceDip, colorOrAttrId, false, isAttrId);
     }
 
@@ -53,8 +52,8 @@ public class GridSpaceDivider extends AbsSpaceDivider {
      * @param includeEdge   是否包括边缘 true 包含
      * @param isAttrId      true:表示是attrId；false:表示是Color
      */
-    public GridSpaceDivider(float spaceDip, int colorOrAttrId, boolean includeEdge,
-                            boolean isAttrId) {
+    public GridDivider(float spaceDip, int colorOrAttrId, boolean includeEdge,
+                       boolean isAttrId) {
         super(colorOrAttrId, isAttrId);
         if (isAttrId || colorOrAttrId != Color.TRANSPARENT) {
             mPaint = new Paint();

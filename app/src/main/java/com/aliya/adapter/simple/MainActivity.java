@@ -12,11 +12,10 @@ import android.widget.TextView;
 import com.aliya.adapter.DecorAdapter;
 import com.aliya.adapter.OnItemClickListener;
 import com.aliya.adapter.OnItemLongClickListener;
+import com.aliya.adapter.divider.GridDivider;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import divider.GridSpaceDivider;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -58,44 +57,44 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        recycle.addItemDecoration(new ListSpaceDivider(5, Color.BLUE,0,0, true, false, false));
-        recycle.addItemDecoration(new GridSpaceDivider(5, Color.BLUE, true, false));
+//        recycle.addItemDecoration(new ListDivider(5, Color.BLUE,0,0, true, false, false));
+        recycle.addItemDecoration(new GridDivider(5, Color.BLUE, false, false));
 
         View inflate = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
         ((TextView) inflate.findViewById(R.id.tv)).setText("第1个header");
         mAdapter.addHeaderView(inflate);
-//
-//        View inflate1 = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
-//        ((TextView) inflate1.findViewById(R.id.tv)).setText("第2个header");
-//        mAdapter.addHeaderView(inflate1);
-//
-//        View inflate2 = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
-//        ((TextView) inflate2.findViewById(R.id.tv)).setText("第3个header");
-//        mAdapter.addHeaderView(inflate2);
-//
-//        View footer = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
-//        ((TextView) footer.findViewById(R.id.tv)).setText("我是加载更多");
-//        mAdapter.setFooterLoadMore(footer);
-//
-//        View footer0 = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
-//        ((TextView) footer0.findViewById(R.id.tv)).setText("我是覆盖加载更多");
-//        mAdapter.setFooterLoadMore(footer0);
-//
+
+        View inflate1 = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
+        ((TextView) inflate1.findViewById(R.id.tv)).setText("第2个header");
+        mAdapter.addHeaderView(inflate1);
+
+        View inflate2 = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
+        ((TextView) inflate2.findViewById(R.id.tv)).setText("第3个header");
+        mAdapter.addHeaderView(inflate2);
+
+        View footer = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
+        ((TextView) footer.findViewById(R.id.tv)).setText("我是加载更多");
+        mAdapter.setFooterLoadMore(footer);
+
+        View footer0 = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
+        ((TextView) footer0.findViewById(R.id.tv)).setText("我是覆盖加载更多");
+        mAdapter.setFooterLoadMore(footer0);
+
         View footer1 = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
         ((TextView) footer1.findViewById(R.id.tv)).setText("第1个footer");
         mAdapter.addFooterView(footer1);
-//
-//        View footer2 = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
-//        ((TextView) footer2.findViewById(R.id.tv)).setText("第2个footer");
-//        mAdapter.addFooterView(footer2);
-//
-//        View refresh = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
-//        ((TextView) refresh.findViewById(R.id.tv)).setText("我是下拉刷新");
-//        mAdapter.setHeaderRefresh(refresh);
-//
-//        View refresh1 = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
-//        ((TextView) refresh1.findViewById(R.id.tv)).setText("我要覆盖下拉刷新");
-//        mAdapter.setHeaderRefresh(refresh1);
+
+        View footer2 = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
+        ((TextView) footer2.findViewById(R.id.tv)).setText("第2个footer");
+        mAdapter.addFooterView(footer2);
+
+        View refresh = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
+        ((TextView) refresh.findViewById(R.id.tv)).setText("我是下拉刷新");
+        mAdapter.setHeaderRefresh(refresh);
+
+        View refresh1 = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
+        ((TextView) refresh1.findViewById(R.id.tv)).setText("我要覆盖下拉刷新");
+        mAdapter.setHeaderRefresh(refresh1);
 
     }
 }

@@ -1,4 +1,4 @@
-package divider;
+package com.aliya.adapter.divider;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -16,7 +16,8 @@ import com.aliya.adapter.DecorAdapter;
  * @author a_liYa
  * @date 16/11/6 下午7:21.
  */
-public class ListSpaceDivider extends AbsSpaceDivider {
+public class ListDivider extends AbsSpaceDivider {
+
     private int mDividerHeight = 0;
     private int mLeftMargin = 0;
     private int mRightMargin = 0;
@@ -24,30 +25,34 @@ public class ListSpaceDivider extends AbsSpaceDivider {
     private Paint mPaint;
     private boolean mIsHorizontal = true;
     private boolean mIncludeLastItem = true;
+
     /**
      * 默认0.5dp 的间距, 没有颜色
      */
-    public ListSpaceDivider() {
+    public ListDivider() {
         this(0.5, Color.TRANSPARENT, false);
     }
+
     /**
      * @param heightDip     分割线高度
      * @param colorOrAttrId 分割线color或attrId
      * @param isAttrId      true:表示是attrId；false:表示是Color
      */
-    public ListSpaceDivider(double heightDip, int colorOrAttrId, boolean isAttrId) {
+    public ListDivider(double heightDip, int colorOrAttrId, boolean isAttrId) {
         this(heightDip, colorOrAttrId, true, isAttrId);
     }
+
     /**
      * @param heightDip     分割线高度
      * @param colorOrAttrId 分割线color或attrId
      * @param isHorizontal  是否为水平方向
      * @param isAttrId      true:表示是attrId；false:表示是Color
      */
-    public ListSpaceDivider(double heightDip, int colorOrAttrId, boolean isHorizontal,
-                            boolean isAttrId) {
+    public ListDivider(double heightDip, int colorOrAttrId, boolean isHorizontal,
+                       boolean isAttrId) {
         this(heightDip, colorOrAttrId, 0, isHorizontal, isAttrId);
     }
+
     /**
      * @param heightDip     分割线高度
      * @param margin        左右两边的边距
@@ -55,10 +60,11 @@ public class ListSpaceDivider extends AbsSpaceDivider {
      * @param isHorizontal  是否为水平方向
      * @param isAttrId      true:表示是attrId；false:表示是Color
      */
-    public ListSpaceDivider(double heightDip, int colorOrAttrId, float margin, boolean isHorizontal,
-                            boolean isAttrId) {
+    public ListDivider(double heightDip, int colorOrAttrId, float margin, boolean isHorizontal,
+                       boolean isAttrId) {
         this(heightDip, colorOrAttrId, margin, margin, isHorizontal, true, isAttrId);
     }
+
     /**
      * @param heightDip       分割线高度
      * @param colorOrAttrId   分割线color或attrId
@@ -68,9 +74,9 @@ public class ListSpaceDivider extends AbsSpaceDivider {
      * @param includeLastItem 是否包括最后一条
      * @param isAttrId        true:表示是attrId；false:表示是Color
      */
-    public ListSpaceDivider(double heightDip, int colorOrAttrId, float leftMargin,
-                            float rightMargin, boolean isHorizontal,
-                            boolean includeLastItem, boolean isAttrId) {
+    public ListDivider(double heightDip, int colorOrAttrId, float leftMargin,
+                       float rightMargin, boolean isHorizontal,
+                       boolean includeLastItem, boolean isAttrId) {
         super(colorOrAttrId, isAttrId);
         mDividerHeight = dp2px((float) heightDip);
         if (isAttrId || colorOrAttrId != Color.TRANSPARENT) {
@@ -82,6 +88,7 @@ public class ListSpaceDivider extends AbsSpaceDivider {
         mIsHorizontal = isHorizontal;
         mIncludeLastItem = includeLastItem;
     }
+
     public void drawHorizontal(Canvas c, RecyclerView parent) {
         final int left = parent.getPaddingLeft();
         final int right = parent.getWidth() - parent.getPaddingRight();
@@ -111,6 +118,7 @@ public class ListSpaceDivider extends AbsSpaceDivider {
             c.drawRect(left + mLeftMargin, top, right - mRightMargin, bottom, mPaint);
         }
     }
+
     public void drawVertical(Canvas c, RecyclerView parent) {
         final int top = parent.getPaddingTop();
         final int bottom = parent.getHeight() - parent.getPaddingBottom();
@@ -131,16 +139,15 @@ public class ListSpaceDivider extends AbsSpaceDivider {
             if (adapter != null && adapter.isInnerPosition(position)) {
                 continue;
             }
-            RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child
+            LayoutParams params = (LayoutParams) child
                     .getLayoutParams();
             int left = child.getRight() + params.rightMargin;
             int right = left + mDividerHeight;
             c.drawRect(left, top + mLeftMargin, right, bottom - mRightMargin, mPaint);
         }
     }
-    /**
-     * 绘制
-     */
+
+    // 绘制
     @Override
     public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
         if (mPaint == null) return;
@@ -151,9 +158,8 @@ public class ListSpaceDivider extends AbsSpaceDivider {
             drawVertical(c, parent);
         }
     }
-    /**
-     * 在绘制ItemDivider之前,需要调用此方法。以便RecyclerView给该条目预留空间,供我们绘制Divider
-     */
+
+    // 在绘制ItemDivider之前,需要调用此方法。以便RecyclerView给该条目预留空间,供我们绘制Divider
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State
             state) {

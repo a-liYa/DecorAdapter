@@ -8,7 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.LayoutParams;
 import android.view.View;
 
-import com.aliya.adapter.DecorAdapter;
+import com.aliya.adapter.CompatAdapter;
 
 /**
  * 自定义RecyclerView的线性布局分割线
@@ -93,9 +93,9 @@ public class ListDivider extends AbsSpaceDivider {
         final int left = parent.getPaddingLeft();
         final int right = parent.getWidth() - parent.getPaddingRight();
         int footerCount = 0;
-        DecorAdapter adapter = null;
-        if (parent.getAdapter() instanceof DecorAdapter) {
-            adapter = (DecorAdapter) parent.getAdapter();
+        CompatAdapter adapter = null;
+        if (parent.getAdapter() instanceof CompatAdapter) {
+            adapter = (CompatAdapter) parent.getAdapter();
             footerCount = adapter.getFooterCount();
         }
         final int itemCount = parent.getAdapter().getItemCount();
@@ -123,9 +123,9 @@ public class ListDivider extends AbsSpaceDivider {
         final int top = parent.getPaddingTop();
         final int bottom = parent.getHeight() - parent.getPaddingBottom();
         int footerCount = 0;
-        DecorAdapter adapter = null;
-        if (parent.getAdapter() instanceof DecorAdapter) {
-            adapter = (DecorAdapter) parent.getAdapter();
+        CompatAdapter adapter = null;
+        if (parent.getAdapter() instanceof CompatAdapter) {
+            adapter = (CompatAdapter) parent.getAdapter();
             footerCount = adapter.getFooterCount();
         }
         final int itemCount = parent.getAdapter().getItemCount();
@@ -166,8 +166,8 @@ public class ListDivider extends AbsSpaceDivider {
         super.getItemOffsets(outRect, view, parent, state);
         int position = parent.getChildAdapterPosition(view);
         int footerCount = 0;
-        if (parent.getAdapter() instanceof DecorAdapter) {
-            DecorAdapter adapter = (DecorAdapter) parent.getAdapter();
+        if (parent.getAdapter() instanceof CompatAdapter) {
+            CompatAdapter adapter = (CompatAdapter) parent.getAdapter();
             footerCount = adapter.getFooterCount();
             if (adapter.isInnerPosition(position)) {
                 return;

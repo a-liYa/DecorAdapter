@@ -9,7 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.LayoutParams;
 import android.view.View;
 
-import com.aliya.adapter.DecorAdapter;
+import com.aliya.adapter.CompatAdapter;
 
 /**
  * Grid 分割线
@@ -84,8 +84,8 @@ public class GridDivider extends AbsSpaceDivider {
 
         // 去除DecorAdapter之后的position
         int takePosition = position;
-        if (parent.getAdapter() instanceof DecorAdapter) {
-            DecorAdapter adapter = (DecorAdapter) parent.getAdapter();
+        if (parent.getAdapter() instanceof CompatAdapter) {
+            CompatAdapter adapter = (CompatAdapter) parent.getAdapter();
             if (adapter.isInnerPosition(position)) {
                 return;
             } else {
@@ -141,9 +141,9 @@ public class GridDivider extends AbsSpaceDivider {
             return;
         }
 
-        DecorAdapter adapter = null;
-        if (parent.getAdapter() instanceof DecorAdapter) {
-            adapter = (DecorAdapter) parent.getAdapter();
+        CompatAdapter adapter = null;
+        if (parent.getAdapter() instanceof CompatAdapter) {
+            adapter = (CompatAdapter) parent.getAdapter();
         }
 
         int childCount = parent.getChildCount();
@@ -200,42 +200,6 @@ public class GridDivider extends AbsSpaceDivider {
                     twY = tnY - Math.round(mSpace);
                 }
             }
-
-//            if (tnY < parent.getTop() + parent.getPaddingTop())
-//                tnY = parent.getTop() + parent.getPaddingTop();
-//            if (twY < parent.getTop() + parent.getPaddingTop())
-//                twY = parent.getTop() + parent.getPaddingTop();
-//            if (bnY < parent.getTop() + parent.getPaddingTop())
-//                bnY = parent.getTop() + parent.getPaddingTop();
-//            if (bwY < parent.getTop() + parent.getPaddingTop())
-//                bwY = parent.getTop() + parent.getPaddingTop();
-//
-//            if (tnY > parent.getBottom() - parent.getPaddingBottom())
-//                tnY = parent.getBottom() - parent.getPaddingBottom();
-//            if (twY > parent.getBottom() - parent.getPaddingBottom())
-//                twY = parent.getBottom() - parent.getPaddingBottom();
-//            if (bnY > parent.getBottom() - parent.getPaddingBottom())
-//                bnY = parent.getBottom() - parent.getPaddingBottom();
-//            if (bwY > parent.getBottom() - parent.getPaddingBottom())
-//                bwY = parent.getBottom() - parent.getPaddingBottom();
-//
-//            if (lnX < parent.getLeft() + parent.getPaddingLeft())
-//                lnX = parent.getLeft() + parent.getPaddingLeft();
-//            if (lwX < parent.getLeft() + parent.getPaddingLeft())
-//                lwX = parent.getLeft() + parent.getPaddingLeft();
-//            if (rnX < parent.getLeft() + parent.getPaddingLeft())
-//                rnX = parent.getLeft() + parent.getPaddingLeft();
-//            if (rwX < parent.getLeft() + parent.getPaddingLeft())
-//                rwX = parent.getLeft() + parent.getPaddingLeft();
-//
-//            if (lnX > parent.getRight() - parent.getPaddingRight())
-//                lnX = parent.getRight() - parent.getPaddingRight();
-//            if (lwX > parent.getRight() - parent.getPaddingRight())
-//                lwX = parent.getRight() - parent.getPaddingRight();
-//            if (rnX > parent.getRight() - parent.getPaddingRight())
-//                rnX = parent.getRight() - parent.getPaddingRight();
-//            if (rwX > parent.getRight() - parent.getPaddingRight())
-//                rwX = parent.getRight() - parent.getPaddingRight();
 
             if (lnX != lwX) {
                 c.drawRect(lwX, twY, lnX, bnY, mPaint);

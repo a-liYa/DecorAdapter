@@ -15,7 +15,7 @@ import static android.support.v7.widget.RecyclerView.NO_ID;
  * @author a_liYa
  * @date 2017/8/23 19:37.
  */
-public class DecorAdapter extends RecyclerView.Adapter {
+public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter {
 
     private static final int VIEW_TYPE_HEADER = -20000;
     private static final int VIEW_TYPE_FOOTER = -40000;
@@ -121,10 +121,12 @@ public class DecorAdapter extends RecyclerView.Adapter {
         mFooterViews.put(VIEW_TYPE_FOOTER + (VIEW_TYPE_HEADER - VIEW_TYPE_FOOTER - 1), view);
     }
 
+    @Override
     public int getHeaderCount() {
         return mHeaderViews.size();
     }
 
+    @Override
     public int getFooterCount() {
         return mFooterViews.size();
     }
@@ -137,8 +139,19 @@ public class DecorAdapter extends RecyclerView.Adapter {
         return position >= getItemCount() - getFooterCount() && position < getItemCount();
     }
 
+    @Override
     public boolean isInnerPosition(int position) {
         return isHeaderPosition(position) || isFooterPosition(position);
+    }
+
+    @Override
+    public int getFirstPosition() {
+        return mHeaderViews.size();
+    }
+
+    @Override
+    public int getLastPosition() {
+        return getItemCount() - getFooterCount() - 1;
     }
 
     public OnItemClickListener getOnItemClickListener() {

@@ -3,7 +3,7 @@ package com.aliya.adapter.simple;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -12,15 +12,19 @@ import android.widget.TextView;
 import com.aliya.adapter.DecorAdapter;
 import com.aliya.adapter.OnItemClickListener;
 import com.aliya.adapter.OnItemLongClickListener;
-import com.aliya.adapter.divider.GridDivider;
+import com.aliya.adapter.divider.ListDivider;
+import com.aliya.adapter.simple.adapter.DemoAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Grid样式 示例
+ * {@link DecorAdapter} 列表样式 示例
+ *
+ * @author a_liYa
+ * @date 2017/8/24 下午5:23.
  */
-public class GridSimpleActivity extends AppCompatActivity {
+public class DecorAdapterListSimpleActivity extends AppCompatActivity {
 
     RecyclerView recycle;
     private DecorAdapter mAdapter;
@@ -28,11 +32,11 @@ public class GridSimpleActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_grid_simple);
+        setContentView(R.layout.activity_recycler_simple);
 
         recycle = (RecyclerView) findViewById(R.id.recycler);
 
-        recycle.setLayoutManager(new GridLayoutManager(this, 3));
+        recycle.setLayoutManager(new LinearLayoutManager(this));
 
         List<String> list = new ArrayList<>();
 
@@ -58,7 +62,7 @@ public class GridSimpleActivity extends AppCompatActivity {
             }
         });
 
-        recycle.addItemDecoration(new GridDivider(5, Color.BLUE, false, false));
+        recycle.addItemDecoration(new ListDivider(5, Color.BLUE, 0, 0, true, false, false));
 
         View inflate = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
         ((TextView) inflate.findViewById(R.id.tv)).setText("第1个header");

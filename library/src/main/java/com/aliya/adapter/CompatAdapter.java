@@ -31,17 +31,11 @@ public interface CompatAdapter {
     boolean isInnerPosition(int position);
 
     /**
-     * 第一个 position
+     * 获取干净的position
      *
-     * @return .
+     * @param position .
+     * @return 去除header、footer的position
      */
-    int getFirstPosition();
-
-    /**
-     * 最后一个 position
-     *
-     * @return .
-     */
-    int getLastPosition();
+    int cleanPosition(int position);
 
 }

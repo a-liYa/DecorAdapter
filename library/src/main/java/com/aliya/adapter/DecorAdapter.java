@@ -1,5 +1,6 @@
 package com.aliya.adapter;
 
+import android.support.annotation.CallSuper;
 import android.support.v4.util.SparseArrayCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,7 +21,7 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
     private static final int VIEW_TYPE_HEADER = -20000;
     private static final int VIEW_TYPE_FOOTER = -40000;
     private static final int KEY_TAG = R.id.tag_view_holder;
-    private static final int DEFAULT_VIEW_TYPE = 0;
+    public static final int DEFAULT_VIEW_TYPE = 0;
 
     private SparseArrayCompat<View> mHeaderViews = new SparseArrayCompat<>();
     private SparseArrayCompat<View> mFooterViews = new SparseArrayCompat<>();
@@ -45,7 +46,7 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
                     if (position == RecyclerView.NO_POSITION) {
                         return; // 说明已经是废弃的Item
                     }
-                    mOnItemClickListener.onItemClick(holder.itemView, position - getHeaderCount());
+                    mOnItemClickListener.onItemClick(holder.itemView, cleanPosition(position));
                 }
             }
         }
@@ -62,11 +63,12 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
             if (tag instanceof ViewHolder) {
                 ViewHolder holder = (ViewHolder) tag;
                 if (mOnItemLongClickListener != null) {
-                    int position = holder.getLayoutPosition() - getHeaderCount();
+                    int position = holder.getLayoutPosition();
                     if (position == RecyclerView.NO_POSITION) {
                         return false; // 说明已经是废弃的Item
                     }
-                    return mOnItemLongClickListener.onItemLongClick(holder.itemView, position);
+                    return mOnItemLongClickListener.onItemLongClick(
+                            holder.itemView, cleanPosition(position));
                 }
             }
             return false;
@@ -87,7 +89,7 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
         }
     }
 
-    public RecyclerView.Adapter getAdapter() {
+    public final RecyclerView.Adapter getAdapter() {
         return adapter;
     }
 
@@ -98,7 +100,7 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
      *
      * @param view .
      */
-    public void addHeaderView(View view) {
+    public final void addHeaderView(View view) {
         mHeaderViews.put(VIEW_TYPE_HEADER + 1 + mHeaderViews.size(), view);
     }
 
@@ -109,25 +111,25 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
      *
      * @param view .
      */
-    public void addFooterView(View view) {
+    public final void addFooterView(View view) {
         mFooterViews.put(VIEW_TYPE_FOOTER + mFooterViews.size(), view);
     }
 
-    public void setHeaderRefresh(View view) {
+    public final void setHeaderRefresh(View view) {
         mHeaderViews.put(VIEW_TYPE_HEADER, view);
     }
 
-    public void setFooterLoadMore(View view) {
+    public final void setFooterLoadMore(View view) {
         mFooterViews.put(VIEW_TYPE_FOOTER + (VIEW_TYPE_HEADER - VIEW_TYPE_FOOTER - 1), view);
     }
 
     @Override
-    public int getHeaderCount() {
+    public final int getHeaderCount() {
         return mHeaderViews.size();
     }
 
     @Override
-    public int getFooterCount() {
+    public final int getFooterCount() {
         return mFooterViews.size();
     }
 
@@ -140,36 +142,32 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
     }
 
     @Override
-    public boolean isInnerPosition(int position) {
+    public final boolean isInnerPosition(int position) {
         return isHeaderPosition(position) || isFooterPosition(position);
     }
 
     @Override
-    public int getFirstPosition() {
-        return mHeaderViews.size();
+    public final int cleanPosition(int position) {
+        return position - getHeaderCount();
     }
 
-    @Override
-    public int getLastPosition() {
-        return getItemCount() - getFooterCount() - 1;
-    }
-
-    public OnItemClickListener getOnItemClickListener() {
+    public final OnItemClickListener getOnItemClickListener() {
         return mOnItemClickListener;
     }
 
-    public void setOnItemClickListener(OnItemClickListener listener) {
+    public final void setOnItemClickListener(OnItemClickListener listener) {
         mOnItemClickListener = listener;
     }
 
-    public OnItemLongClickListener getOnItemLongClickListener() {
+    public final OnItemLongClickListener getOnItemLongClickListener() {
         return mOnItemLongClickListener;
     }
 
-    public void setOnItemLongClickListener(OnItemLongClickListener listener) {
+    public final void setOnItemLongClickListener(OnItemLongClickListener listener) {
         mOnItemLongClickListener = listener;
     }
 
+    @CallSuper
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (mHeaderViews.get(viewType) != null) {
@@ -183,12 +181,13 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
         return null;
     }
 
+    @CallSuper
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (isInnerPosition(position)) return;
         onSetupItemClick(holder);
         if (adapter != null) {
-            adapter.onBindViewHolder(holder, position - getHeaderCount());
+            adapter.onBindViewHolder(holder, cleanPosition(position));
         }
     }
 
@@ -197,7 +196,7 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
      *
      * @param holder ViewHolder
      */
-    protected void onSetupItemClick(ViewHolder holder) {
+    protected final void onSetupItemClick(ViewHolder holder) {
         if (holder != null && holder.itemView != null) {
             if (mOnItemClickListener != null) {
                 holder.itemView.setOnClickListener(innerOnClick);
@@ -209,6 +208,7 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
         }
     }
 
+    @CallSuper
     @Override
     public int getItemCount() {
         if (adapter != null) {
@@ -217,6 +217,7 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
         return getHeaderCount() + getFooterCount();
     }
 
+    @CallSuper
     @Override
     public int getItemViewType(int position) {
         if (isHeaderPosition(position)) { // 页眉
@@ -226,7 +227,7 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
         }
 
         if (adapter != null) {
-            return adapter.getItemViewType(position - getHeaderCount());
+            return adapter.getItemViewType(cleanPosition(position));
         }
         return DEFAULT_VIEW_TYPE;
     }
@@ -297,6 +298,7 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
     }
 
     // 解决Grid布局时添加Header、footer合并一行
+    @CallSuper
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         if (adapter != null) {
@@ -318,7 +320,7 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
         }
     }
 
-    private class WrapSpanSizeLookup extends GridLayoutManager.SpanSizeLookup{
+    private class WrapSpanSizeLookup extends GridLayoutManager.SpanSizeLookup {
 
         int spanCount;
 
@@ -335,13 +337,13 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
                 return spanCount;
             }
             if (spanSizeLookup != null) {
-                return spanSizeLookup.getSpanSize(position - getFooterCount());
+                return spanSizeLookup.getSpanSize(cleanPosition(position));
             }
             return 1;
         }
     }
 
-    private static class SimpleViewHolder extends RecyclerView.ViewHolder {
+    private static final class SimpleViewHolder extends RecyclerView.ViewHolder {
         public SimpleViewHolder(View itemView) {
             super(itemView);
         }

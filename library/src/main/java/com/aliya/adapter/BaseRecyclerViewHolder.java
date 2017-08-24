@@ -31,4 +31,5 @@ public abstract class BaseRecyclerViewHolder<T> extends RecyclerView.ViewHolder 
      * 把数据绑定到View上
      */
     public abstract void bindView(T data);
+
 }

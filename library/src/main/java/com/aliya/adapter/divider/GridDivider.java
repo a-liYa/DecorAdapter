@@ -89,7 +89,7 @@ public class GridDivider extends AbsSpaceDivider {
             if (adapter.isInnerPosition(position)) {
                 return;
             } else {
-                takePosition = position - adapter.getHeaderCount();
+                takePosition = adapter.cleanPosition(position);
             }
         }
 
@@ -162,7 +162,7 @@ public class GridDivider extends AbsSpaceDivider {
                 if (adapter.isInnerPosition(position)) {
                     continue;
                 } else {
-                    takePosition = position - adapter.getHeaderCount();
+                    takePosition = adapter.cleanPosition(position);
                 }
             }
             final LayoutParams lp = (LayoutParams) child.getLayoutParams();

@@ -1,9 +1,11 @@
-package com.aliya.adapter.simple;
+package com.aliya.adapter.simple.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.aliya.adapter.simple.R;
 
 import java.util.List;
 
@@ -13,11 +15,11 @@ import java.util.List;
  * @author a_liYa
  * @date 2017/8/23 20:17.
  */
-public class DemoAdapter extends RecyclerView.Adapter {
+public class DemoAdapter extends RecyclerView.Adapter{
 
     List<String> datas;
 
-    public DemoAdapter(List<String> datas) {
+    public DemoAdapter(List<String> datas){
         this.datas = datas;
     }
 
@@ -35,6 +37,7 @@ public class DemoAdapter extends RecyclerView.Adapter {
     public int getItemCount() {
         return datas.size();
     }
+
 
     class Holder extends RecyclerView.ViewHolder {
 

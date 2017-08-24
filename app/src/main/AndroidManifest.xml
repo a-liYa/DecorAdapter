@@ -16,8 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ListSimpleActivity"></activity>
-        <activity android:name=".GridSimpleActivity"></activity>
+        <activity android:name=".DecorAdapterListSimpleActivity"></activity>
+        <activity android:name=".DecorAdapterGridSimpleActivity"></activity>
+        <activity android:name=".AdapterUnifyDataSimpleActivity"></activity>
+        <activity android:name=".AdapterDiffDataSimpleActivity"></activity>
     </application>
 
 </manifest>

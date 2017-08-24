@@ -37,6 +37,7 @@ public abstract class AbsSpaceDivider extends RecyclerView.ItemDecoration {
     /**
      * 获取当前日夜间模式分割线的颜色
      *
+     * @param context .
      * @return Color的int值
      */
     public int getUiModeColor(Context context) {

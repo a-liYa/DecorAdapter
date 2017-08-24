@@ -62,20 +62,6 @@ public class MainActivity extends AppCompatActivity {
 
         recycle.setAdapter(mAdapter);
 
-//        mAdapter.setOnItemClickListener(new OnItemClickListener() {
-//            @Override
-//            public void onItemClick(View itemView, int position) {
-//                Log.e("TAG", "onItemClick " + mAdapter.getData(position));
-//            }
-//        });
-//        mAdapter.setOnItemLongClickListener(new OnItemLongClickListener() {
-//            @Override
-//            public boolean onItemLongClick(View itemView, int position) {
-//                Log.e("TAG", "onItemLongClick " + mAdapter.getData(position));
-//                return true;
-//            }
-//        });
-
         recycle.addItemDecoration(new ListDivider(5, Color.BLUE, 0, 0, true, false, false));
 
         View inflate = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);

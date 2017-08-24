@@ -4,7 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 /**
- * RecyclerView的拓展, 结合BaseRecyclerAdapter使用
+ * {@link RecyclerView.ViewHolder}的拓展, 结合{@link BaseRecyclerAdapter}使用
  *
  * @param <T> 数据的泛型
  * @author a_liYa
@@ -28,7 +28,9 @@ public abstract class BaseRecyclerViewHolder<T> extends RecyclerView.ViewHolder 
     }
 
     /**
-     * 把数据绑定到View上
+     * bind data to view
+     *
+     * @param data .
      */
     public abstract void bindView(T data);
 

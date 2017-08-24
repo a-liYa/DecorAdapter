@@ -11,7 +11,7 @@ import android.view.View;
 public interface OnItemClickListener {
 
     /**
-     * item点击回调
+     * item 点击回调
      *
      * @param itemView .
      * @param position .

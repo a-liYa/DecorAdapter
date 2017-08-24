@@ -3,6 +3,7 @@ package com.aliya.adapter.simple;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -17,7 +18,10 @@ import com.aliya.adapter.divider.ListDivider;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+/**
+ * 列表样式 示例
+ */
+public class ListSimpleActivity extends AppCompatActivity {
 
     RecyclerView recycle;
     private DecorAdapter mAdapter;
@@ -25,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_list_simple);
 
         recycle = (RecyclerView) findViewById(R.id.recycler);
 
@@ -92,6 +96,6 @@ public class MainActivity extends AppCompatActivity {
         View refresh1 = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
         ((TextView) refresh1.findViewById(R.id.tv)).setText("我要覆盖下拉刷新");
         mAdapter.setHeaderRefresh(refresh1);
-
     }
+
 }

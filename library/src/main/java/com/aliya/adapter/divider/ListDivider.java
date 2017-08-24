@@ -168,6 +168,7 @@ public class ListDivider extends AbsSpaceDivider {
         int footerCount = 0;
         if (parent.getAdapter() instanceof DecorAdapter) {
             DecorAdapter adapter = (DecorAdapter) parent.getAdapter();
+            footerCount = adapter.getFooterCount();
             if (adapter.isInnerPosition(position)) {
                 return;
             }

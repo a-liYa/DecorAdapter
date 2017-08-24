@@ -3,7 +3,7 @@ package com.aliya.adapter.simple;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -12,12 +12,15 @@ import android.widget.TextView;
 import com.aliya.adapter.DecorAdapter;
 import com.aliya.adapter.OnItemClickListener;
 import com.aliya.adapter.OnItemLongClickListener;
-import com.aliya.adapter.divider.ListDivider;
+import com.aliya.adapter.divider.GridDivider;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+/**
+ * Grid样式 示例
+ */
+public class GridSimpleActivity extends AppCompatActivity {
 
     RecyclerView recycle;
     private DecorAdapter mAdapter;
@@ -25,11 +28,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_grid_simple);
 
         recycle = (RecyclerView) findViewById(R.id.recycler);
 
-        recycle.setLayoutManager(new LinearLayoutManager(this));
+        recycle.setLayoutManager(new GridLayoutManager(this, 3));
 
         List<String> list = new ArrayList<>();
 
@@ -55,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        recycle.addItemDecoration(new ListDivider(5, Color.BLUE,0,0, true, false, false));
+        recycle.addItemDecoration(new GridDivider(5, Color.BLUE, false, false));
 
         View inflate = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
         ((TextView) inflate.findViewById(R.id.tv)).setText("第1个header");
@@ -92,6 +95,6 @@ public class MainActivity extends AppCompatActivity {
         View refresh1 = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
         ((TextView) refresh1.findViewById(R.id.tv)).setText("我要覆盖下拉刷新");
         mAdapter.setHeaderRefresh(refresh1);
-
     }
+
 }

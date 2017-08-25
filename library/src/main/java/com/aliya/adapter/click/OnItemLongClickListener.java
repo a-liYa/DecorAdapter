@@ -1,4 +1,4 @@
-package com.aliya.adapter;
+package com.aliya.adapter.click;
 
 import android.view.View;
 

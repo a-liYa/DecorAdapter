@@ -5,16 +5,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.View;
-import android.widget.TextView;
 
 import com.aliya.adapter.BaseRecyclerAdapter;
-import com.aliya.adapter.DecorAdapter;
-import com.aliya.adapter.divider.ListDivider;
-import com.aliya.adapter.simple.adapter.DemoAdapter;
-import com.aliya.adapter.simple.adapter.DiffDataSimpleAdapter;
+import com.aliya.adapter.divider.ListSpaceDivider;
 import com.aliya.adapter.simple.adapter.UnifyDataSimpleAdapter;
+import com.aliya.adapter.page.LoadMore;
 import com.aliya.adapter.simple.callback.LoadMoreListener;
 import com.aliya.adapter.simple.callback.LoadingCallBack;
 import com.aliya.adapter.simple.holder.FooterLoadMore;
@@ -63,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
         recycle.setAdapter(mAdapter);
 
-        recycle.addItemDecoration(new ListDivider(5, Color.BLUE, 0, 0, true, true, false));
+        recycle.addItemDecoration(new ListSpaceDivider(5, Color.BLUE, 0, 0, true, true, false));
 
 //        View inflate = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
 //        ((TextView) inflate.findViewById(R.id.tv)).setText("第1个header");
@@ -80,20 +75,18 @@ public class MainActivity extends AppCompatActivity {
         mAdapter.setFooterLoadMore(new FooterLoadMore(recycle, new LoadMoreListener<String>() {
 
             @Override
-            public void onLoadMoreSuccess(String data) {
+            public void onLoadMoreSuccess(String data, LoadMore loadMore) {
 //                List datas = mAdapter.getDatas();
 //                mList.add(data);
 //                mAdapter.notifyDataSetChanged();
                 List<String> list = new ArrayList<>();
                 list.add(data);
                 mAdapter.addData(list, true);
-//                Log.e("TAG", "notifyDataSetChanged");
-
+                loadMore.setState(LoadMore.TYPE_NO_MORE);
             }
 
             @Override
             public void onLoadMore(final LoadingCallBack<String> callback) {
-//                Log.e("TAG", "onLoadMore " + count);
                 recycle.postDelayed(new Runnable() {
                     @Override
                     public void run() {

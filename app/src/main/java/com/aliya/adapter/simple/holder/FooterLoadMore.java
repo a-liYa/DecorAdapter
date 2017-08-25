@@ -1,11 +1,12 @@
 package com.aliya.adapter.simple.holder;
 
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
+import com.aliya.adapter.page.PageItem;
 import com.aliya.adapter.simple.R;
+import com.aliya.adapter.page.LoadMore;
 import com.aliya.adapter.simple.callback.LoadMoreListener;
 import com.aliya.adapter.simple.callback.LoadingCallBack;
 
@@ -15,21 +16,8 @@ import com.aliya.adapter.simple.callback.LoadingCallBack;
  * @author a_liYa
  * @date 2017/8/24 18:11.
  */
-public class FooterLoadMore<M> implements View.OnClickListener,
+public class FooterLoadMore<M> extends PageItem implements LoadMore, View.OnClickListener,
         View.OnAttachStateChangeListener, LoadingCallBack<M> {
-
-    /**
-     * 加载中
-     */
-    public static final int TYPE_LOADING = 1;
-    /**
-     * 没有更多数据
-     */
-    public static final int TYPE_NO_MORE = 2;
-    /**
-     * 失败
-     */
-    public static final int TYPE_ERROR = 3;
 
     private int state = 0;
     private boolean isLoading = false;
@@ -38,23 +26,18 @@ public class FooterLoadMore<M> implements View.OnClickListener,
     private RelativeLayout mLoadMoreView;
     private RelativeLayout mErrorMoreView;
     private View mNoMoreView;
-    public View itemView;
 
     public FooterLoadMore(ViewGroup parent, LoadMoreListener<M> loadMoreListener) {
-        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        itemView = inflater.inflate(R.layout.item_footer_load_more, parent, false);
-        mLoadMoreView = (RelativeLayout) itemView.findViewById(R.id.rl_more_loading);
-        mErrorMoreView = (RelativeLayout) itemView.findViewById(R.id.rl_more_error);
-        mNoMoreView = itemView.findViewById(R.id.layout_no_more);
+        super(parent, R.layout.item_footer_load_more);
+
+        mLoadMoreView = findViewById(R.id.rl_more_loading);
+        mErrorMoreView = findViewById(R.id.rl_more_error);
+        mNoMoreView = findViewById(R.id.layout_no_more);
 
         mErrorMoreView.setOnClickListener(this);
         itemView.addOnAttachStateChangeListener(this);
 
         this.loadMoreListener = loadMoreListener;
-    }
-
-    public View getView() {
-        return itemView;
     }
 
     @Override
@@ -64,7 +47,7 @@ public class FooterLoadMore<M> implements View.OnClickListener,
         }
     }
 
-    public void setLoadState(int state) {
+    public void setState(int state) {
         this.state = state;
         isLoading = state == TYPE_LOADING;
         updateState();
@@ -86,7 +69,7 @@ public class FooterLoadMore<M> implements View.OnClickListener,
     }
 
     private void loadMore() {
-        setLoadState(TYPE_LOADING);
+        setState(TYPE_LOADING);
         if (loadMoreListener != null) {
             loadMoreListener.onLoadMore(this);
         }
@@ -98,24 +81,24 @@ public class FooterLoadMore<M> implements View.OnClickListener,
 
     @Override
     public void onCancel() {
-        setLoadState(TYPE_ERROR);
+        setState(TYPE_ERROR);
     }
 
     @Override
     public void onError(String errMsg, int errCode) {
-        setLoadState(TYPE_ERROR);
+        setState(TYPE_ERROR);
     }
 
     @Override
     public void onEmpty() {
-        setLoadState(TYPE_NO_MORE);
+        setState(TYPE_NO_MORE);
     }
 
     @Override
     public void onSuccess(M data) {
         isLoading = false;
         if (loadMoreListener != null) {
-            loadMoreListener.onLoadMoreSuccess(data);
+            loadMoreListener.onLoadMoreSuccess(data, this);
         }
     }
 

@@ -8,6 +8,9 @@ import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.aliya.adapter.click.OnItemClickListener;
+import com.aliya.adapter.click.OnItemLongClickListener;
+
 /**
  * Adapter的装饰器
  *

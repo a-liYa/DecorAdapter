@@ -17,7 +17,7 @@ import com.aliya.adapter.CompatAdapter;
  * @author a_liYa
  * @date 16/10/22 14:30.
  */
-public class GridDivider extends AbsSpaceDivider {
+public class GridSpaceDivider extends AbsSpaceDivider {
 
     /**
      * item间隔 单位 : px
@@ -33,7 +33,7 @@ public class GridDivider extends AbsSpaceDivider {
     /**
      * @param spaceDip 间隔距离 单位 : dip
      */
-    public GridDivider(float spaceDip) {
+    public GridSpaceDivider(float spaceDip) {
         this(spaceDip, Color.TRANSPARENT, false);
     }
 
@@ -42,7 +42,7 @@ public class GridDivider extends AbsSpaceDivider {
      * @param colorOrAttrId 分割线color或attrId
      * @param isAttrId      true:表示是attrId；false:表示是Color
      */
-    public GridDivider(float spaceDip, int colorOrAttrId, boolean isAttrId) {
+    public GridSpaceDivider(float spaceDip, int colorOrAttrId, boolean isAttrId) {
         this(spaceDip, colorOrAttrId, false, isAttrId);
     }
 
@@ -52,8 +52,8 @@ public class GridDivider extends AbsSpaceDivider {
      * @param includeEdge   是否包括边缘 true 包含
      * @param isAttrId      true:表示是attrId；false:表示是Color
      */
-    public GridDivider(float spaceDip, int colorOrAttrId, boolean includeEdge,
-                       boolean isAttrId) {
+    public GridSpaceDivider(float spaceDip, int colorOrAttrId, boolean includeEdge,
+                            boolean isAttrId) {
         super(colorOrAttrId, isAttrId);
         if (isAttrId || colorOrAttrId != Color.TRANSPARENT) {
             mPaint = new Paint();
@@ -82,7 +82,7 @@ public class GridDivider extends AbsSpaceDivider {
         int position = parent.getChildAdapterPosition(view);
         if (position == RecyclerView.NO_POSITION) return;
 
-        // 去除DecorAdapter之后的position
+        // 去除header、footer因素的position
         int takePosition = position;
         if (parent.getAdapter() instanceof CompatAdapter) {
             CompatAdapter adapter = (CompatAdapter) parent.getAdapter();

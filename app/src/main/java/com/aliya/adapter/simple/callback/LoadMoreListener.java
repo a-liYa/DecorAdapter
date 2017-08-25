@@ -1,5 +1,7 @@
 package com.aliya.adapter.simple.callback;
 
+import com.aliya.adapter.page.LoadMore;
+
 /**
  * LoadMoreListener
  *
@@ -8,7 +10,7 @@ package com.aliya.adapter.simple.callback;
  */
 public interface LoadMoreListener<M>{
 
-    void onLoadMoreSuccess(M data);
+    void onLoadMoreSuccess(M data, LoadMore loadMore);
 
     void onLoadMore(LoadingCallBack<M> callback);
 }

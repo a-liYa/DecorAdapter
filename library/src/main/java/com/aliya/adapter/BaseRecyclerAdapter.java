@@ -10,6 +10,7 @@ import java.util.List;
 /**
  * Recycler.Adapter的封装
  *
+ * @param <T> item 数据类型
  * @author a_liYa
  * @date 2017/8/24 15:42.
  */

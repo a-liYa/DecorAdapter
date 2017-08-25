@@ -17,7 +17,7 @@ import com.aliya.adapter.CompatAdapter;
  * @author a_liYa
  * @date 16/11/6 下午7:21.
  */
-public class ListDivider extends AbsSpaceDivider {
+public class ListSpaceDivider extends AbsSpaceDivider {
 
     private int mDividerHeight = 0;
     private int mLeftMargin = 0;
@@ -30,7 +30,7 @@ public class ListDivider extends AbsSpaceDivider {
     /**
      * 默认0.5dp 的间距, 没有颜色
      */
-    public ListDivider() {
+    public ListSpaceDivider() {
         this(0.5, Color.TRANSPARENT, false);
     }
 
@@ -39,7 +39,7 @@ public class ListDivider extends AbsSpaceDivider {
      * @param colorOrAttrId 分割线color或attrId
      * @param isAttrId      true:表示是attrId；false:表示是Color
      */
-    public ListDivider(double heightDip, int colorOrAttrId, boolean isAttrId) {
+    public ListSpaceDivider(double heightDip, int colorOrAttrId, boolean isAttrId) {
         this(heightDip, colorOrAttrId, true, isAttrId);
     }
 
@@ -49,8 +49,8 @@ public class ListDivider extends AbsSpaceDivider {
      * @param isHorizontal  是否为水平方向
      * @param isAttrId      true:表示是attrId；false:表示是Color
      */
-    public ListDivider(double heightDip, int colorOrAttrId, boolean isHorizontal,
-                       boolean isAttrId) {
+    public ListSpaceDivider(double heightDip, int colorOrAttrId, boolean isHorizontal,
+                            boolean isAttrId) {
         this(heightDip, colorOrAttrId, 0, isHorizontal, isAttrId);
     }
 
@@ -61,8 +61,8 @@ public class ListDivider extends AbsSpaceDivider {
      * @param isHorizontal  是否为水平方向
      * @param isAttrId      true:表示是attrId；false:表示是Color
      */
-    public ListDivider(double heightDip, int colorOrAttrId, float margin, boolean isHorizontal,
-                       boolean isAttrId) {
+    public ListSpaceDivider(double heightDip, int colorOrAttrId, float margin, boolean isHorizontal,
+                            boolean isAttrId) {
         this(heightDip, colorOrAttrId, margin, margin, isHorizontal, true, isAttrId);
     }
 
@@ -75,9 +75,9 @@ public class ListDivider extends AbsSpaceDivider {
      * @param includeLastItem 是否包括最后一条
      * @param isAttrId        true:表示是attrId；false:表示是Color
      */
-    public ListDivider(double heightDip, int colorOrAttrId, float leftMargin,
-                       float rightMargin, boolean isHorizontal,
-                       boolean includeLastItem, boolean isAttrId) {
+    public ListSpaceDivider(double heightDip, int colorOrAttrId, float leftMargin,
+                            float rightMargin, boolean isHorizontal,
+                            boolean includeLastItem, boolean isAttrId) {
         super(colorOrAttrId, isAttrId);
         mDividerHeight = dp2px((float) heightDip);
         if (isAttrId || colorOrAttrId != Color.TRANSPARENT) {
@@ -166,7 +166,6 @@ public class ListDivider extends AbsSpaceDivider {
             state) {
         super.getItemOffsets(outRect, view, parent, state);
         int position = parent.getChildAdapterPosition(view);
-        Log.e("TAG", "getItemOffsets " + position);
         int footerCount = 0;
         if (parent.getAdapter() instanceof CompatAdapter) {
             CompatAdapter adapter = (CompatAdapter) parent.getAdapter();

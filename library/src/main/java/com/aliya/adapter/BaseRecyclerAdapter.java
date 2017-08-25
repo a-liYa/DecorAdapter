@@ -13,7 +13,7 @@ import java.util.List;
  * @author a_liYa
  * @date 2017/8/24 15:42.
  */
-public abstract class BaseRecyclerAdapter<T extends Object> extends DecorAdapter {
+public abstract class BaseRecyclerAdapter<T> extends DecorAdapter {
 
     public List<T> datas;
 
@@ -43,8 +43,35 @@ public abstract class BaseRecyclerAdapter<T extends Object> extends DecorAdapter
         return null;
     }
 
-    public List<T> getDatas() {
+    public final List<T> getData() {
         return datas;
+    }
+
+    public void setData(List<T> data) {
+        datas = data;
+    }
+
+    /**
+     * 追加数据集合
+     *
+     * @param data         数据集
+     * @param isAutoNotify 是否自动局部刷新 true ： 自动刷新
+     * @return false:数据为空追加失败； true:追加成功
+     */
+    public boolean addData(List<T> data, boolean isAutoNotify) {
+        if (data == null || data.isEmpty()) {
+            return false;
+        }
+        int positionStart = getItemCount() - getFooterCount();
+        if (datas == null) {
+            datas = data;
+        } else {
+            datas.addAll(data);
+        }
+        if (isAutoNotify) {
+            notifyItemRangeInserted(positionStart, data.size());
+        }
+        return true;
     }
 
     @Override

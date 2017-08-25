@@ -20,6 +20,7 @@
         <activity android:name=".DecorAdapterGridSimpleActivity"></activity>
         <activity android:name=".AdapterUnifyDataSimpleActivity"></activity>
         <activity android:name=".AdapterDiffDataSimpleActivity"></activity>
+        <activity android:name=".DecorAdapterLoadMoreSimpleActivity"></activity>
     </application>
 
 </manifest>

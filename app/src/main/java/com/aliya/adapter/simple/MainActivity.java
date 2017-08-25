@@ -14,6 +14,7 @@ import com.aliya.adapter.DecorAdapter;
 import com.aliya.adapter.divider.ListDivider;
 import com.aliya.adapter.simple.adapter.DemoAdapter;
 import com.aliya.adapter.simple.adapter.DiffDataSimpleAdapter;
+import com.aliya.adapter.simple.adapter.UnifyDataSimpleAdapter;
 import com.aliya.adapter.simple.callback.LoadMoreListener;
 import com.aliya.adapter.simple.callback.LoadingCallBack;
 import com.aliya.adapter.simple.holder.FooterLoadMore;
@@ -24,7 +25,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     RecyclerView recycle;
-    private DecorAdapter mAdapter;
+    private BaseRecyclerAdapter<String> mAdapter;
 
     private int count;
     private List<String> mList;
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
         mList = new ArrayList<>();
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 5; i++) {
             mList.add(String.valueOf(i));
 //            switch (i % 3 + 5) {
 //                case 0:
@@ -58,37 +59,41 @@ public class MainActivity extends AppCompatActivity {
 //            }
         }
 
-        mAdapter = new DecorAdapter(new DemoAdapter(mList));
+        mAdapter = new UnifyDataSimpleAdapter(mList);
 
         recycle.setAdapter(mAdapter);
 
-        recycle.addItemDecoration(new ListDivider(5, Color.BLUE, 0, 0, true, false, false));
+        recycle.addItemDecoration(new ListDivider(5, Color.BLUE, 0, 0, true, true, false));
 
-        View inflate = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
-        ((TextView) inflate.findViewById(R.id.tv)).setText("第1个header");
-        mAdapter.addHeaderView(inflate);
-
-        View inflate1 = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
-        ((TextView) inflate1.findViewById(R.id.tv)).setText("第2个header");
-        mAdapter.addHeaderView(inflate1);
-
-        View inflate2 = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
-        ((TextView) inflate2.findViewById(R.id.tv)).setText("第3个header");
-        mAdapter.addHeaderView(inflate2);
+//        View inflate = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
+//        ((TextView) inflate.findViewById(R.id.tv)).setText("第1个header");
+//        mAdapter.addHeaderView(inflate);
+//
+//        View inflate1 = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
+//        ((TextView) inflate1.findViewById(R.id.tv)).setText("第2个header");
+//        mAdapter.addHeaderView(inflate1);
+//
+//        View inflate2 = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
+//        ((TextView) inflate2.findViewById(R.id.tv)).setText("第3个header");
+//        mAdapter.addHeaderView(inflate2);
 
         mAdapter.setFooterLoadMore(new FooterLoadMore(recycle, new LoadMoreListener<String>() {
 
             @Override
             public void onLoadMoreSuccess(String data) {
 //                List datas = mAdapter.getDatas();
-                mList.add(data);
-                mAdapter.notifyDataSetChanged();
-                Log.e("TAG", "notifyDataSetChanged");
+//                mList.add(data);
+//                mAdapter.notifyDataSetChanged();
+                List<String> list = new ArrayList<>();
+                list.add(data);
+                mAdapter.addData(list, true);
+//                Log.e("TAG", "notifyDataSetChanged");
+
             }
 
             @Override
             public void onLoadMore(final LoadingCallBack<String> callback) {
-                Log.e("TAG", "onLoadMore " + count);
+//                Log.e("TAG", "onLoadMore " + count);
                 recycle.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -101,22 +106,22 @@ public class MainActivity extends AppCompatActivity {
                             callback.onSuccess("成功 " + count);
                         }
                     }
-                }, 2000);
+                }, 8000);
             }
 
         }).getView());
 
-        View footer1 = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
-        ((TextView) footer1.findViewById(R.id.tv)).setText("第1个footer");
-        mAdapter.addFooterView(footer1);
+//        View footer1 = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
+//        ((TextView) footer1.findViewById(R.id.tv)).setText("第1个footer");
+//        mAdapter.addFooterView(footer1);
+//
+//        View footer2 = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
+//        ((TextView) footer2.findViewById(R.id.tv)).setText("第2个footer");
+//        mAdapter.addFooterView(footer2);
 
-        View footer2 = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
-        ((TextView) footer2.findViewById(R.id.tv)).setText("第2个footer");
-        mAdapter.addFooterView(footer2);
-
-        View refresh = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
-        ((TextView) refresh.findViewById(R.id.tv)).setText("我是下拉刷新");
-        mAdapter.setHeaderRefresh(refresh);
+//        View refresh = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
+//        ((TextView) refresh.findViewById(R.id.tv)).setText("我是下拉刷新");
+//        mAdapter.setHeaderRefresh(refresh);
 
     }
 }

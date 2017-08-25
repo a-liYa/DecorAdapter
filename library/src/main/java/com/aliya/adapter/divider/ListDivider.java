@@ -6,6 +6,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.LayoutParams;
+import android.util.Log;
 import android.view.View;
 
 import com.aliya.adapter.CompatAdapter;
@@ -165,6 +166,7 @@ public class ListDivider extends AbsSpaceDivider {
             state) {
         super.getItemOffsets(outRect, view, parent, state);
         int position = parent.getChildAdapterPosition(view);
+        Log.e("TAG", "getItemOffsets " + position);
         int footerCount = 0;
         if (parent.getAdapter() instanceof CompatAdapter) {
             CompatAdapter adapter = (CompatAdapter) parent.getAdapter();
@@ -179,6 +181,7 @@ public class ListDivider extends AbsSpaceDivider {
                 return;
             }
         }
+
         if (mIsHorizontal) {
             outRect.set(0, 0, 0, mDividerHeight);
         } else {

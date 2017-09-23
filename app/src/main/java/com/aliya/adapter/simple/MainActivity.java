@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.aliya.adapter.BaseRecyclerAdapter;
+import com.aliya.adapter.RecyclerAdapter;
 import com.aliya.adapter.divider.ListSpaceDivider;
 import com.aliya.adapter.simple.adapter.UnifyDataSimpleAdapter;
 import com.aliya.adapter.page.LoadMore;
@@ -20,7 +20,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     RecyclerView recycle;
-    private BaseRecyclerAdapter<String> mAdapter;
+    private RecyclerAdapter<String> mAdapter;
 
     private int count;
     private List<String> mList;

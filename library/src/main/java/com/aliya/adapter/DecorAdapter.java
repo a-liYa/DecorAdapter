@@ -21,6 +21,8 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
 
     private static final int VIEW_TYPE_HEADER = -20000;
     private static final int VIEW_TYPE_FOOTER = -40000;
+    private static final int VIEW_TYPE_PULL_REFRESH = VIEW_TYPE_HEADER; // 下拉刷新
+    private static final int VIEW_TYPE_LOAD_MORE = VIEW_TYPE_HEADER - 1; // 加载更多
     private static final int KEY_TAG = R.id.tag_view_holder;
     public static final int DEFAULT_VIEW_TYPE = 0;
 
@@ -78,7 +80,7 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
     };
 
     /**
-     * 留给子类实现的另外一个方案
+     * 留给子类实现, 实现DecorAdapter功能的另一种方案
      */
     protected DecorAdapter() {
     }
@@ -97,7 +99,7 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
     /**
      * 添加 header view
      * <p>
-     * 注意：不能大量添加，会导致内存过大；且不能超过20000个， 会导致错乱
+     * 注意：不能大量添加，否则会导致内存过大；且不能超过20000个， 否则会导致错乱
      *
      * @param view .
      */
@@ -108,7 +110,7 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
     /**
      * 添加 footer view
      * <p>
-     * 注意：不能大量添加，会导致内存过大；且不能超过20000个，会导致错乱
+     * 注意：不能大量添加，否则会导致内存过大；且不能超过20000个，否则会导致错乱
      *
      * @param view .
      */
@@ -116,12 +118,22 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
         mFooterViews.put(VIEW_TYPE_FOOTER + mFooterViews.size(), view);
     }
 
+    /**
+     * 专门为下拉刷新提供的方法, 保证下拉刷新header永远在最第一个
+     *
+     * @param view .
+     */
     public final void setHeaderRefresh(View view) {
-        mHeaderViews.put(VIEW_TYPE_HEADER, view);
+        mHeaderViews.put(VIEW_TYPE_PULL_REFRESH, view);
     }
 
+    /**
+     * 专门为加载更多提供的方法，保证加载更多footer永远在最后一个
+     *
+     * @param view .
+     */
     public final void setFooterLoadMore(View view) {
-        mFooterViews.put(VIEW_TYPE_FOOTER + (VIEW_TYPE_HEADER - VIEW_TYPE_FOOTER - 1), view);
+        mFooterViews.put(VIEW_TYPE_LOAD_MORE, view);
     }
 
     @Override

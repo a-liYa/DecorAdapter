@@ -40,24 +40,25 @@ public abstract class AbsSpaceDivider extends RecyclerView.ItemDecoration {
      * @param context .
      * @return Color的int值
      */
-    public int getUiModeColor(Context context) {
+    protected int getUiModeColor(Context context) {
         if (context != null && mAttrId != NO_ATTR_ID) {
             if (null != context.getTheme()) {
-                context.getTheme().resolveAttribute(mAttrId, sOutValue, true);
-                switch (sOutValue.type) {
-                    case TypedValue.TYPE_INT_COLOR_ARGB4:
-                    case TypedValue.TYPE_INT_COLOR_ARGB8:
-                    case TypedValue.TYPE_INT_COLOR_RGB4:
-                    case TypedValue.TYPE_INT_COLOR_RGB8:
-                        mCurrColor = sOutValue.data;
-                        break;
+                if (context.getTheme().resolveAttribute(mAttrId, sOutValue, true)) {
+                    switch (sOutValue.type) {
+                        case TypedValue.TYPE_INT_COLOR_ARGB4:
+                        case TypedValue.TYPE_INT_COLOR_ARGB8:
+                        case TypedValue.TYPE_INT_COLOR_RGB4:
+                        case TypedValue.TYPE_INT_COLOR_RGB8:
+                            mCurrColor = sOutValue.data;
+                            break;
+                    }
                 }
             }
         }
         return mCurrColor;
     }
 
-    protected int dp2px(float dp) {
+    protected static int dp2px(float dp) {
         return (int) (TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_DIP,
                 dp,

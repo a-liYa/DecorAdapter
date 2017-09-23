@@ -6,7 +6,6 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.LayoutParams;
-import android.util.Log;
 import android.view.View;
 
 import com.aliya.adapter.CompatAdapter;
@@ -19,13 +18,13 @@ import com.aliya.adapter.CompatAdapter;
  */
 public class ListSpaceDivider extends AbsSpaceDivider {
 
-    private int mDividerHeight = 0;
-    private int mLeftMargin = 0;
-    private int mRightMargin = 0;
+    protected int mDividerHeight = 0;
+    protected int mLeftMargin = 0;
+    protected int mRightMargin = 0;
     // 画笔
-    private Paint mPaint;
-    private boolean mIsHorizontal = true;
-    private boolean mIncludeLastItem = true;
+    protected Paint mPaint;
+    protected boolean mIsHorizontal = true;
+    protected boolean mIncludeLastItem = true;
 
     /**
      * 默认0.5dp 的间距, 没有颜色
@@ -90,7 +89,7 @@ public class ListSpaceDivider extends AbsSpaceDivider {
         mIncludeLastItem = includeLastItem;
     }
 
-    public void drawHorizontal(Canvas c, RecyclerView parent) {
+    private void drawHorizontal(Canvas c, RecyclerView parent) {
         final int left = parent.getPaddingLeft();
         final int right = parent.getWidth() - parent.getPaddingRight();
         int footerCount = 0;
@@ -120,7 +119,7 @@ public class ListSpaceDivider extends AbsSpaceDivider {
         }
     }
 
-    public void drawVertical(Canvas c, RecyclerView parent) {
+    protected void drawVertical(Canvas c, RecyclerView parent) {
         final int top = parent.getPaddingTop();
         final int bottom = parent.getHeight() - parent.getPaddingBottom();
         int footerCount = 0;
@@ -151,7 +150,7 @@ public class ListSpaceDivider extends AbsSpaceDivider {
     // 绘制
     @Override
     public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
-        if (mPaint == null) return;
+        if (mPaint == null || parent.getAdapter() == null) return;
         mPaint.setColor(getUiModeColor(parent.getContext())); // 设置颜色
         if (mIsHorizontal) {
             drawHorizontal(c, parent);
@@ -165,6 +164,8 @@ public class ListSpaceDivider extends AbsSpaceDivider {
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State
             state) {
         super.getItemOffsets(outRect, view, parent, state);
+        if (parent.getAdapter() == null) return;
+
         int position = parent.getChildAdapterPosition(view);
         int footerCount = 0;
         if (parent.getAdapter() instanceof CompatAdapter) {

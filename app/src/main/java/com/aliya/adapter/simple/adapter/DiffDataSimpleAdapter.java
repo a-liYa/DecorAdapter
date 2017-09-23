@@ -4,8 +4,8 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.aliya.adapter.BaseRecyclerAdapter;
-import com.aliya.adapter.BaseRecyclerViewHolder;
+import com.aliya.adapter.RecyclerAdapter;
+import com.aliya.adapter.RecyclerViewHolder;
 import com.aliya.adapter.simple.R;
 
 import java.util.List;
@@ -16,7 +16,7 @@ import java.util.List;
  * @author a_liYa
  * @date 2017/8/23 20:17.
  */
-public class DiffDataSimpleAdapter extends BaseRecyclerAdapter {
+public class DiffDataSimpleAdapter extends RecyclerAdapter {
 
 
     public DiffDataSimpleAdapter(List data) {
@@ -24,7 +24,7 @@ public class DiffDataSimpleAdapter extends BaseRecyclerAdapter {
     }
 
     @Override
-    public BaseRecyclerViewHolder onAbsCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerViewHolder onAbsCreateViewHolder(ViewGroup parent, int viewType) {
         switch (viewType) {
             case 0:
                 return new VoidHolder(parent);
@@ -49,7 +49,7 @@ public class DiffDataSimpleAdapter extends BaseRecyclerAdapter {
         return viewType;
     }
 
-    class StringHolder extends BaseRecyclerViewHolder<String> {
+    class StringHolder extends RecyclerViewHolder<String> {
 
         TextView tv;
 
@@ -65,7 +65,7 @@ public class DiffDataSimpleAdapter extends BaseRecyclerAdapter {
         }
     }
 
-    class IntegerHolder extends BaseRecyclerViewHolder<Integer> {
+    class IntegerHolder extends RecyclerViewHolder<Integer> {
 
         TextView tv;
 
@@ -81,7 +81,7 @@ public class DiffDataSimpleAdapter extends BaseRecyclerAdapter {
         }
     }
 
-    class VoidHolder extends BaseRecyclerViewHolder<Void> {
+    class VoidHolder extends RecyclerViewHolder<Void> {
 
         TextView tv;
 

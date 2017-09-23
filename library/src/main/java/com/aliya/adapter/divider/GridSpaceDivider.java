@@ -22,13 +22,13 @@ public class GridSpaceDivider extends AbsSpaceDivider {
     /**
      * item间隔 单位 : px
      */
-    private float mSpace = 0;
+    protected float mSpace = 0;
     // 画笔
     private Paint mPaint;
     /**
      * 默认false 不包含边缘
      */
-    private boolean includeEdge;
+    protected boolean includeEdge;
 
     /**
      * @param spaceDip 间隔距离 单位 : dip
@@ -69,6 +69,8 @@ public class GridSpaceDivider extends AbsSpaceDivider {
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State
             state) {
         super.getItemOffsets(outRect, view, parent, state);
+        if (parent.getAdapter() == null) return;
+
         GridLayoutManager.SpanSizeLookup spanSizeLookup;
         int spanCount;
         if (parent.getLayoutManager() instanceof GridLayoutManager) {
@@ -129,7 +131,7 @@ public class GridSpaceDivider extends AbsSpaceDivider {
     @Override
     public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
         super.onDraw(c, parent, state);
-        if (mPaint == null) return;
+        if (mPaint == null || parent.getAdapter() == null) return;
         mPaint.setColor(getUiModeColor(parent.getContext())); // 设置颜色
         GridLayoutManager.SpanSizeLookup spanSizeLookup;
         int spanCount;
@@ -217,8 +219,4 @@ public class GridSpaceDivider extends AbsSpaceDivider {
 
     }
 
-    @Override
-    public void onDrawOver(Canvas c, RecyclerView parent, RecyclerView.State state) {
-        super.onDrawOver(c, parent, state);
-    }
 }

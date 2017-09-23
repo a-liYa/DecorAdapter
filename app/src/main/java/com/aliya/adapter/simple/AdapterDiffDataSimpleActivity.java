@@ -9,7 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.aliya.adapter.BaseRecyclerAdapter;
+import com.aliya.adapter.RecyclerAdapter;
 import com.aliya.adapter.click.OnItemClickListener;
 import com.aliya.adapter.click.OnItemLongClickListener;
 import com.aliya.adapter.divider.ListSpaceDivider;
@@ -27,7 +27,7 @@ import java.util.List;
 public class AdapterDiffDataSimpleActivity extends AppCompatActivity {
 
     RecyclerView recycle;
-    private BaseRecyclerAdapter mAdapter;
+    private RecyclerAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

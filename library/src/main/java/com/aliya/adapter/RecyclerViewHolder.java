@@ -1,37 +1,46 @@
-package com.aliya.adapter.page;
+package com.aliya.adapter;
 
-import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * page item，为了规范header、footer使用，提供的通用父类
+ * {@link RecyclerView.ViewHolder}的拓展, 结合{@link RecyclerAdapter}使用
  *
+ * @param <T> 数据的泛型
  * @author a_liYa
- * @date 2017/8/25 13:12.
+ * @date 16/10/19 09:52.
  */
-public abstract class PageItem {
+public abstract class RecyclerViewHolder<T> extends RecyclerView.ViewHolder {
 
-    public View itemView;
+    public T mData;
 
-    public PageItem(@NonNull ViewGroup parent, @LayoutRes int layoutRes) {
+    public RecyclerViewHolder(@NonNull ViewGroup parent, @LayoutRes int layoutRes) {
         this(inflate(layoutRes, parent, false));
     }
 
-    public PageItem(@NonNull View itemView) {
-        this.itemView = itemView;
+    public RecyclerViewHolder(@NonNull View itemView) {
+        super(itemView);
     }
 
-    public View getView() {
-        return itemView;
+    public void setData(T data) {
+        this.mData = data;
+        bindView(mData);
     }
 
-    public <T extends View> T findViewById(@IdRes int id) {
-        return (T) itemView.findViewById(id);
+    public T getData() {
+        return mData;
     }
+
+    /**
+     * bind data to view
+     *
+     * @param data .
+     */
+    public abstract void bindView(T data);
 
     /**
      * Inflate a new view hierarchy from the specified xml resource

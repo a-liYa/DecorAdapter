@@ -1,6 +1,7 @@
 package com.aliya.adapter;
 
 import android.support.annotation.CallSuper;
+import android.support.annotation.LayoutRes;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.ViewGroup;
@@ -14,11 +15,11 @@ import java.util.List;
  * @author a_liYa
  * @date 2017/8/24 15:42.
  */
-public abstract class BaseRecyclerAdapter<T> extends DecorAdapter {
+public abstract class RecyclerAdapter<T> extends DecorAdapter {
 
     public List<T> datas;
 
-    public BaseRecyclerAdapter(List<T> data) {
+    public RecyclerAdapter(List<T> data) {
         this.datas = data;
     }
 
@@ -33,7 +34,7 @@ public abstract class BaseRecyclerAdapter<T> extends DecorAdapter {
         super.onBindViewHolder(holder, position);
         if (isInnerPosition(position)) return; // super.onBindViewHolder已经处理
         if (!onAbsBindViewHolder(holder, cleanPosition(position))) { // 没有拦截
-            ((BaseRecyclerViewHolder) holder).setData(getData(cleanPosition(position)));
+            ((RecyclerViewHolder) holder).setData(getData(cleanPosition(position)));
         }
     }
 
@@ -123,6 +124,25 @@ public abstract class BaseRecyclerAdapter<T> extends DecorAdapter {
      * @return .
      * @see RecyclerView.Adapter#onCreateViewHolder(ViewGroup, int)
      */
-    public abstract BaseRecyclerViewHolder onAbsCreateViewHolder(ViewGroup parent, int viewType);
+    public abstract RecyclerViewHolder onAbsCreateViewHolder(ViewGroup parent, int viewType);
+
+    /**
+     * 静态的 ViewHolder 对应布局没有交互，没有点击，一切效果来源于原始xml布局
+     *
+     * @author a_liYa
+     * @date 2017/9/13 下午4:27.
+     */
+    public static class StaticViewHolder extends RecyclerViewHolder {
+
+        public StaticViewHolder(ViewGroup parent, @LayoutRes int resource) {
+            super(inflate(resource, parent, false));
+        }
+
+        @Override
+        public void bindView(Object data) {
+            itemView.setClickable(false); // 设置条目不可点击
+        }
+
+    }
 
 }

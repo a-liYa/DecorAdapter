@@ -4,8 +4,8 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.aliya.adapter.BaseRecyclerAdapter;
-import com.aliya.adapter.BaseRecyclerViewHolder;
+import com.aliya.adapter.RecyclerAdapter;
+import com.aliya.adapter.RecyclerViewHolder;
 import com.aliya.adapter.simple.R;
 
 import java.util.List;
@@ -16,18 +16,18 @@ import java.util.List;
  * @author a_liYa
  * @date 2017/8/23 20:17.
  */
-public class UnifyDataSimpleAdapter extends BaseRecyclerAdapter<String> {
+public class UnifyDataSimpleAdapter extends RecyclerAdapter<String> {
 
     public UnifyDataSimpleAdapter(List<String> data) {
         super(data);
     }
 
     @Override
-    public BaseRecyclerViewHolder onAbsCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerViewHolder onAbsCreateViewHolder(ViewGroup parent, int viewType) {
         return new Holder(parent);
     }
 
-    class Holder extends BaseRecyclerViewHolder<String> {
+    class Holder extends RecyclerViewHolder<String> {
 
         TextView tv;
 

@@ -29,15 +29,6 @@ public abstract class RecyclerAdapter<T> extends DecorAdapter {
         return super.getItemCount() + (datas == null ? 0 : datas.size());
     }
 
-    @Override
-    public final void onBindViewHolder(ViewHolder holder, int position) {
-        super.onBindViewHolder(holder, position);
-        if (isInnerPosition(position)) return; // super.onBindViewHolder已经处理
-        if (!onAbsBindViewHolder(holder, cleanPosition(position))) { // 没有拦截
-            ((RecyclerViewHolder) holder).setData(getData(cleanPosition(position)));
-        }
-    }
-
     public final T getData(int index) {
         if (datas != null && index < datas.size() && index >= 0) {
             return datas.get(index);
@@ -74,6 +65,15 @@ public abstract class RecyclerAdapter<T> extends DecorAdapter {
             notifyItemRangeInserted(positionStart, data.size());
         }
         return true;
+    }
+
+    @Override
+    public final void onBindViewHolder(ViewHolder holder, int position) {
+        super.onBindViewHolder(holder, position);
+        if (isInnerPosition(position)) return; // super.onBindViewHolder已经处理
+        if (!onAbsBindViewHolder(holder, cleanPosition(position))) { // 没有拦截
+            ((RecyclerViewHolder) holder).setData(getData(cleanPosition(position)));
+        }
     }
 
     @Override

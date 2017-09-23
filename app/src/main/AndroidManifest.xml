@@ -16,11 +16,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DecorAdapterListSimpleActivity"></activity>
-        <activity android:name=".DecorAdapterGridSimpleActivity"></activity>
-        <activity android:name=".AdapterUnifyDataSimpleActivity"></activity>
-        <activity android:name=".AdapterDiffDataSimpleActivity"></activity>
-        <activity android:name=".DecorAdapterLoadMoreSimpleActivity"></activity>
+        <activity android:name=".activity.DecorAdapterListSimpleActivity" />
+        <activity android:name=".activity.DecorAdapterGridSimpleActivity" />
+        <activity android:name=".activity.AdapterUnifyDataSimpleActivity" />
+        <activity android:name=".activity.AdapterDiffDataSimpleActivity" />
+        <activity android:name=".activity.DecorAdapterLoadMoreSimpleActivity" />
+        <activity android:name=".activity.OverlaySimpleActivity"></activity>
     </application>
 
 </manifest>

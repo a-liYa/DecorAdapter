@@ -1,13 +1,16 @@
 package com.aliya.adapter.simple;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.aliya.adapter.RecyclerAdapter;
 import com.aliya.adapter.divider.ListSpaceDivider;
+import com.aliya.adapter.simple.activity.OverlaySimpleActivity;
 import com.aliya.adapter.simple.adapter.UnifyDataSimpleAdapter;
 import com.aliya.adapter.page.LoadMore;
 import com.aliya.adapter.simple.callback.LoadMoreListener;
@@ -17,7 +20,7 @@ import com.aliya.adapter.simple.holder.FooterLoadMore;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView recycle;
     private RecyclerAdapter<String> mAdapter;
@@ -31,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         recycle = (RecyclerView) findViewById(R.id.recycler);
+        findViewById(R.id.tv_overlay).setOnClickListener(this);
 
         recycle.setLayoutManager(new LinearLayoutManager(this));
 
@@ -116,5 +120,14 @@ public class MainActivity extends AppCompatActivity {
 //        ((TextView) refresh.findViewById(R.id.tv)).setText("我是下拉刷新");
 //        mAdapter.setHeaderRefresh(refresh);
 
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.tv_overlay:
+                startActivity(new Intent(this, OverlaySimpleActivity.class));
+                break;
+        }
     }
 }

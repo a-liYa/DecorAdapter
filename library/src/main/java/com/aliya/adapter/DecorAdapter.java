@@ -164,6 +164,18 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
         return position - getHeaderCount();
     }
 
+    // 默认为false
+    @Override
+    public boolean isOverlayViewType(int position) {
+        return false;
+    }
+
+    // 需要悬浮效果时需要子类重写 Override
+    @Override
+    public ViewHolder onCreateOverlayViewHolder(ViewGroup parent, int viewType) {
+        return null;
+    }
+
     public final OnItemClickListener getOnItemClickListener() {
         return mOnItemClickListener;
     }

@@ -1,4 +1,4 @@
-package com.aliya.adapter.simple;
+package com.aliya.adapter.simple.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -9,25 +9,26 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.aliya.adapter.RecyclerAdapter;
+import com.aliya.adapter.DecorAdapter;
 import com.aliya.adapter.click.OnItemClickListener;
 import com.aliya.adapter.click.OnItemLongClickListener;
 import com.aliya.adapter.divider.ListSpaceDivider;
-import com.aliya.adapter.simple.adapter.DiffDataSimpleAdapter;
+import com.aliya.adapter.simple.R;
+import com.aliya.adapter.simple.adapter.DemoAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * BaseRecyclerAdapter不同数据类型的使用示例
+ * {@link DecorAdapter} 列表样式 示例
  *
  * @author a_liYa
- * @date 2017/8/24 下午5:55.
+ * @date 2017/8/24 下午5:23.
  */
-public class AdapterDiffDataSimpleActivity extends AppCompatActivity {
+public class DecorAdapterListSimpleActivity extends AppCompatActivity {
 
     RecyclerView recycle;
-    private RecyclerAdapter mAdapter;
+    private DecorAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,39 +39,26 @@ public class AdapterDiffDataSimpleActivity extends AppCompatActivity {
 
         recycle.setLayoutManager(new LinearLayoutManager(this));
 
-        List<Object> list = new ArrayList<>();
+        List<String> list = new ArrayList<>();
 
         for (int i = 0; i < 20; i++) {
-            switch (i % 3) {
-                case 0:
-                    list.add(String.valueOf(i));
-                    break;
-                case 1:
-                    list.add(Integer.valueOf(i));
-                    break;
-                case 2:
-                    list.add(null);
-                    break;
-                default:
-                    list.add(String.valueOf(i));
-                    break;
-            }
+            list.add(String.valueOf(i));
         }
 
-        mAdapter = new DiffDataSimpleAdapter(list);
+        mAdapter = new DecorAdapter(new DemoAdapter(list));
 
         recycle.setAdapter(mAdapter);
 
         mAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View itemView, int position) {
-                Log.e("TAG", "onItemClick " + mAdapter.getData(position));
+                Log.e("TAG", "onItemClick " + position);
             }
         });
         mAdapter.setOnItemLongClickListener(new OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(View itemView, int position) {
-                Log.e("TAG", "onItemLongClick " + mAdapter.getData(position));
+                Log.e("TAG", "onItemLongClick " + position);
                 return true;
             }
         });
@@ -112,6 +100,6 @@ public class AdapterDiffDataSimpleActivity extends AppCompatActivity {
         View refresh1 = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
         ((TextView) refresh1.findViewById(R.id.tv)).setText("我要覆盖下拉刷新");
         mAdapter.setHeaderRefresh(refresh1);
-
     }
+
 }

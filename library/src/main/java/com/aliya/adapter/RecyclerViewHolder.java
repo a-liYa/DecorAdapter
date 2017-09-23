@@ -29,6 +29,7 @@ public abstract class RecyclerViewHolder<T> extends RecyclerView.ViewHolder {
     public void setData(T data) {
         this.mData = data;
         bindView(mData);
+        bindView();
     }
 
     public T getData() {
@@ -41,6 +42,13 @@ public abstract class RecyclerViewHolder<T> extends RecyclerView.ViewHolder {
      * @param data .
      */
     public abstract void bindView(T data);
+
+    /**
+     * @deprecated Override use {@link #bindView(Object)}
+     */
+    @Deprecated
+    public void bindView() {
+    }
 
     /**
      * Inflate a new view hierarchy from the specified xml resource

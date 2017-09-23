@@ -1,4 +1,4 @@
-package com.aliya.adapter.simple;
+package com.aliya.adapter.simple.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -13,6 +13,7 @@ import com.aliya.adapter.DecorAdapter;
 import com.aliya.adapter.click.OnItemClickListener;
 import com.aliya.adapter.click.OnItemLongClickListener;
 import com.aliya.adapter.divider.ListSpaceDivider;
+import com.aliya.adapter.simple.R;
 import com.aliya.adapter.simple.adapter.UnifyDataSimpleAdapter;
 
 import java.util.ArrayList;

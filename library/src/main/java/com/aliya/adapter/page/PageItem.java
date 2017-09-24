@@ -39,7 +39,7 @@ public abstract class PageItem {
      * @param resource     ID for an XML layout
      * @param parent       the parent of
      * @param attachToRoot .
-     * @return
+     * @return The root View of the inflated hierarchy.
      * @see LayoutInflater#inflate(int, ViewGroup, boolean)
      */
     protected static View inflate(@LayoutRes int resource, ViewGroup parent, boolean attachToRoot) {

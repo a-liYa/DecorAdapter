@@ -11,8 +11,8 @@ import android.view.ViewGroup;
  * 悬浮、吸顶功能 - 标识 ViewHolder
  * <p>
  * 注意：悬浮原理
- * {@link android.support.v7.widget.RecyclerView.ItemDecoration#onDrawOver(Canvas, RecyclerView, RecyclerView.State)} draw bitmap
- * 没有交互事件，{@link #getOverlayView()} 返回的view, 通过{@link View#getDrawingCache()} 获取bitmap，预防bitmap过大
+ * {@link com.aliya.adapter.divider.OverlayItemDecoration#onDrawOver(Canvas, RecyclerView, RecyclerView.State)} draw bitmap
+ * 没有交互事件，{@link #getOverlayView()} 返回的view, 通过{@link View#getDrawingCache()} 获取bitmap，谨慎bitmap过大
  *
  * @author a_liYa
  * @date 2017/9/23 15:55.

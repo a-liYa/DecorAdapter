@@ -21,7 +21,8 @@
         <activity android:name=".activity.AdapterUnifyDataSimpleActivity" />
         <activity android:name=".activity.AdapterDiffDataSimpleActivity" />
         <activity android:name=".activity.DecorAdapterLoadMoreSimpleActivity" />
-        <activity android:name=".activity.OverlaySimpleActivity"></activity>
+        <activity android:name=".activity.OverlaySimpleActivity" />
+        <activity android:name=".activity.EmptyPageSimpleActivity"></activity>
     </application>
 
 </manifest>

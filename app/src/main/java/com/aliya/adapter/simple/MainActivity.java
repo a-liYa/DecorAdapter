@@ -1,32 +1,36 @@
 package com.aliya.adapter.simple;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.aliya.adapter.RecyclerAdapter;
+import com.aliya.adapter.RecyclerViewHolder;
 import com.aliya.adapter.divider.ListSpaceDivider;
+import com.aliya.adapter.simple.activity.EmptyPageSimpleActivity;
 import com.aliya.adapter.simple.activity.OverlaySimpleActivity;
-import com.aliya.adapter.simple.adapter.UnifyDataSimpleAdapter;
-import com.aliya.adapter.page.LoadMore;
-import com.aliya.adapter.simple.callback.LoadMoreListener;
-import com.aliya.adapter.simple.callback.LoadingCallBack;
-import com.aliya.adapter.simple.holder.FooterLoadMore;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity {
 
     RecyclerView recycle;
-    private RecyclerAdapter<String> mAdapter;
 
-    private int count;
-    private List<String> mList;
+    private static List<Entity> items = new ArrayList<>();
+
+    static {
+        items.add(new Entity("悬浮吸顶 - 示例", OverlaySimpleActivity.class));
+        items.add(new Entity("Adapter空页面 - 示例", EmptyPageSimpleActivity.class));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,100 +38,76 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         recycle = (RecyclerView) findViewById(R.id.recycler);
-        findViewById(R.id.tv_overlay).setOnClickListener(this);
 
         recycle.setLayoutManager(new LinearLayoutManager(this));
+        recycle.addItemDecoration(new ListSpaceDivider(1, Color.parseColor("#cccccc"), false));
 
-        mList = new ArrayList<>();
-
-        for (int i = 0; i < 5; i++) {
-            mList.add(String.valueOf(i));
-//            switch (i % 3 + 5) {
-//                case 0:
-//                    mList.add(String.valueOf(i));
-//                    break;
-//                case 1:
-//                    mList.add(Integer.valueOf(i));
-//                    break;
-//                case 2:
-//                    mList.add(null);
-//                    break;
-//                default:
-//                    mList.add(String.valueOf(i));
-//                    break;
-//            }
-        }
-
-        mAdapter = new UnifyDataSimpleAdapter(mList);
-
-        recycle.setAdapter(mAdapter);
-
-        recycle.addItemDecoration(new ListSpaceDivider(5, Color.BLUE, 0, 0, true, true, false));
-
-//        View inflate = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
-//        ((TextView) inflate.findViewById(R.id.tv)).setText("第1个header");
-//        mAdapter.addHeaderView(inflate);
-//
-//        View inflate1 = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
-//        ((TextView) inflate1.findViewById(R.id.tv)).setText("第2个header");
-//        mAdapter.addHeaderView(inflate1);
-//
-//        View inflate2 = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
-//        ((TextView) inflate2.findViewById(R.id.tv)).setText("第3个header");
-//        mAdapter.addHeaderView(inflate2);
-
-        mAdapter.setFooterLoadMore(new FooterLoadMore(recycle, new LoadMoreListener<String>() {
-
-            @Override
-            public void onLoadMoreSuccess(String data, LoadMore loadMore) {
-//                List datas = mAdapter.getDatas();
-//                mList.add(data);
-//                mAdapter.notifyDataSetChanged();
-                List<String> list = new ArrayList<>();
-                list.add(data);
-                mAdapter.addData(list, true);
-                loadMore.setState(LoadMore.TYPE_NO_MORE);
-            }
-
-            @Override
-            public void onLoadMore(final LoadingCallBack<String> callback) {
-                recycle.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        count++;
-                        if (count == 8) {
-                            callback.onEmpty();
-                        } else if (count % 3 == 0) {
-                            callback.onError("", 1);
-                        } else {
-                            callback.onSuccess("成功 " + count);
-                        }
-                    }
-                }, 8000);
-            }
-
-        }).getView());
-
-//        View footer1 = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
-//        ((TextView) footer1.findViewById(R.id.tv)).setText("第1个footer");
-//        mAdapter.addFooterView(footer1);
-//
-//        View footer2 = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
-//        ((TextView) footer2.findViewById(R.id.tv)).setText("第2个footer");
-//        mAdapter.addFooterView(footer2);
-
-//        View refresh = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
-//        ((TextView) refresh.findViewById(R.id.tv)).setText("我是下拉刷新");
-//        mAdapter.setHeaderRefresh(refresh);
+        recycle.setAdapter(new Adapter(items));
 
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.tv_overlay:
-                startActivity(new Intent(this, OverlaySimpleActivity.class));
-                break;
+    static class Entity {
+
+        String content;
+
+        Class activity;
+
+        public Entity(String content, Class activity) {
+            this.content = content;
+            this.activity = activity;
+        }
+
+        public String getContent() {
+            return content;
+        }
+
+        public Entity setContent(String content) {
+            this.content = content;
+            return this;
+        }
+
+        public Class getActivity() {
+            return activity;
+        }
+
+        public Entity setActivity(Class activity) {
+            this.activity = activity;
+            return this;
         }
     }
+
+    static class Adapter extends RecyclerAdapter<Entity> {
+
+        public Adapter(List<Entity> data) {
+            super(data);
+        }
+
+        @Override
+        public RecyclerViewHolder onAbsCreateViewHolder(ViewGroup parent, int viewType) {
+            return new ViewHolder(parent);
+        }
+    }
+
+    static class ViewHolder extends RecyclerViewHolder<Entity> implements View.OnClickListener {
+
+        TextView mTextView;
+
+        public ViewHolder(@NonNull ViewGroup parent) {
+            super(inflate(R.layout.item_main_simple, parent, false));
+            mTextView = itemView.findViewById(R.id.tv_item);
+            mTextView.setOnClickListener(this);
+        }
+
+        @Override
+        public void bindView(Entity data) {
+            mTextView.setText(data.getContent());
+        }
+
+        @Override
+        public void onClick(View view) {
+            Context context = view.getContext();
+            context.startActivity(new Intent(context, mData.getActivity()));
+        }
+    }
+
 }

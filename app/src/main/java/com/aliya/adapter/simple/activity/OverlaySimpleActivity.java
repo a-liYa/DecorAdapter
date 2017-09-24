@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -19,9 +18,7 @@ import com.aliya.adapter.simple.R;
 import com.aliya.adapter.simple.holder.SimpleViewHolder;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 悬浮吸顶效果 示例 Activity
@@ -63,6 +60,7 @@ public class OverlaySimpleActivity extends Activity {
     static class Adapter extends RecyclerAdapter {
 
         static final int TYPE_OVERLAY = 1;
+
         private RecyclerView.ViewHolder overlayViewHolder;
 
         public Adapter(List data) {
@@ -92,12 +90,13 @@ public class OverlaySimpleActivity extends Activity {
         }
 
         @Override
-        public RecyclerView.ViewHolder onCreateOverlayViewHolder(ViewGroup parent, int viewType) {
+        public OverlayViewHolder onCreateOverlayViewHolder(ViewGroup parent, int viewType) {
             if (overlayViewHolder == null) {
                 overlayViewHolder = onAbsCreateViewHolder(parent, viewType);
             }
-            return overlayViewHolder;
+            return (OverlayViewHolder) overlayViewHolder;
         }
+
     }
 
     static class OverlayHolder extends OverlayViewHolder {
@@ -111,9 +110,13 @@ public class OverlaySimpleActivity extends Activity {
 
         @Override
         public void bindView(Object data) {
-            Log.e("TAG", "bindView " + data);
             tv.setText("悬浮 - - " + data);
         }
+
+//        @Override
+//        public View getOverlayView() {
+//            return tv;
+//        }
 
     }
 

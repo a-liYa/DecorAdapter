@@ -172,7 +172,7 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
 
     // 需要悬浮效果时需要子类重写 Override
     @Override
-    public ViewHolder onCreateOverlayViewHolder(ViewGroup parent, int viewType) {
+    public OverlayViewHolder onCreateOverlayViewHolder(ViewGroup parent, int viewType) {
         return null;
     }
 

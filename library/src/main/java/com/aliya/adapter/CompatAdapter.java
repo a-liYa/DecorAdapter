@@ -1,6 +1,5 @@
 package com.aliya.adapter;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
 /**
@@ -54,8 +53,8 @@ public interface CompatAdapter {
      *
      * @param parent   .
      * @param viewType view type
-     * @return ViewHolder
+     * @return {@link OverlayViewHolder}
      */
-    RecyclerView.ViewHolder onCreateOverlayViewHolder(ViewGroup parent, int viewType);
+    OverlayViewHolder onCreateOverlayViewHolder(ViewGroup parent, int viewType);
 
 }

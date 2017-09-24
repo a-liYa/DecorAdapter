@@ -9,7 +9,11 @@ import android.view.ViewGroup;
 import java.util.List;
 
 /**
- * Recycler.Adapter的封装
+ * Recycler.Adapter的封装, extends {@link DecorAdapter}
+ * <p>
+ * 1. 内部集成数据集合 {@link #datas}
+ * 2. 封装 {@link #datas} 系列的操作
+ * 3. 结合 {@link RecyclerViewHolder} 使用更简单
  *
  * @param <T> item 数据类型
  * @author a_liYa

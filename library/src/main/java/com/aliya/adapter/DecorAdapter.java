@@ -12,7 +12,16 @@ import com.aliya.adapter.click.OnItemClickListener;
 import com.aliya.adapter.click.OnItemLongClickListener;
 
 /**
- * Adapter的装饰器
+ * Adapter的装饰者
+ * <p>
+ * 实现功能：
+ * 1. 设置Header {@link #addHeaderView(View)}
+ * 2. 设置Footer {@link #addFooterView(View)}
+ * 3. 设置OnItemClick     {@link #setOnItemClickListener(OnItemClickListener)}
+ * 4. 设置OnItemLongClick {@link #setOnItemLongClickListener(OnItemLongClickListener)}
+ * 5. 设置HeaderRefresh   {@link #setHeaderRefresh(View)}
+ * 6. 设置FooterLoadMore  {@link #setFooterLoadMore(View)}
+ * 7. 设置EmptyView       {@link #setEmptyView(View)}
  *
  * @author a_liYa
  * @date 2017/8/23 19:37.
@@ -120,7 +129,7 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
     }
 
     /**
-     * 专门为下拉刷新提供的方法, 保证下拉刷新header永远在最第一个
+     * 专门为下拉刷新提供的方法, 保证下拉刷新header永远在第一个
      *
      * @param view .
      */
@@ -259,7 +268,7 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
             }
             return getHeaderCount() + getFooterCount();
         } else { // remove empty view
-           mFooterViews.remove(VIEW_TYPE_EMPTY);
+            mFooterViews.remove(VIEW_TYPE_EMPTY);
             if (adapter == null) {
                 return getHeaderCount() + getFooterCount();
             }
@@ -268,7 +277,7 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
     }
 
     /**
-     * 留给子类复写 提供是否为 empty
+     * 留给子类复写 提供数据是否为empty
      *
      * @return true：empty
      */
@@ -408,6 +417,12 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
         }
     }
 
+    /**
+     * 供内部 Header、Footer使用的ViewHolder
+     *
+     * @author a_liYa
+     * @date 2017/9/24 下午8:21.
+     */
     private static final class SimpleViewHolder extends RecyclerView.ViewHolder {
         public SimpleViewHolder(View itemView) {
             super(itemView);

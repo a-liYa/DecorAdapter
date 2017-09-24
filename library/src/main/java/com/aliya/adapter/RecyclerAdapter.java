@@ -26,7 +26,15 @@ public abstract class RecyclerAdapter<T> extends DecorAdapter {
     @CallSuper
     @Override
     public int getItemCount() {
-        return super.getItemCount() + (datas == null ? 0 : datas.size());
+        if (isEmptyData()) {
+            return super.getItemCount();
+        }
+        return super.getItemCount() + datas.size();
+    }
+
+    @Override
+    protected boolean isEmptyData() {
+        return datas == null || datas.isEmpty();
     }
 
     public final T getData(int index) {
@@ -56,13 +64,19 @@ public abstract class RecyclerAdapter<T> extends DecorAdapter {
             return false;
         }
         int positionStart = getItemCount() - getFooterCount();
-        if (datas == null) {
+        boolean notifyAll = false; // 是否全部刷新
+        if (datas == null || datas.isEmpty()) {
             datas = data;
+            notifyAll = emptyView != null; // datas 为空，且有空页面时，全部刷新
         } else {
             datas.addAll(data);
         }
         if (isAutoNotify) {
-            notifyItemRangeInserted(positionStart, data.size());
+            if (notifyAll) {
+                notifyDataSetChanged();
+            } else {
+                notifyItemRangeInserted(positionStart, data.size());
+            }
         }
         return true;
     }

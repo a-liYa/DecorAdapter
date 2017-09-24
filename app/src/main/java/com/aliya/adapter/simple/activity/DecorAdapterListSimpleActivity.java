@@ -14,7 +14,7 @@ import com.aliya.adapter.click.OnItemClickListener;
 import com.aliya.adapter.click.OnItemLongClickListener;
 import com.aliya.adapter.divider.ListSpaceDivider;
 import com.aliya.adapter.simple.R;
-import com.aliya.adapter.simple.adapter.DemoAdapter;
+import com.aliya.adapter.simple.adapter.OriginalAdapterSimple;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +45,7 @@ public class DecorAdapterListSimpleActivity extends AppCompatActivity {
             list.add(String.valueOf(i));
         }
 
-        mAdapter = new DecorAdapter(new DemoAdapter(list));
+        mAdapter = new DecorAdapter(new OriginalAdapterSimple(list));
 
         recycle.setAdapter(mAdapter);
 

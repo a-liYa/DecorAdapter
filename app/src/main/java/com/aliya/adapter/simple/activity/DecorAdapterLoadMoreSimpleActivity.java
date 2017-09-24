@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.aliya.adapter.DecorAdapter;
 import com.aliya.adapter.divider.ListSpaceDivider;
 import com.aliya.adapter.simple.R;
-import com.aliya.adapter.simple.adapter.DemoAdapter;
+import com.aliya.adapter.simple.adapter.OriginalAdapterSimple;
 import com.aliya.adapter.page.LoadMore;
 import com.aliya.adapter.simple.callback.LoadMoreListener;
 import com.aliya.adapter.simple.callback.LoadingCallBack;
@@ -50,7 +50,7 @@ public class DecorAdapterLoadMoreSimpleActivity extends AppCompatActivity {
             mList.add(String.valueOf(i));
         }
 
-        mAdapter = new DecorAdapter(new DemoAdapter(mList));
+        mAdapter = new DecorAdapter(new OriginalAdapterSimple(mList));
 
         recycle.setAdapter(mAdapter);
 

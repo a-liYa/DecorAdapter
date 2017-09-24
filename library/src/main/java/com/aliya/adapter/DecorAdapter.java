@@ -19,10 +19,11 @@ import com.aliya.adapter.click.OnItemLongClickListener;
  */
 public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter {
 
-    private static final int VIEW_TYPE_HEADER = -20000;
-    private static final int VIEW_TYPE_FOOTER = -40000;
-    private static final int VIEW_TYPE_PULL_REFRESH = VIEW_TYPE_HEADER; // 下拉刷新
-    private static final int VIEW_TYPE_LOAD_MORE = VIEW_TYPE_HEADER - 1; // 加载更多
+    private static final int VIEW_TYPE_HEADER = -20000; // [-20000, 0)
+    private static final int VIEW_TYPE_FOOTER = -40000; // [-40001, -20000)
+    private static final int VIEW_TYPE_PULL_REFRESH = VIEW_TYPE_HEADER;  // 下拉刷新 -> -20000
+    private static final int VIEW_TYPE_EMPTY = VIEW_TYPE_FOOTER - 1;     // 空页面   -> -40001
+    private static final int VIEW_TYPE_LOAD_MORE = VIEW_TYPE_HEADER - 1; // 加载更多 -> -20001
     private static final int KEY_TAG = R.id.tag_view_holder;
     public static final int DEFAULT_VIEW_TYPE = 0;
 
@@ -136,6 +137,17 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
         mFooterViews.put(VIEW_TYPE_LOAD_MORE, view);
     }
 
+    protected View emptyView;
+
+    /**
+     * Sets the view to show if the adapter item count is empty
+     *
+     * @param view .
+     */
+    public final void setEmptyView(View view) {
+        emptyView = view;
+    }
+
     @Override
     public final int getHeaderCount() {
         return mHeaderViews.size();
@@ -143,6 +155,11 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
 
     @Override
     public final int getFooterCount() {
+        if (mFooterViews.get(VIEW_TYPE_EMPTY) != null
+                && mFooterViews.get(VIEW_TYPE_LOAD_MORE) != null) {
+            // 空页面与加载更多同时存在时，只取空页面
+            return mFooterViews.size() - 1;
+        }
         return mFooterViews.size();
     }
 
@@ -236,10 +253,27 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
     @CallSuper
     @Override
     public int getItemCount() {
-        if (adapter != null) {
+        if (isEmptyData()) { // 设置 empty view
+            if (emptyView != null) {
+                mFooterViews.put(VIEW_TYPE_EMPTY, emptyView);
+            }
+            return getHeaderCount() + getFooterCount();
+        } else { // remove empty view
+           mFooterViews.remove(VIEW_TYPE_EMPTY);
+            if (adapter == null) {
+                return getHeaderCount() + getFooterCount();
+            }
             return getHeaderCount() + getFooterCount() + adapter.getItemCount();
         }
-        return getHeaderCount() + getFooterCount();
+    }
+
+    /**
+     * 留给子类复写 提供是否为 empty
+     *
+     * @return true：empty
+     */
+    protected boolean isEmptyData() {
+        return adapter == null || adapter.getItemCount() == 0;
     }
 
     @CallSuper
@@ -248,7 +282,7 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
         if (isHeaderPosition(position)) { // 页眉
             return mHeaderViews.keyAt(position);
         } else if (isFooterPosition(position)) { // 页脚
-            return mFooterViews.keyAt(mFooterViews.size() - (getItemCount() - position));
+            return mFooterViews.keyAt(getFooterCount() - (getItemCount() - position));
         }
 
         if (adapter != null) {

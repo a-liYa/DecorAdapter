@@ -18,7 +18,7 @@ public class SimpleViewHolder extends RecyclerViewHolder {
     TextView mTextView;
 
     public SimpleViewHolder(@NonNull ViewGroup parent) {
-        super(inflate(R.layout.item_demo, parent, false));
+        super(inflate(R.layout.item_demo_simple, parent, false));
         mTextView = itemView.findViewById(R.id.tv);
     }
 

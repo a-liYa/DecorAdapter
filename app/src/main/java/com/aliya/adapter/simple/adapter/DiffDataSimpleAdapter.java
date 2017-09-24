@@ -54,7 +54,7 @@ public class DiffDataSimpleAdapter extends RecyclerAdapter {
         TextView tv;
 
         public StringHolder(ViewGroup parent) {
-            super(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_demo, parent,
+            super(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_demo_simple, parent,
                     false));
             tv = itemView.findViewById(R.id.tv);
         }
@@ -70,7 +70,7 @@ public class DiffDataSimpleAdapter extends RecyclerAdapter {
         TextView tv;
 
         public IntegerHolder(ViewGroup parent) {
-            super(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_demo, parent,
+            super(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_demo_simple, parent,
                     false));
             tv = itemView.findViewById(R.id.tv);
         }
@@ -86,7 +86,7 @@ public class DiffDataSimpleAdapter extends RecyclerAdapter {
         TextView tv;
 
         public VoidHolder(ViewGroup parent) {
-            super(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_demo, parent,
+            super(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_demo_simple, parent,
                     false));
             tv = itemView.findViewById(R.id.tv);
         }

@@ -47,4 +47,14 @@ public abstract class OverlayViewHolder<T> extends RecyclerViewHolder<T> {
         return itemView;
     }
 
+    /**
+     * 悬浮View偏移量，
+     * 由于 {@link #getOverlayView()} 重写返回不是 {@link #itemView} 为了悬浮View在顶部悬浮，需要重写此方法
+     *
+     * @return 默认：0
+     */
+    public int getOverlayOffset() {
+        return 0;
+    }
+
 }

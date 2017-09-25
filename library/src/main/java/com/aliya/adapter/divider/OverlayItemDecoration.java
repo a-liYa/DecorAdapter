@@ -40,24 +40,45 @@ public class OverlayItemDecoration extends RecyclerView.ItemDecoration {
         int overlayPosition = getOverlayPosition(adapter, firstVisiblePosition);
         if (overlayPosition == RecyclerView.NO_POSITION) return;
 
-        OverlayViewHolder overlayHolder = adapter.onCreateOverlayViewHolder(parent,
-                adapter.getAbsItemViewType(overlayPosition));
+        OverlayViewHolder overlayHolder = adapter.onCreateOverlayViewHolder(
+                parent,
+                adapter.getAbsItemViewType(adapter.cleanPosition(overlayPosition)));
 
         if (overlayHolder == null) {
             Log.e("TAG", adapter.getClass().getName() + " must be override " +
                     "onCreateOverlayViewHolder(ViewGroup, viewType)");
             return;
         }
-
         adapter.onBindViewHolder(overlayHolder, overlayPosition);
 
         Bitmap bitmap = getOverlayViewBitmap(parent, overlayHolder);
         int top = calcOverlayViewTop(parent, firstVisiblePosition, overlayHolder);
+        if (overlayHolder.getOverlayOffset() != 0
+                && isFirstOverlayPosition(adapter, overlayPosition)) {
+            if (top - overlayHolder.getOverlayOffset() <= 0) return;
+        }
         if (bitmap != null) {
             int left = parent.getPaddingLeft() + overlayHolder.getOverlayView().getLeft();
             c.drawBitmap(bitmap, left, top, null);
         }
 
+    }
+
+    /**
+     * 判断是否首个悬浮 position
+     *
+     * @param adapter         .
+     * @param overlayPosition overlay position
+     * @return true:首个
+     */
+    private boolean isFirstOverlayPosition(RecyclerAdapter adapter, int overlayPosition) {
+        int headerCount = adapter.getHeaderCount();
+        while (--overlayPosition >= headerCount) {
+            if (adapter.isOverlayViewType(adapter.cleanPosition(overlayPosition))) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -74,12 +95,13 @@ public class OverlayItemDecoration extends RecyclerView.ItemDecoration {
         RecyclerView.Adapter adapter = parent.getAdapter();
         View overlayItemView = overlayHolder.itemView;
         View overlayView = overlayHolder.getOverlayView();
-        int overlayTop = overlayItemView.getTop();
-        int overlayBottom = overlayItemView.getTop() + overlayView.getHeight();
+        int offset = overlayHolder.getOverlayOffset();
+        int overlayTop = overlayItemView.getTop() + offset;
+        int overlayBottom = overlayItemView.getTop() + overlayView.getHeight() + offset;
 
         if (overlayView != overlayItemView) {
             overlayTop += overlayView.getTop();
-            overlayBottom = overlayItemView.getTop() + overlayView.getBottom();
+            overlayBottom = overlayItemView.getTop() + overlayView.getBottom() + offset;
         }
 
         int count = adapter.getItemCount();
@@ -150,8 +172,9 @@ public class OverlayItemDecoration extends RecyclerView.ItemDecoration {
      * @return position
      */
     protected int getOverlayPosition(RecyclerAdapter adapter, int firstVisiblePosition) {
-        while (firstVisiblePosition >= 0) {
-            if (adapter.isOverlayViewType(firstVisiblePosition)) {
+        int headerCount = adapter.getHeaderCount();
+        while (firstVisiblePosition >= headerCount) {
+            if (adapter.isOverlayViewType(adapter.cleanPosition(firstVisiblePosition))) {
                 return firstVisiblePosition;
             }
             firstVisiblePosition--;

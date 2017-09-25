@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -15,6 +16,7 @@ import com.aliya.adapter.RecyclerViewHolder;
 import com.aliya.adapter.divider.ListSpaceDivider;
 import com.aliya.adapter.divider.OverlayItemDecoration;
 import com.aliya.adapter.simple.R;
+import com.aliya.adapter.simple.holder.HeaderHolderSimple;
 import com.aliya.adapter.simple.holder.SimpleViewHolder;
 
 import java.util.ArrayList;
@@ -29,6 +31,7 @@ import java.util.List;
 public class OverlaySimpleActivity extends Activity {
 
     RecyclerView recycle;
+    private Adapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +43,12 @@ public class OverlaySimpleActivity extends Activity {
         recycle.setLayoutManager(new LinearLayoutManager(this));
         recycle.addItemDecoration(new ListSpaceDivider(0.5f, Color.GRAY, false));
         recycle.addItemDecoration(new OverlayItemDecoration());
-        recycle.setAdapter(new Adapter(createTestData()));
+        mAdapter = new Adapter(createTestData());
+        mAdapter.addHeaderView(new HeaderHolderSimple(recycle, "我是页头").itemView);
+        mAdapter.addHeaderView(new HeaderHolderSimple(recycle, "我是页头").itemView);
+        mAdapter.addHeaderView(new HeaderHolderSimple(recycle, "我是页头").itemView);
+        mAdapter.addHeaderView(new HeaderHolderSimple(recycle, "我是页头").itemView);
+        recycle.setAdapter(mAdapter);
     }
 
     private List createTestData() {
@@ -111,11 +119,15 @@ public class OverlaySimpleActivity extends Activity {
             tv.setText("悬浮 - - " + data);
         }
 
-//        @Override
-//        public View getOverlayView() {
-//            return tv;
-//        }
+        @Override
+        public View getOverlayView() {
+            return tv;
+        }
 
+        @Override
+        public int getOverlayOffset() {
+            return -tv.getTop();
+        }
     }
 
 }

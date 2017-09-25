@@ -2,8 +2,10 @@ package com.aliya.adapter;
 
 import android.support.annotation.CallSuper;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
+import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.List;
@@ -90,7 +92,7 @@ public abstract class RecyclerAdapter<T> extends DecorAdapter {
         super.onBindViewHolder(holder, position);
         if (isInnerPosition(position)) return; // super.onBindViewHolder已经处理
         if (!onAbsBindViewHolder(holder, cleanPosition(position))) { // 没有拦截
-            ((RecyclerViewHolder) holder).setData(getData(cleanPosition(position)));
+            ((RecyclerViewHolder<T>) holder).setData(getData(cleanPosition(position)));
         }
     }
 
@@ -152,8 +154,12 @@ public abstract class RecyclerAdapter<T> extends DecorAdapter {
      */
     public static class StaticViewHolder extends RecyclerViewHolder {
 
-        public StaticViewHolder(ViewGroup parent, @LayoutRes int resource) {
-            super(inflate(resource, parent, false));
+        public StaticViewHolder(@NonNull ViewGroup parent, @LayoutRes int layoutRes) {
+            super(parent, layoutRes);
+        }
+
+        public StaticViewHolder(@NonNull View itemView) {
+            super(itemView);
         }
 
         @Override

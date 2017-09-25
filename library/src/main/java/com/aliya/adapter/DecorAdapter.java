@@ -33,7 +33,7 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
     private static final int VIEW_TYPE_PULL_REFRESH = VIEW_TYPE_HEADER;  // 下拉刷新 -> -20000
     private static final int VIEW_TYPE_EMPTY = VIEW_TYPE_FOOTER - 1;     // 空页面   -> -40001
     private static final int VIEW_TYPE_LOAD_MORE = VIEW_TYPE_HEADER - 1; // 加载更多 -> -20001
-    private static final int KEY_TAG = R.id.tag_view_holder;
+    private static final int KEY_TAG = R.id.tag_holder;
     public static final int DEFAULT_VIEW_TYPE = 0;
 
     private SparseArrayCompat<View> mHeaderViews = new SparseArrayCompat<>();

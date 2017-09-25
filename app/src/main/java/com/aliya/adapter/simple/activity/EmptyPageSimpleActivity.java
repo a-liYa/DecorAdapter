@@ -43,9 +43,9 @@ public class EmptyPageSimpleActivity extends Activity implements View.OnClickLis
 
         mAdapter.setEmptyView(new EmptyPageHolder(mRecycler).getView());
         mAdapter.addHeaderView(new HeaderHolderSimple(mRecycler, "我是页眉一").getView());
-//        mAdapter.setFooterLoadMore(new FooterHolderSimple(mRecycler, "我是加载更多").getView());
-//        mAdapter.addFooterView(new FooterHolderSimple(mRecycler, "我是页脚1").getView());
-//        mAdapter.addFooterView(new FooterHolderSimple(mRecycler, "我是页脚2").getView());
+        mAdapter.setFooterLoadMore(new FooterHolderSimple(mRecycler, "我是加载更多").getView());
+        mAdapter.addFooterView(new FooterHolderSimple(mRecycler, "我是页脚1").getView());
+        mAdapter.addFooterView(new FooterHolderSimple(mRecycler, "我是页脚2").getView());
 
         mRecycler.setAdapter(mAdapter);
 

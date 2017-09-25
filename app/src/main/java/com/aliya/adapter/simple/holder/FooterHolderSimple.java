@@ -23,7 +23,7 @@ public class FooterHolderSimple extends PageItem {
     }
 
     public FooterHolderSimple(@NonNull ViewGroup parent, String title) {
-        super(inflate(R.layout.item_footer_simple_layout, parent, false));
+        super(parent, R.layout.item_footer_simple_layout);
         tv = itemView.findViewById(R.id.tv);
         if (!TextUtils.isEmpty(title)) {
             tv.setText(title);

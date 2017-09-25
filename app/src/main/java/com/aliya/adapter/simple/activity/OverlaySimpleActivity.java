@@ -104,7 +104,7 @@ public class OverlaySimpleActivity extends Activity {
         TextView tv;
 
         public OverlayHolder(@NonNull ViewGroup parent) {
-            super(inflate(R.layout.item_overlay_simple, parent, false));
+            super(parent, R.layout.item_overlay_simple);
             tv = itemView.findViewById(R.id.tv);
         }
 

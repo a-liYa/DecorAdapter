@@ -23,7 +23,7 @@ public class HeaderHolderSimple extends PageItem {
     }
 
     public HeaderHolderSimple(@NonNull ViewGroup parent, String title) {
-        super(inflate(R.layout.item_header_simple_layout, parent, false));
+        super(parent, R.layout.item_header_simple_layout);
         tv = itemView.findViewById(R.id.tv);
         if (!TextUtils.isEmpty(title)) {
             tv.setText(title);

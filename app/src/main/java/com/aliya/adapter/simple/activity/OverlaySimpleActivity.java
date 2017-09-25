@@ -28,8 +28,6 @@ import java.util.List;
  */
 public class OverlaySimpleActivity extends Activity {
 
-    protected static final String OVERLAY_TAG = "我是悬浮item";
-
     RecyclerView recycle;
 
     @Override
@@ -49,7 +47,7 @@ public class OverlaySimpleActivity extends Activity {
         List list = new ArrayList<>();
         for (int i = 0; i < 50; i++) {
             if (i % 5 == 0) {
-                list.add(OVERLAY_TAG + (i / 5));
+                list.add("我是悬浮item" + (i / 5));
             } else {
                 list.add(i);
             }

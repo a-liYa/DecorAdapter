@@ -54,6 +54,10 @@ public abstract class RecyclerAdapter<T> extends DecorAdapter {
         return datas;
     }
 
+    public int getDataSize() {
+        return datas == null ? 0 : datas.size();
+    }
+
     public void setData(List<T> data) {
         datas = data;
     }

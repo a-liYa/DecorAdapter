@@ -37,7 +37,7 @@ public class OverlayItemDecoration extends RecyclerView.ItemDecoration {
         }
         if (firstVisiblePosition == RecyclerView.NO_POSITION) return;
 
-        int overlayPosition = getOverlayPosition(adapter, firstVisiblePosition);
+        int overlayPosition = getOverlayPosition(parent, adapter, firstVisiblePosition);
         if (overlayPosition == RecyclerView.NO_POSITION) return;
 
         OverlayViewHolder overlayHolder = adapter.onCreateOverlayViewHolder(
@@ -53,32 +53,11 @@ public class OverlayItemDecoration extends RecyclerView.ItemDecoration {
 
         Bitmap bitmap = getOverlayViewBitmap(parent, overlayHolder);
         int top = calcOverlayViewTop(parent, firstVisiblePosition, overlayHolder);
-        if (overlayHolder.getOverlayOffset() != 0
-                && isFirstOverlayPosition(adapter, overlayPosition)) {
-            if (top - overlayHolder.getOverlayOffset() <= 0) return;
-        }
         if (bitmap != null) {
             int left = parent.getPaddingLeft() + overlayHolder.getOverlayView().getLeft();
             c.drawBitmap(bitmap, left, top, null);
         }
 
-    }
-
-    /**
-     * 判断是否首个悬浮 position
-     *
-     * @param adapter         .
-     * @param overlayPosition overlay position
-     * @return true:首个
-     */
-    private boolean isFirstOverlayPosition(RecyclerAdapter adapter, int overlayPosition) {
-        int headerCount = adapter.getHeaderCount();
-        while (--overlayPosition >= headerCount) {
-            if (adapter.isOverlayViewType(adapter.cleanPosition(overlayPosition))) {
-                return false;
-            }
-        }
-        return true;
     }
 
     /**
@@ -167,17 +146,30 @@ public class OverlayItemDecoration extends RecyclerView.ItemDecoration {
     /**
      * 获取悬浮ViewHolder的position
      *
-     * @param adapter              Adapter
-     * @param firstVisiblePosition .
+     * @param parent               parent is recycler view
+     * @param adapter              {@link RecyclerAdapter}
+     * @param firstVisiblePosition first visible position
      * @return position
      */
-    protected int getOverlayPosition(RecyclerAdapter adapter, int firstVisiblePosition) {
+    protected int getOverlayPosition(RecyclerView parent, RecyclerAdapter adapter,
+                                     final int firstVisiblePosition) {
         int headerCount = adapter.getHeaderCount();
-        while (firstVisiblePosition >= headerCount) {
-            if (adapter.isOverlayViewType(adapter.cleanPosition(firstVisiblePosition))) {
-                return firstVisiblePosition;
+        int position = firstVisiblePosition;
+        while (position >= headerCount) {
+            if (adapter.isOverlayViewType(adapter.cleanPosition(position))) {
+                if (position == firstVisiblePosition) { // 特殊处理
+                    ViewHolder viewHolder = parent.findViewHolderForAdapterPosition(position);
+                    if (viewHolder instanceof OverlayViewHolder) {
+                        OverlayViewHolder overlay = (OverlayViewHolder) viewHolder;
+                        if (overlay.itemView.getTop() - overlay.getOverlayOffset() > 0) {
+                            position--;
+                            continue;
+                        }
+                    }
+                }
+                return position;
             }
-            firstVisiblePosition--;
+            position--;
         }
         return RecyclerView.NO_POSITION;
     }

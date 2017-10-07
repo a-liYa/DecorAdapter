@@ -55,7 +55,7 @@ public class OverlaySimpleActivity extends Activity {
         List list = new ArrayList<>();
         for (int i = 0; i < 50; i++) {
             if (i % 5 == 0) {
-                list.add("我是悬浮item" + (i / 5));
+                list.add("悬浮 item " + (i / 5));
             } else {
                 list.add(i);
             }
@@ -105,6 +105,12 @@ public class OverlaySimpleActivity extends Activity {
 
     }
 
+    /**
+     * 悬浮 - ViewHolder
+     *
+     * @author a_liYa
+     * @date 2017/10/6 下午5:22.
+     */
     static class OverlayHolder extends OverlayViewHolder {
 
         TextView tv;
@@ -116,7 +122,7 @@ public class OverlaySimpleActivity extends Activity {
 
         @Override
         public void bindView(Object data) {
-            tv.setText("悬浮 - - " + data);
+            tv.setText("" + data);
         }
 
         @Override
@@ -128,6 +134,7 @@ public class OverlaySimpleActivity extends Activity {
         public int getOverlayOffset() {
             return -tv.getTop();
         }
+
     }
 
 }

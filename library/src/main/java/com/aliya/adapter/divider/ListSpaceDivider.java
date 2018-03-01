@@ -90,6 +90,7 @@ public class ListSpaceDivider extends AbsSpaceDivider {
     }
 
     private void drawHorizontal(Canvas c, RecyclerView parent) {
+        if (parent.getAdapter() == null) return;
         final int left = parent.getPaddingLeft();
         final int right = parent.getWidth() - parent.getPaddingRight();
         int footerCount = 0;
@@ -120,6 +121,7 @@ public class ListSpaceDivider extends AbsSpaceDivider {
     }
 
     protected void drawVertical(Canvas c, RecyclerView parent) {
+        if (parent.getAdapter() == null) return;
         final int top = parent.getPaddingTop();
         final int bottom = parent.getHeight() - parent.getPaddingBottom();
         int footerCount = 0;
@@ -172,6 +174,7 @@ public class ListSpaceDivider extends AbsSpaceDivider {
             CompatAdapter adapter = (CompatAdapter) parent.getAdapter();
             footerCount = adapter.getFooterCount();
             if (adapter.isInnerPosition(position)) {
+                outRect.set(0, 0, 0, 0);
                 return;
             }
         }

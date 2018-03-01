@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.aliya.adapter.RecyclerAdapter;
 import com.aliya.adapter.RecyclerViewHolder;
 import com.aliya.adapter.divider.ListSpaceDivider;
+import com.aliya.adapter.simple.activity.AdapterUnifyDataSimpleActivity;
 import com.aliya.adapter.simple.activity.EmptyPageSimpleActivity;
 import com.aliya.adapter.simple.activity.OverlaySimpleActivity;
 
@@ -28,8 +29,9 @@ public class MainActivity extends AppCompatActivity {
     private static List<Entity> items = new ArrayList<>();
 
     static {
-        items.add(new Entity("悬浮吸顶 - 示例", OverlaySimpleActivity.class));
+        items.add(new Entity("普通用法 - 示例", AdapterUnifyDataSimpleActivity.class));
         items.add(new Entity("Adapter空页面 - 示例", EmptyPageSimpleActivity.class));
+        items.add(new Entity("悬浮吸顶 - 示例", OverlaySimpleActivity.class));
     }
 
     @Override
@@ -37,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        recycle = (RecyclerView) findViewById(R.id.recycler);
+        recycle = findViewById(R.id.recycler);
 
         recycle.setLayoutManager(new LinearLayoutManager(this));
         recycle.addItemDecoration(new ListSpaceDivider(1, Color.parseColor("#cccccc"), false));

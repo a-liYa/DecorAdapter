@@ -8,6 +8,8 @@ import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.aliya.adapter.click.ItemClickCallback;
+import com.aliya.adapter.click.ItemLongClickCallback;
 import com.aliya.adapter.click.OnItemClickListener;
 import com.aliya.adapter.click.OnItemLongClickListener;
 
@@ -54,12 +56,18 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
             Object tag = v.getTag(KEY_TAG);
             if (tag instanceof ViewHolder) {
                 ViewHolder holder = (ViewHolder) tag;
-                if (mOnItemClickListener != null) {
+                if (mOnItemClickListener != null || holder instanceof ItemClickCallback) {
                     int position = holder.getLayoutPosition();
                     if (position == RecyclerView.NO_POSITION) {
                         return; // 说明已经是废弃的Item
                     }
-                    mOnItemClickListener.onItemClick(holder.itemView, cleanPosition(position));
+                    if (mOnItemClickListener != null) {
+                        mOnItemClickListener.onItemClick(holder.itemView, cleanPosition(position));
+                    }
+                    if (holder instanceof ItemClickCallback) {
+                        ((ItemClickCallback) holder)
+                                .onItemClick(holder.itemView, cleanPosition(position));
+                    }
                 }
             }
         }
@@ -75,13 +83,21 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
             Object tag = v.getTag(KEY_TAG);
             if (tag instanceof ViewHolder) {
                 ViewHolder holder = (ViewHolder) tag;
-                if (mOnItemLongClickListener != null) {
+                if (mOnItemLongClickListener != null || holder instanceof ItemLongClickCallback) {
                     int position = holder.getLayoutPosition();
                     if (position == RecyclerView.NO_POSITION) {
                         return false; // 说明已经是废弃的Item
                     }
-                    return mOnItemLongClickListener.onItemLongClick(
-                            holder.itemView, cleanPosition(position));
+                    boolean longClick = false;
+                    if (mOnItemLongClickListener != null) {
+                        longClick = longClick | mOnItemLongClickListener
+                                .onItemLongClick(holder.itemView, cleanPosition(position));
+                    }
+                    if (holder instanceof ItemLongClickCallback) {
+                        longClick = longClick | ((ItemLongClickCallback) holder)
+                                .onItemLongClick(holder.itemView, cleanPosition(position));
+                    }
+                    return longClick;
                 }
             }
             return false;
@@ -249,10 +265,10 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
      */
     protected final void onSetupItemClick(ViewHolder holder) {
         if (holder != null && holder.itemView != null) {
-            if (mOnItemClickListener != null) {
+            if (mOnItemClickListener != null || holder instanceof ItemClickCallback) {
                 holder.itemView.setOnClickListener(innerOnClick);
             }
-            if (mOnItemLongClickListener != null) {
+            if (mOnItemLongClickListener != null || holder instanceof ItemLongClickCallback) {
                 holder.itemView.setOnLongClickListener(innerOnLongClick);
             }
             holder.itemView.setTag(KEY_TAG, holder);

@@ -16,6 +16,7 @@ public interface ItemLongClickCallback {
      *
      * @param itemView {@link android.support.v7.widget.RecyclerView.ViewHolder#itemView}
      * @param position .
+     * @return true:表示处理 {@link View.OnLongClickListener#onLongClick(View)}
      */
     boolean onItemLongClick(View itemView, int position);
 

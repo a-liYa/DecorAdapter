@@ -34,7 +34,7 @@ public class RefreshHeader extends PageItem {
     boolean refreshing;
     boolean startTouching;
 
-    RecyclerView recycler;
+    RecyclerView mRecycler;
 
     private ValueAnimator mIcSearchAnimator;
     private OnRefreshListener mListener;
@@ -113,17 +113,17 @@ public class RefreshHeader extends PageItem {
 
         @Override
         public void onViewAttachedToWindow(View v) {
-            if (v == itemView && recycler != null) {
-                recycler.removeOnItemTouchListener(itemTouchListener);
-                recycler.addOnItemTouchListener(itemTouchListener);
+            if (v == itemView && mRecycler != null) {
+                mRecycler.removeOnItemTouchListener(itemTouchListener);
+                mRecycler.addOnItemTouchListener(itemTouchListener);
             }
         }
 
         @Override
         public void onViewDetachedFromWindow(View v) {
-            if (v == itemView && recycler != null) {
+            if (v == itemView && mRecycler != null) {
                 startTouching = false;
-                recycler.removeOnItemTouchListener(itemTouchListener);
+                mRecycler.removeOnItemTouchListener(itemTouchListener);
             }
         }
 
@@ -162,7 +162,7 @@ public class RefreshHeader extends PageItem {
 
     public RefreshHeader(RecyclerView recycler, OnRefreshListener listener) {
         super(recycler, R.layout.layout_header_refresh);
-        this.recycler = recycler;
+        this.mRecycler = recycler;
         this.mListener = listener;
 
         itemView.addOnAttachStateChangeListener(mOnAttachStateChangeListener);

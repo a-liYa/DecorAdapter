@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         items.add(new Entity("列表样式 - 示例", DecorAdapterListSimpleActivity.class));
         items.add(new Entity("Grid样式 - 示例", DecorAdapterGridSimpleActivity.class));
         items.add(new Entity("多item类型 - 示例", AdapterDiffDataSimpleActivity.class));
-        items.add(new Entity("加载更多 - 示例", DecorAdapterLoadMoreSimpleActivity.class));
+        items.add(new Entity("下拉刷新 - 上拉加载", DecorAdapterLoadMoreSimpleActivity.class));
         items.add(new Entity("悬浮吸顶 - 示例", OverlaySimpleActivity.class));
         items.add(new Entity("Adapter空页面 - 示例", EmptyPageSimpleActivity.class));
     }

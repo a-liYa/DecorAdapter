@@ -17,6 +17,7 @@ import com.aliya.adapter.page.LoadMore;
 import com.aliya.adapter.simple.callback.LoadMoreListener;
 import com.aliya.adapter.simple.callback.LoadingCallBack;
 import com.aliya.adapter.simple.holder.FooterLoadMore;
+import com.aliya.adapter.simple.holder.RefreshHeader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,13 +28,15 @@ import java.util.List;
  * @author a_liYa
  * @date 2017/8/25 上午9:05.
  */
-public class DecorAdapterLoadMoreSimpleActivity extends AppCompatActivity {
+public class DecorAdapterLoadMoreSimpleActivity extends AppCompatActivity implements
+        RefreshHeader.OnRefreshListener {
 
     RecyclerView recycle;
     private DecorAdapter mAdapter;
 
     private int count;
     private List<String> mList;
+    private RefreshHeader mRefreshHeader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,7 +98,7 @@ public class DecorAdapterLoadMoreSimpleActivity extends AppCompatActivity {
                 }, 2000);
             }
 
-        }).getView());
+        }).itemView);
 
         View footer1 = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
         ((TextView) footer1.findViewById(R.id.tv)).setText("第1个footer");
@@ -107,7 +110,19 @@ public class DecorAdapterLoadMoreSimpleActivity extends AppCompatActivity {
 
         View refresh = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
         ((TextView) refresh.findViewById(R.id.tv)).setText("我是下拉刷新");
-        mAdapter.setHeaderRefresh(refresh);
+        mRefreshHeader = new RefreshHeader(recycle, this);
+        mAdapter.setHeaderRefresh(mRefreshHeader.itemView);
 
     }
+
+    @Override
+    public void onRefresh() {
+        recycle.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mRefreshHeader.setRefreshing(false);
+            }
+        }, 2000);
+    }
+
 }

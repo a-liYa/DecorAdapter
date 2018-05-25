@@ -15,7 +15,7 @@ import android.view.ViewGroup;
  */
 public abstract class PageItem {
 
-    public View itemView;
+    public final View itemView;
 
     public PageItem(@NonNull ViewGroup parent, @LayoutRes int layoutRes) {
         this(inflate(layoutRes, parent, false));
@@ -23,10 +23,6 @@ public abstract class PageItem {
 
     public PageItem(@NonNull View itemView) {
         this.itemView = itemView;
-    }
-
-    public View getView() {
-        return itemView;
     }
 
     public <T extends View> T findViewById(@IdRes int id) {

@@ -41,11 +41,11 @@ public class EmptyPageSimpleActivity extends AppCompatActivity implements View.O
 
         mAdapter = new RecyclerAdapterSimple(null);
 
-        mAdapter.setEmptyView(new EmptyPageHolder(mRecycler).getView());
-        mAdapter.addHeaderView(new HeaderHolderSimple(mRecycler, "我是页眉一").getView());
-        mAdapter.setFooterLoadMore(new FooterHolderSimple(mRecycler, "我是加载更多").getView());
-        mAdapter.addFooterView(new FooterHolderSimple(mRecycler, "我是页脚1").getView());
-        mAdapter.addFooterView(new FooterHolderSimple(mRecycler, "我是页脚2").getView());
+        mAdapter.setEmptyView(new EmptyPageHolder(mRecycler).itemView);
+        mAdapter.addHeaderView(new HeaderHolderSimple(mRecycler, "我是页眉一").itemView);
+        mAdapter.setFooterLoadMore(new FooterHolderSimple(mRecycler, "我是加载更多").itemView);
+        mAdapter.addFooterView(new FooterHolderSimple(mRecycler, "我是页脚1").itemView);
+        mAdapter.addFooterView(new FooterHolderSimple(mRecycler, "我是页脚2").itemView);
 
         mRecycler.setAdapter(mAdapter);
 

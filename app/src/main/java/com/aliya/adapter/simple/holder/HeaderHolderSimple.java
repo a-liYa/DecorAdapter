@@ -18,10 +18,6 @@ public class HeaderHolderSimple extends PageItem {
 
     TextView tv;
 
-    public HeaderHolderSimple(@NonNull ViewGroup parent) {
-        this(parent, null);
-    }
-
     public HeaderHolderSimple(@NonNull ViewGroup parent, String title) {
         super(parent, R.layout.item_header_simple_layout);
         tv = itemView.findViewById(R.id.tv);

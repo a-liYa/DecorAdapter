@@ -16,13 +16,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.DecorAdapterListSimpleActivity" />
-        <activity android:name=".activity.DecorAdapterGridSimpleActivity" />
-        <activity android:name=".activity.AdapterUnifyDataSimpleActivity" />
-        <activity android:name=".activity.AdapterDiffDataSimpleActivity" />
-        <activity android:name=".activity.DecorAdapterLoadMoreSimpleActivity" />
-        <activity android:name=".activity.OverlaySimpleActivity" />
-        <activity android:name=".activity.EmptyPageSimpleActivity"></activity>
+        <activity
+            android:name=".activity.AdapterUnifyDataSimpleActivity"
+            android:label="通用示例" />
+        <activity
+            android:name=".activity.DecorAdapterListSimpleActivity"
+            android:label="列表样式" />
+        <activity
+            android:name=".activity.DecorAdapterGridSimpleActivity"
+            android:label="Grid样式" />
+        <activity
+            android:name=".activity.AdapterDiffDataSimpleActivity"
+            android:label="多item类型" />
+        <activity
+            android:name=".activity.DecorAdapterLoadMoreSimpleActivity"
+            android:label="加载更多" />
+        <activity
+            android:name=".activity.OverlaySimpleActivity"
+            android:label="悬浮吸顶" />
+        <activity
+            android:name=".activity.EmptyPageSimpleActivity"
+            android:label="空页面" />
     </application>
 
 </manifest>

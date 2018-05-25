@@ -35,7 +35,7 @@ public class AdapterUnifyDataSimpleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler_simple);
 
-        recycle = (RecyclerView) findViewById(R.id.recycler);
+        recycle = findViewById(R.id.recycler);
 
         recycle.setLayoutManager(new LinearLayoutManager(this));
 
@@ -63,7 +63,7 @@ public class AdapterUnifyDataSimpleActivity extends AppCompatActivity {
             }
         });
 
-        recycle.addItemDecoration(new ListSpaceDivider(5, Color.BLUE,0,0, true, false, false));
+        recycle.addItemDecoration(new ListSpaceDivider(5, Color.parseColor("#cccccc"),0,0, true, false, false));
 
         View inflate = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
         ((TextView) inflate.findViewById(R.id.tv)).setText("第1个header");
@@ -77,13 +77,13 @@ public class AdapterUnifyDataSimpleActivity extends AppCompatActivity {
         ((TextView) inflate2.findViewById(R.id.tv)).setText("第3个header");
         mAdapter.addHeaderView(inflate2);
 
-        View footer = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
-        ((TextView) footer.findViewById(R.id.tv)).setText("我是加载更多");
-        mAdapter.setFooterLoadMore(footer);
+        View loadMareFooter = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
+        ((TextView) loadMareFooter.findViewById(R.id.tv)).setText("我是加载更多");
+        mAdapter.setFooterLoadMore(loadMareFooter);
 
-        View footer0 = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
-        ((TextView) footer0.findViewById(R.id.tv)).setText("我是覆盖加载更多");
-        mAdapter.setFooterLoadMore(footer0);
+        View loadMareCoverFooter = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
+        ((TextView) loadMareCoverFooter.findViewById(R.id.tv)).setText("我是覆盖加载更多");
+        mAdapter.setFooterLoadMore(loadMareCoverFooter);
 
         View footer1 = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
         ((TextView) footer1.findViewById(R.id.tv)).setText("第1个footer");
@@ -93,13 +93,13 @@ public class AdapterUnifyDataSimpleActivity extends AppCompatActivity {
         ((TextView) footer2.findViewById(R.id.tv)).setText("第2个footer");
         mAdapter.addFooterView(footer2);
 
-        View refresh = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
-        ((TextView) refresh.findViewById(R.id.tv)).setText("我是下拉刷新");
-        mAdapter.setHeaderRefresh(refresh);
+        View refreshHeader = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
+        ((TextView) refreshHeader.findViewById(R.id.tv)).setText("我是下拉刷新");
+        mAdapter.setHeaderRefresh(refreshHeader);
 
-        View refresh1 = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
-        ((TextView) refresh1.findViewById(R.id.tv)).setText("我要覆盖下拉刷新");
-        mAdapter.setHeaderRefresh(refresh1);
+        View refreshCoverHeader = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
+        ((TextView) refreshCoverHeader.findViewById(R.id.tv)).setText("我要覆盖下拉刷新");
+        mAdapter.setHeaderRefresh(refreshCoverHeader);
 
     }
 }

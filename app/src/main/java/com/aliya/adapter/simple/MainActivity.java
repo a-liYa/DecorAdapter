@@ -15,7 +15,11 @@ import android.widget.TextView;
 import com.aliya.adapter.RecyclerAdapter;
 import com.aliya.adapter.RecyclerViewHolder;
 import com.aliya.adapter.divider.ListSpaceDivider;
+import com.aliya.adapter.simple.activity.AdapterDiffDataSimpleActivity;
 import com.aliya.adapter.simple.activity.AdapterUnifyDataSimpleActivity;
+import com.aliya.adapter.simple.activity.DecorAdapterGridSimpleActivity;
+import com.aliya.adapter.simple.activity.DecorAdapterListSimpleActivity;
+import com.aliya.adapter.simple.activity.DecorAdapterLoadMoreSimpleActivity;
 import com.aliya.adapter.simple.activity.EmptyPageSimpleActivity;
 import com.aliya.adapter.simple.activity.OverlaySimpleActivity;
 
@@ -30,8 +34,12 @@ public class MainActivity extends AppCompatActivity {
 
     static {
         items.add(new Entity("普通用法 - 示例", AdapterUnifyDataSimpleActivity.class));
-        items.add(new Entity("Adapter空页面 - 示例", EmptyPageSimpleActivity.class));
+        items.add(new Entity("列表样式 - 示例", DecorAdapterListSimpleActivity.class));
+        items.add(new Entity("Grid样式 - 示例", DecorAdapterGridSimpleActivity.class));
+        items.add(new Entity("多item类型 - 示例", AdapterDiffDataSimpleActivity.class));
+        items.add(new Entity("加载更多 - 示例", DecorAdapterLoadMoreSimpleActivity.class));
         items.add(new Entity("悬浮吸顶 - 示例", OverlaySimpleActivity.class));
+        items.add(new Entity("Adapter空页面 - 示例", EmptyPageSimpleActivity.class));
     }
 
     @Override
@@ -95,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
         TextView mTextView;
 
         public ViewHolder(@NonNull ViewGroup parent) {
-            super(inflate(R.layout.item_main_simple, parent, false));
+            super(parent, R.layout.item_main_simple);
             mTextView = itemView.findViewById(R.id.tv_item);
             mTextView.setOnClickListener(this);
         }

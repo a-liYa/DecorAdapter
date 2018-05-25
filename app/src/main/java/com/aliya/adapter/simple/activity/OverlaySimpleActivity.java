@@ -1,9 +1,9 @@
 package com.aliya.adapter.simple.activity;
 
-import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -28,7 +28,7 @@ import java.util.List;
  * @author a_liYa
  * @date 2017/9/23 下午3:34.
  */
-public class OverlaySimpleActivity extends Activity {
+public class OverlaySimpleActivity extends AppCompatActivity {
 
     RecyclerView recycle;
     private Adapter mAdapter;

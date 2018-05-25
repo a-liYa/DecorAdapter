@@ -35,7 +35,7 @@ public class DecorAdapterListSimpleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler_simple);
 
-        recycle = (RecyclerView) findViewById(R.id.recycler);
+        recycle = findViewById(R.id.recycler);
 
         recycle.setLayoutManager(new LinearLayoutManager(this));
 

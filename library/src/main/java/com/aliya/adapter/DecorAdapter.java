@@ -14,7 +14,7 @@ import com.aliya.adapter.click.OnItemClickListener;
 import com.aliya.adapter.click.OnItemLongClickListener;
 
 /**
- * Adapter的装饰者
+ * {@link RecyclerView.Adapter}的装饰者
  * <p>
  * 实现功能：
  * 1. 设置Header {@link #addHeaderView(View)}

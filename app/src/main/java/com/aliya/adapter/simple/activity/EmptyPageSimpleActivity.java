@@ -1,8 +1,8 @@
 package com.aliya.adapter.simple.activity;
 
-import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -24,7 +24,7 @@ import java.util.List;
  * @author a_liYa
  * @date 2017/9/24 下午3:17.
  */
-public class EmptyPageSimpleActivity extends Activity implements View.OnClickListener {
+public class EmptyPageSimpleActivity extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView mRecycler;
 

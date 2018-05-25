@@ -14,10 +14,9 @@ import com.aliya.adapter.divider.ListSpaceDivider;
 import com.aliya.adapter.simple.R;
 import com.aliya.adapter.simple.adapter.OriginalAdapterSimple;
 import com.aliya.adapter.page.LoadMore;
-import com.aliya.adapter.simple.callback.LoadMoreListener;
 import com.aliya.adapter.simple.callback.LoadingCallBack;
-import com.aliya.adapter.simple.holder.FooterLoadMore;
-import com.aliya.adapter.simple.holder.RefreshHeader;
+import com.aliya.adapter.simple.page.LoadMoreFooter;
+import com.aliya.adapter.simple.page.RefreshHeader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +42,7 @@ public class DecorAdapterLoadMoreSimpleActivity extends AppCompatActivity implem
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler_simple);
 
-        recycle = (RecyclerView) findViewById(R.id.recycler);
+        recycle = findViewById(R.id.recycler);
 
         recycle.setLayoutManager(new LinearLayoutManager(this));
 
@@ -71,7 +70,8 @@ public class DecorAdapterLoadMoreSimpleActivity extends AppCompatActivity implem
         ((TextView) inflate2.findViewById(R.id.tv)).setText("第3个header");
         mAdapter.addHeaderView(inflate2);
 
-        mAdapter.setFooterLoadMore(new FooterLoadMore(recycle, new LoadMoreListener<String>() {
+        mAdapter.setFooterLoadMore(new LoadMoreFooter(recycle,
+                new LoadMoreFooter.LoadMoreListener<String>() {
 
             @Override
             public void onLoadMoreSuccess(String data, LoadMore loadMore) {

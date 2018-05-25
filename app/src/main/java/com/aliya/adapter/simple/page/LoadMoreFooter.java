@@ -1,13 +1,12 @@
-package com.aliya.adapter.simple.holder;
+package com.aliya.adapter.simple.page;
 
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
+import com.aliya.adapter.page.LoadMore;
 import com.aliya.adapter.page.PageItem;
 import com.aliya.adapter.simple.R;
-import com.aliya.adapter.page.LoadMore;
-import com.aliya.adapter.simple.callback.LoadMoreListener;
 import com.aliya.adapter.simple.callback.LoadingCallBack;
 
 /**
@@ -16,7 +15,7 @@ import com.aliya.adapter.simple.callback.LoadingCallBack;
  * @author a_liYa
  * @date 2017/8/24 18:11.
  */
-public class FooterLoadMore<M> extends PageItem implements LoadMore, View.OnClickListener,
+public class LoadMoreFooter<M> extends PageItem implements LoadMore, View.OnClickListener,
         View.OnAttachStateChangeListener, LoadingCallBack<M> {
 
     private int state = 0;
@@ -27,7 +26,7 @@ public class FooterLoadMore<M> extends PageItem implements LoadMore, View.OnClic
     private RelativeLayout mErrorMoreView;
     private View mNoMoreView;
 
-    public FooterLoadMore(ViewGroup parent, LoadMoreListener<M> loadMoreListener) {
+    public LoadMoreFooter(ViewGroup parent, LoadMoreListener<M> loadMoreListener) {
         super(parent, R.layout.item_footer_load_more);
 
         mLoadMoreView = findViewById(R.id.rl_more_loading);
@@ -113,6 +112,19 @@ public class FooterLoadMore<M> extends PageItem implements LoadMore, View.OnClic
         if (loadMoreListener != null) {
             loadMoreListener.onLoadMoreSuccess(data, this);
         }
+    }
+
+    /**
+     * LoadMoreListener
+     *
+     * @author a_liYa
+     * @date 2017/8/24 20:02.
+     */
+    public interface LoadMoreListener<M>{
+
+        void onLoadMoreSuccess(M data, LoadMore loadMore);
+
+        void onLoadMore(LoadingCallBack<M> callback);
     }
 
 }

@@ -30,7 +30,7 @@
             android:label="多item类型" />
         <activity
             android:name=".activity.DecorAdapterLoadMoreSimpleActivity"
-            android:label="加载更多" />
+            android:label="下拉刷新 - 上拉加载" />
         <activity
             android:name=".activity.OverlaySimpleActivity"
             android:label="悬浮吸顶" />

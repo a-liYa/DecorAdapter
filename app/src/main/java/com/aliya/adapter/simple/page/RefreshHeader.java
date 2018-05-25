@@ -1,4 +1,4 @@
-package com.aliya.adapter.simple.holder;
+package com.aliya.adapter.simple.page;
 
 import android.animation.ValueAnimator;
 import android.support.v7.widget.RecyclerView;

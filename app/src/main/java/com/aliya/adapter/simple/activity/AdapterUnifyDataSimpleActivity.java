@@ -12,7 +12,8 @@ import android.widget.TextView;
 import com.aliya.adapter.DecorAdapter;
 import com.aliya.adapter.click.OnItemClickListener;
 import com.aliya.adapter.click.OnItemLongClickListener;
-import com.aliya.adapter.divider.ListSpaceDivider;
+import com.aliya.adapter.divider.ListArgs;
+import com.aliya.adapter.divider.ListItemDecoration;
 import com.aliya.adapter.simple.R;
 import com.aliya.adapter.simple.adapter.UnifyDataSimpleAdapter;
 
@@ -63,7 +64,10 @@ public class AdapterUnifyDataSimpleActivity extends AppCompatActivity {
             }
         });
 
-        recycle.addItemDecoration(new ListSpaceDivider(5, Color.parseColor("#cccccc"),0,0, true, false, false));
+        recycle.addItemDecoration(new ListItemDecoration(
+                new ListArgs(this)
+                        .setDividerHeight(5)
+                        .setColor(Color.parseColor("#cccccc"))));
 
         View inflate = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
         ((TextView) inflate.findViewById(R.id.tv)).setText("第1个header");

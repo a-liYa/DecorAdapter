@@ -13,7 +13,8 @@ import android.widget.TextView;
 import com.aliya.adapter.OverlayViewHolder;
 import com.aliya.adapter.RecyclerAdapter;
 import com.aliya.adapter.RecyclerViewHolder;
-import com.aliya.adapter.divider.ListSpaceDivider;
+import com.aliya.adapter.divider.ListArgs;
+import com.aliya.adapter.divider.ListItemDecoration;
 import com.aliya.adapter.divider.OverlayItemDecoration;
 import com.aliya.adapter.simple.R;
 import com.aliya.adapter.simple.holder.HeaderHolderSimple;
@@ -41,7 +42,11 @@ public class OverlaySimpleActivity extends AppCompatActivity {
         recycle = findViewById(R.id.recycler);
 
         recycle.setLayoutManager(new LinearLayoutManager(this));
-        recycle.addItemDecoration(new ListSpaceDivider(0.5f, Color.GRAY, false));
+        recycle.addItemDecoration(new ListItemDecoration(
+                new ListArgs(this).
+                        setColor(Color.GRAY)
+                        .setDividerHeight(0.5f)
+        ));
         recycle.addItemDecoration(new OverlayItemDecoration());
         mAdapter = new Adapter(createTestData());
         mAdapter.addHeaderView(new HeaderHolderSimple(recycle, "我是页头").itemView);

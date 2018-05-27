@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.LayoutParams;
@@ -11,58 +12,24 @@ import android.view.View;
 
 import com.aliya.adapter.CompatAdapter;
 
+import static com.aliya.adapter.divider.GridArgs.NO_COLOR_ID;
+
 /**
  * Grid 分割线
  *
  * @author a_liYa
  * @date 16/10/22 14:30.
  */
-public class GridSpaceDivider extends AbsSpaceDivider {
+public class GridItemDecoration extends RecyclerView.ItemDecoration {
 
-    /**
-     * item间隔 单位 : px
-     */
-    protected float mSpace = 0;
-    // 画笔
-    private Paint mPaint;
-    /**
-     * 默认false 不包含边缘
-     */
-    protected boolean includeEdge;
+    private Paint mPaint; // 画笔
+    private GridArgs mArgs;
 
-    /**
-     * @param spaceDip 间隔距离 单位 : dip
-     */
-    public GridSpaceDivider(float spaceDip) {
-        this(spaceDip, Color.TRANSPARENT, false);
-    }
-
-    /**
-     * @param spaceDip      间隔距离 单位 : dip
-     * @param colorOrAttrId 分割线color或attrId
-     * @param isAttrId      true:表示是attrId；false:表示是Color
-     */
-    public GridSpaceDivider(float spaceDip, int colorOrAttrId, boolean isAttrId) {
-        this(spaceDip, colorOrAttrId, false, isAttrId);
-    }
-
-    /**
-     * @param spaceDip      间隔距离 单位 : dip
-     * @param colorOrAttrId 分割线color或attrId
-     * @param includeEdge   是否包括边缘 true 包含
-     * @param isAttrId      true:表示是attrId；false:表示是Color
-     */
-    public GridSpaceDivider(float spaceDip, int colorOrAttrId, boolean includeEdge,
-                            boolean isAttrId) {
-        super(colorOrAttrId, isAttrId);
-        if (isAttrId || colorOrAttrId != Color.TRANSPARENT) {
-            mPaint = new Paint();
-            mPaint.setAntiAlias(true); // 设置画笔抗锯齿
+    public GridItemDecoration(@NonNull GridArgs args) {
+        mArgs = args;
+        if (mArgs.colorRes != NO_COLOR_ID || mArgs.color != Color.TRANSPARENT) {
+            mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         }
-
-        if (spaceDip > 0)
-            mSpace = dp2px(spaceDip);
-        this.includeEdge = includeEdge;
     }
 
     @Override
@@ -104,35 +71,36 @@ public class GridSpaceDivider extends AbsSpaceDivider {
                 totalSpanSize += spanSizeLookup.getSpanSize(position - ++preCount);
             } while (spanSizeLookup.getSpanIndex(position - preCount, spanCount) != 0);
         }
-        if (includeEdge) { // 包括边界
-            // mSpace - column * ((1f / spanCount) * mSpace)
-            outRect.left = Math.round(mSpace - totalSpanSize * mSpace / spanCount);
+        if (mArgs.includeEdge) { // 包括边界
+            // space - column * ((1f / spanCount) * space)
+            outRect.left = Math.round(mArgs.space - totalSpanSize * mArgs.space / spanCount);
 
-            // (column + 1) * ((1f / spanCount) * spacing)
-            outRect.right = Math.round((totalSpanSize + spanSize) * mSpace / spanCount);
+            // (column + 1) * ((1f / spanCount) * space)
+            outRect.right = Math.round((totalSpanSize + spanSize) * mArgs.space / spanCount);
 
             if (takePosition == spanIndex) { // top edge
-                outRect.top = Math.round(mSpace);
+                outRect.top = Math.round(mArgs.space);
             }
-            outRect.bottom = Math.round(mSpace); // item bottom
+            outRect.bottom = Math.round(mArgs.space); // item bottom
         } else {
 
-            // column * ((1f / spanCount) * spacing)
-            outRect.left = Math.round(totalSpanSize * mSpace / spanCount);
+            // column * ((1f / spanCount) * space)
+            outRect.left = Math.round(totalSpanSize * mArgs.space / spanCount);
 
-            // spacing - (column + 1) * ((1f /    spanCount) * spacing)
-            outRect.right = Math.round(mSpace - (totalSpanSize + spanSize) * mSpace / spanCount);
+            // space - (column + 1) * ((1f /    spanCount) * space)
+            outRect.right = Math.round(mArgs.space - (totalSpanSize + spanSize) * mArgs.space /
+                    spanCount);
             if (takePosition != spanIndex) {
-                outRect.top = Math.round(mSpace); // item top
+                outRect.top = Math.round(mArgs.space); // item top
             }
         }
     }
 
     @Override
     public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
-        super.onDraw(c, parent, state);
         if (mPaint == null || parent.getAdapter() == null) return;
-        mPaint.setColor(getUiModeColor(parent.getContext())); // 设置颜色
+
+        mPaint.setColor(mArgs.getColor());
         GridLayoutManager.SpanSizeLookup spanSizeLookup;
         int spanCount;
         if (parent.getLayoutManager() instanceof GridLayoutManager) {
@@ -186,20 +154,21 @@ public class GridSpaceDivider extends AbsSpaceDivider {
                     totalSpanSize += spanSizeLookup.getSpanSize(position - ++preCount);
                 } while (spanSizeLookup.getSpanIndex(position - preCount, spanCount) != 0);
             }
-            if (includeEdge) { // 包括边界
-                lwX = lnX - Math.round(mSpace - totalSpanSize * mSpace / spanCount);
-                rwX = rnX + Math.round((totalSpanSize + spanSize) * mSpace / spanCount);
+            if (mArgs.includeEdge) { // 包括边界
+                lwX = lnX - Math.round(mArgs.space - totalSpanSize * mArgs.space / spanCount);
+                rwX = rnX + Math.round((totalSpanSize + spanSize) * mArgs.space / spanCount);
 
                 if (takePosition == spanIndex) { // top edge
-                    twY = tnY - Math.round(mSpace);
+                    twY = tnY - Math.round(mArgs.space);
                 }
-                bwY = bnY + Math.round(mSpace);
+                bwY = bnY + Math.round(mArgs.space);
             } else {
-                lwX = lnX - Math.round(totalSpanSize * mSpace / spanCount);
-                rwX = rnX + Math.round(mSpace - (totalSpanSize + spanSize) * mSpace / spanCount);
+                lwX = lnX - Math.round(totalSpanSize * mArgs.space / spanCount);
+                rwX = rnX + Math.round(mArgs.space - (totalSpanSize + spanSize) * mArgs.space /
+                        spanCount);
 
                 if (takePosition != spanIndex) { // item top
-                    twY = tnY - Math.round(mSpace);
+                    twY = tnY - Math.round(mArgs.space);
                 }
             }
 

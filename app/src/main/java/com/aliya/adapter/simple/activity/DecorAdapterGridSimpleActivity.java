@@ -12,7 +12,8 @@ import android.widget.TextView;
 import com.aliya.adapter.DecorAdapter;
 import com.aliya.adapter.click.OnItemClickListener;
 import com.aliya.adapter.click.OnItemLongClickListener;
-import com.aliya.adapter.divider.GridSpaceDivider;
+import com.aliya.adapter.divider.GridArgs;
+import com.aliya.adapter.divider.GridItemDecoration;
 import com.aliya.adapter.simple.R;
 import com.aliya.adapter.simple.adapter.OriginalAdapterSimple;
 
@@ -35,7 +36,7 @@ public class DecorAdapterGridSimpleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler_simple);
 
-        recycle = (RecyclerView) findViewById(R.id.recycler);
+        recycle = findViewById(R.id.recycler);
 
         recycle.setLayoutManager(new GridLayoutManager(this, 3));
 
@@ -63,7 +64,7 @@ public class DecorAdapterGridSimpleActivity extends AppCompatActivity {
             }
         });
 
-        recycle.addItemDecoration(new GridSpaceDivider(5, Color.BLUE, false, false));
+        recycle.addItemDecoration(new GridItemDecoration(new GridArgs(this).setSpace(5).setColor(Color.BLUE)));
 
         View inflate = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
         ((TextView) inflate.findViewById(R.id.tv)).setText("第1个header");

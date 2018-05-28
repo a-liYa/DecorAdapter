@@ -23,7 +23,7 @@ import java.util.List;
  */
 public abstract class RecyclerAdapter<T> extends DecorAdapter {
 
-    public List<T> datas;
+    protected List<T> datas;
 
     public RecyclerAdapter(List<T> data) {
         this.datas = data;
@@ -59,17 +59,30 @@ public abstract class RecyclerAdapter<T> extends DecorAdapter {
     }
 
     public void setData(List<T> data) {
+        setData(data, false);
+    }
+
+    /**
+     * 设置数据
+     *
+     * @param data       数据集合
+     * @param autoNotify 自动刷新 true:自动
+     */
+    public void setData(List<T> data, boolean autoNotify) {
         datas = data;
+        if (autoNotify) {
+            notifyDataSetChanged();
+        }
     }
 
     /**
      * 追加数据集合
      *
-     * @param data         数据集
-     * @param isAutoNotify 是否自动局部刷新 true ： 自动刷新
+     * @param data       数据集
+     * @param autoNotify 是否自动局部刷新 true ： 自动刷新
      * @return false:数据为空追加失败； true:追加成功
      */
-    public boolean addData(List<T> data, boolean isAutoNotify) {
+    public boolean addData(List<T> data, boolean autoNotify) {
         if (data == null || data.isEmpty()) {
             return false;
         }
@@ -81,7 +94,7 @@ public abstract class RecyclerAdapter<T> extends DecorAdapter {
         } else {
             datas.addAll(data);
         }
-        if (isAutoNotify) {
+        if (autoNotify) {
             if (notifyAll) {
                 notifyDataSetChanged();
             } else {

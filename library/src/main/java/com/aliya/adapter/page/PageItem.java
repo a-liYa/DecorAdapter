@@ -13,9 +13,10 @@ import android.view.ViewGroup;
  * @author a_liYa
  * @date 2017/8/25 13:12.
  */
-public abstract class PageItem {
+public class PageItem {
 
-    public final View itemView;
+    public View itemView;
+    private int layoutRes;
 
     public PageItem(@NonNull ViewGroup parent, @LayoutRes int layoutRes) {
         this(inflate(layoutRes, parent, false));
@@ -23,7 +24,22 @@ public abstract class PageItem {
 
     public PageItem(@NonNull View itemView) {
         this.itemView = itemView;
+        onViewCreate(itemView);
     }
+
+    public PageItem(@LayoutRes int layoutRes) {
+        this.layoutRes = layoutRes;
+    }
+
+    public final View onCreateView(ViewGroup parent) {
+        if (itemView == null) {
+            itemView = inflate(layoutRes, parent, false);
+            onViewCreate(itemView);
+        }
+        return itemView;
+    }
+
+    public void onViewCreate(View itemView) {}
 
     public <T extends View> T findViewById(@IdRes int id) {
         return (T) itemView.findViewById(id);

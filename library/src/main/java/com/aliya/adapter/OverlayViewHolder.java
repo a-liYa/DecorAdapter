@@ -32,7 +32,8 @@ public abstract class OverlayViewHolder<T> extends RecyclerViewHolder<T> {
         if (mData != data) { // 悬浮类型 针对重复setData做优化
             super.setData(data);
             View overlayView = getOverlayView();
-            if (overlayView != null && overlayView.isDrawingCacheEnabled()) { // 真正悬浮 view holder
+            // 真正悬浮 view holder
+            if (overlayView != null && overlayView.isDrawingCacheEnabled()) {
                 overlayView.setDrawingCacheEnabled(false); // 清空绘制缓存
 //                overlayView.destroyDrawingCache(); // 此方案TextView文本长度变化时宽度不变化
 //                overlayView.buildDrawingCache();

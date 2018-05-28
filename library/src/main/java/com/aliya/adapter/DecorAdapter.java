@@ -12,18 +12,19 @@ import com.aliya.adapter.click.ItemClickCallback;
 import com.aliya.adapter.click.ItemLongClickCallback;
 import com.aliya.adapter.click.OnItemClickListener;
 import com.aliya.adapter.click.OnItemLongClickListener;
+import com.aliya.adapter.page.PageItem;
 
 /**
  * {@link RecyclerView.Adapter}的装饰者
  * <p>
  * 实现功能：
- * 1. 设置Header {@link #addHeaderView(View)}
- * 2. 设置Footer {@link #addFooterView(View)}
+ * 1. 设置Header {@link #addFooterView(PageItem)}
+ * 2. 设置Footer {@link #addFooterView(PageItem)}
  * 3. 设置OnItemClick     {@link #setOnItemClickListener(OnItemClickListener)}
  * 4. 设置OnItemLongClick {@link #setOnItemLongClickListener(OnItemLongClickListener)}
- * 5. 设置HeaderRefresh   {@link #setHeaderRefresh(View)}
- * 6. 设置FooterLoadMore  {@link #setFooterLoadMore(View)}
- * 7. 设置EmptyView       {@link #setEmptyView(View)}
+ * 5. 设置HeaderRefresh   {@link #setHeaderRefresh(PageItem)}
+ * 6. 设置FooterLoadMore  {@link #setFooterLoadMore(PageItem)}
+ * 7. 设置EmptyView       {@link #setEmptyView(PageItem)}
  *
  * @author a_liYa
  * @date 2017/8/23 19:37.
@@ -38,8 +39,8 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
     private static final int KEY_TAG = R.id.tag_holder;
     public static final int DEFAULT_VIEW_TYPE = 0;
 
-    private SparseArrayCompat<View> mHeaderViews = new SparseArrayCompat<>();
-    private SparseArrayCompat<View> mFooterViews = new SparseArrayCompat<>();
+    private SparseArrayCompat<PageItem> mHeaderViews = new SparseArrayCompat<>();
+    private SparseArrayCompat<PageItem> mFooterViews = new SparseArrayCompat<>();
 
     private RecyclerView.Adapter adapter;
 
@@ -124,53 +125,103 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
 
     /**
      * 添加 header view
+     *
+     * @param view item view
+     * @see #addHeaderView(PageItem)
+     */
+    public final void addHeaderView(View view) {
+        addHeaderView(new PageItem(view));
+    }
+
+    /**
+     * 添加 header PageItem
      * <p>
      * 注意：不能大量添加，否则会导致内存过大；且不能超过20000个， 否则会导致错乱
      *
-     * @param view .
+     * @param page page item
      */
-    public final void addHeaderView(View view) {
-        mHeaderViews.put(VIEW_TYPE_HEADER + 1 + mHeaderViews.size(), view);
+    public final void addHeaderView(PageItem page) {
+        mHeaderViews.put(VIEW_TYPE_HEADER + 1 + mHeaderViews.size(), page);
     }
 
     /**
      * 添加 footer view
+     *
+     * @param view item view
+     * @see #addFooterView(PageItem)
+     */
+    public final void addFooterView(View view) {
+        addFooterView(new PageItem(view));
+    }
+
+    /**
+     * 添加 footer PageItem
      * <p>
      * 注意：不能大量添加，否则会导致内存过大；且不能超过20000个，否则会导致错乱
      *
-     * @param view .
+     * @param page page item
      */
-    public final void addFooterView(View view) {
-        mFooterViews.put(VIEW_TYPE_FOOTER + mFooterViews.size(), view);
+    public final void addFooterView(PageItem page) {
+        mFooterViews.put(VIEW_TYPE_FOOTER + mFooterViews.size(), page);
     }
 
     /**
      * 专门为下拉刷新提供的方法, 保证下拉刷新header永远在第一个
      *
-     * @param view .
+     * @param view item view
+     * @see #setHeaderRefresh(PageItem)
      */
     public final void setHeaderRefresh(View view) {
-        mHeaderViews.put(VIEW_TYPE_PULL_REFRESH, view);
+        setHeaderRefresh(new PageItem(view));
+    }
+
+    /**
+     * 专门为下拉刷新提供的方法, 保证下拉刷新header永远在第一个
+     *
+     * @param page page item
+     */
+    public final void setHeaderRefresh(PageItem page) {
+        mHeaderViews.put(VIEW_TYPE_PULL_REFRESH, page);
     }
 
     /**
      * 专门为加载更多提供的方法，保证加载更多footer永远在最后一个
      *
-     * @param view .
+     * @param view item view
+     * @see #setFooterLoadMore(PageItem)
      */
     public final void setFooterLoadMore(View view) {
-        mFooterViews.put(VIEW_TYPE_LOAD_MORE, view);
+        setFooterLoadMore(new PageItem(view));
     }
 
-    protected View emptyView;
+    /**
+     * 专门为加载更多提供的方法，保证加载更多footer永远在最后一个
+     *
+     * @param page page item
+     */
+    public final void setFooterLoadMore(PageItem page) {
+        mFooterViews.put(VIEW_TYPE_LOAD_MORE, page);
+    }
+
+    protected PageItem emptyView;
 
     /**
      * Sets the view to show if the adapter item count is empty
      *
-     * @param view .
+     * @param view item view
+     * @see #setEmptyView(PageItem)
      */
     public final void setEmptyView(View view) {
-        emptyView = view;
+        setEmptyView(new PageItem(view));
+    }
+
+    /**
+     * Sets the view to show if the adapter item count is empty
+     *
+     * @param page page item
+     */
+    public final void setEmptyView(PageItem page) {
+        emptyView = page;
     }
 
     @Override
@@ -238,9 +289,9 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (mHeaderViews.get(viewType) != null) {
-            return new SimpleViewHolder(mHeaderViews.get(viewType));
+            return new SimpleViewHolder(mHeaderViews.get(viewType).onCreateView(parent));
         } else if (mFooterViews.get(viewType) != null) {
-            return new SimpleViewHolder(mFooterViews.get(viewType));
+            return new SimpleViewHolder(mFooterViews.get(viewType).onCreateView(parent));
         }
         if (adapter != null) {
             return adapter.onCreateViewHolder(parent, viewType);

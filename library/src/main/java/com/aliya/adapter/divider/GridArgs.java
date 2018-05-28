@@ -18,8 +18,8 @@ public class GridArgs {
 
     public static final int NO_COLOR_ID = 0;
 
-    protected float space = 0;      // item间隔 单位 : px
-    protected boolean includeEdge;  // 默认false 不包含边缘
+    float space = 0;      // item间隔 单位 : px
+    boolean includeEdge;  // 默认false 不包含边缘
 
     @ColorInt
     int color = Color.TRANSPARENT;

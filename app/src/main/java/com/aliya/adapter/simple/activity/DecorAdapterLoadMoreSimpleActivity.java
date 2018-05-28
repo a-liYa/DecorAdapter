@@ -58,7 +58,7 @@ public class DecorAdapterLoadMoreSimpleActivity extends AppCompatActivity implem
         recycle.setAdapter(mAdapter);
 
         recycle.addItemDecoration(new ListItemDecoration(
-                new ListArgs(this).setDividerHeight(5).setColor(Color.BLUE)));
+                new ListArgs(this).setSpace(5).setColor(Color.BLUE)));
 
         View inflate = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
         ((TextView) inflate.findViewById(R.id.tv)).setText("第1个header");

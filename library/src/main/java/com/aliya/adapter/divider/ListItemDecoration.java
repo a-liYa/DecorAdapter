@@ -49,7 +49,7 @@ public class ListItemDecoration extends RecyclerView.ItemDecoration {
             if (position == RecyclerView.NO_POSITION) {
                 continue;
             }
-            if (!mArgs.includeLastItem && position == itemCount - 1 - footerCount) {
+            if (mArgs.ignoreLastItem && position == itemCount - 1 - footerCount) {
                 continue;
             }
             if (adapter != null && adapter.isInnerPosition(position)) {
@@ -57,7 +57,7 @@ public class ListItemDecoration extends RecyclerView.ItemDecoration {
             }
             LayoutParams params = (LayoutParams) child.getLayoutParams();
             int top = child.getBottom() + params.bottomMargin;
-            int bottom = top + mArgs.dividerHeight;
+            int bottom = top + mArgs.space;
             c.drawRect(left + mArgs.marginLeft, top, right - mArgs.marginRight, bottom, mPaint);
         }
     }
@@ -77,7 +77,7 @@ public class ListItemDecoration extends RecyclerView.ItemDecoration {
         for (int i = 0; i < childCount; i++) {
             View child = parent.getChildAt(i);
             int position = parent.getChildAdapterPosition(child);
-            if (!mArgs.includeLastItem && position == itemCount - 1 - footerCount) {
+            if (mArgs.ignoreLastItem && position == itemCount - 1 - footerCount) {
                 continue;
             }
             if (adapter != null && adapter.isInnerPosition(position)) {
@@ -86,7 +86,7 @@ public class ListItemDecoration extends RecyclerView.ItemDecoration {
             LayoutParams params = (LayoutParams) child
                     .getLayoutParams();
             int left = child.getRight() + params.rightMargin;
-            int right = left + mArgs.dividerHeight;
+            int right = left + mArgs.space;
             c.drawRect(left, top + mArgs.marginLeft, right, bottom - mArgs.marginRight, mPaint);
         }
     }
@@ -121,7 +121,7 @@ public class ListItemDecoration extends RecyclerView.ItemDecoration {
                 return;
             }
         }
-        if (!mArgs.includeLastItem) {
+        if (mArgs.ignoreLastItem) {
 //            ((RecyclerView.LayoutParams) view.getLayoutParams()).getViewLayoutPosition();
             if (position == parent.getAdapter().getItemCount() - 1 - footerCount) {
                 return;
@@ -129,9 +129,9 @@ public class ListItemDecoration extends RecyclerView.ItemDecoration {
         }
 
         if (mArgs.isVertical) {
-            outRect.set(0, 0, mArgs.dividerHeight, 0);
+            outRect.set(0, 0, mArgs.space, 0);
         } else {
-            outRect.set(0, 0, 0, mArgs.dividerHeight);
+            outRect.set(0, 0, 0, mArgs.space);
         }
     }
 

@@ -66,7 +66,7 @@ public class AdapterUnifyDataSimpleActivity extends AppCompatActivity {
 
         recycle.addItemDecoration(new ListItemDecoration(
                 new ListArgs(this)
-                        .setDividerHeight(5)
+                        .setSpace(5)
                         .setColor(Color.parseColor("#cccccc"))));
 
         View inflate = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);

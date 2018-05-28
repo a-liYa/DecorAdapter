@@ -2,7 +2,6 @@ package com.aliya.adapter.simple;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -52,8 +51,11 @@ public class MainActivity extends AppCompatActivity {
 
         recycle.setLayoutManager(new LinearLayoutManager(this));
         recycle.addItemDecoration(new ListItemDecoration(
-                new ListArgs(this).setDividerHeight(1)
-                        .setColor(Color.parseColor("#cccccc"))));
+                new ListArgs(this).setSpace(1)
+                        .setColorRes(R.color.colorDivider)
+                        .setIgnoreLastItem(true)
+                        .setMargin(5)
+        ));
 
         recycle.setAdapter(new Adapter(items));
 

@@ -1,6 +1,5 @@
 package com.aliya.adapter.simple.activity;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -42,7 +41,7 @@ public class DecorAdapterGridSimpleActivity extends AppCompatActivity {
 
         List<String> list = new ArrayList<>();
 
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 21; i++) {
             list.add(String.valueOf(i));
         }
 
@@ -64,7 +63,12 @@ public class DecorAdapterGridSimpleActivity extends AppCompatActivity {
             }
         });
 
-        recycle.addItemDecoration(new GridItemDecoration(new GridArgs(this).setSpace(5).setColor(Color.BLUE)));
+        recycle.addItemDecoration(new GridItemDecoration(
+                new GridArgs(this)
+                        .setSpace(5)
+                        .setColorRes(R.color.colorDivider)
+                        .setIncludeEdge(true)
+        ));
 
         View inflate = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
         ((TextView) inflate.findViewById(R.id.tv)).setText("第1个header");

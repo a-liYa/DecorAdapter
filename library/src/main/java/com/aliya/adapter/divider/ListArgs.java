@@ -18,12 +18,12 @@ public class ListArgs {
 
     public static final int NO_COLOR_ID = 0;
 
-    int dividerHeight;                  // 分割线高度
-    int marginLeft;                     // 左边距
-    int marginRight;                    // 右边距
+    int space;                  // 分割线高度
+    int marginLeft;             // 左边距
+    int marginRight;            // 右边距
 
-    boolean isVertical;                 // 是否为竖直方向
-    boolean includeLastItem = true;     // 是否包括最后一条
+    boolean isVertical;         // 是否为竖直方向
+    boolean ignoreLastItem;     // 是否忽略最后一条
 
     @ColorInt
     int color = Color.TRANSPARENT;
@@ -34,11 +34,11 @@ public class ListArgs {
 
     public ListArgs(Context context) {
         this.context = context;
-        dividerHeight = dp2px(0.5f);
+        space = dp2px(0.5f);
     }
 
-    public ListArgs setDividerHeight(float dividerHeight) {
-        this.dividerHeight = dp2px(dividerHeight);
+    public ListArgs setSpace(float space) {
+        this.space = dp2px(space);
         return this;
     }
 
@@ -63,8 +63,8 @@ public class ListArgs {
         return this;
     }
 
-    public ListArgs setIncludeLastItem(boolean includeLastItem) {
-        this.includeLastItem = includeLastItem;
+    public ListArgs setIgnoreLastItem(boolean ignore) {
+        this.ignoreLastItem = ignore;
         return this;
     }
 

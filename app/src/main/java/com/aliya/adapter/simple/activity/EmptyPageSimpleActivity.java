@@ -39,7 +39,7 @@ public class EmptyPageSimpleActivity extends AppCompatActivity implements View.O
         mRecycler = findViewById(R.id.recycler);
         mRecycler.setLayoutManager(new LinearLayoutManager(this));
         mRecycler.addItemDecoration(new ListItemDecoration(
-                new ListArgs(this).setDividerHeight(1).setColor(Color.parseColor("#cccccc"))));
+                new ListArgs(this).setSpace(1).setColor(Color.parseColor("#cccccc"))));
 
         mAdapter = new RecyclerAdapterSimple(null);
 

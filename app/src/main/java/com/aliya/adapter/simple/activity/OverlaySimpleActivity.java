@@ -45,7 +45,7 @@ public class OverlaySimpleActivity extends AppCompatActivity {
         recycle.addItemDecoration(new ListItemDecoration(
                 new ListArgs(this).
                         setColor(Color.GRAY)
-                        .setDividerHeight(0.5f)
+                        .setSpace(0.5f)
         ));
         recycle.addItemDecoration(new OverlayItemDecoration());
         mAdapter = new Adapter(createTestData());

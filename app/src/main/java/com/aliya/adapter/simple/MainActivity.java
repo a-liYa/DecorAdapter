@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.aliya.adapter.RecyclerAdapter;
 import com.aliya.adapter.RecyclerViewHolder;
 import com.aliya.adapter.divider.ListBuilder;
-import com.aliya.adapter.divider.ListItemDecoration;
 import com.aliya.adapter.simple.activity.AdapterDiffDataSimpleActivity;
 import com.aliya.adapter.simple.activity.AdapterUnifyDataSimpleActivity;
 import com.aliya.adapter.simple.activity.DecorAdapterGridSimpleActivity;
@@ -51,10 +50,13 @@ public class MainActivity extends AppCompatActivity {
 
         recycle.setLayoutManager(new LinearLayoutManager(this));
         recycle.addItemDecoration(
-                new ListBuilder(this).setSpace(1)
-                        .setColorRes(R.color.colorDivider)
-                        .setIgnoreLastItem(true)
-                        .setMargin(5).build()
+                new ListBuilder(getApplicationContext())
+                        .setSpace(1)                        // 分割线间距
+                        .setColorRes(R.color.colorDivider)  // 分割线颜色
+                        .setIgnoreLastItem(true)            // 是否忽略最后一条
+                        .setMargin(5)                       // 两边间距
+                        .setVertical(true)                  // 间隔线是否为竖直
+                        .build()
         );
 
         recycle.setAdapter(new Adapter(items));

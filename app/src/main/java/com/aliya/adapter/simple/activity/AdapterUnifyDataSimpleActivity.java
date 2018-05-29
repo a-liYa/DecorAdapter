@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.aliya.adapter.DecorAdapter;
 import com.aliya.adapter.click.OnItemClickListener;
 import com.aliya.adapter.click.OnItemLongClickListener;
-import com.aliya.adapter.divider.ListArgs;
+import com.aliya.adapter.divider.ListBuilder;
 import com.aliya.adapter.divider.ListItemDecoration;
 import com.aliya.adapter.simple.R;
 import com.aliya.adapter.simple.adapter.UnifyDataSimpleAdapter;
@@ -64,10 +64,10 @@ public class AdapterUnifyDataSimpleActivity extends AppCompatActivity {
             }
         });
 
-        recycle.addItemDecoration(new ListItemDecoration(
-                new ListArgs(this)
+        recycle.addItemDecoration(
+                new ListBuilder(this)
                         .setSpace(5)
-                        .setColor(Color.parseColor("#cccccc"))));
+                        .setColor(Color.parseColor("#cccccc")).build());
 
         View inflate = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
         ((TextView) inflate.findViewById(R.id.tv)).setText("第1个header");
@@ -81,11 +81,13 @@ public class AdapterUnifyDataSimpleActivity extends AppCompatActivity {
         ((TextView) inflate2.findViewById(R.id.tv)).setText("第3个header");
         mAdapter.addHeaderView(inflate2);
 
-        View loadMareFooter = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
+        View loadMareFooter = getLayoutInflater().inflate(R.layout.item_header_layout, recycle,
+                false);
         ((TextView) loadMareFooter.findViewById(R.id.tv)).setText("我是加载更多");
         mAdapter.setFooterLoadMore(loadMareFooter);
 
-        View loadMareCoverFooter = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
+        View loadMareCoverFooter = getLayoutInflater().inflate(R.layout.item_header_layout,
+                recycle, false);
         ((TextView) loadMareCoverFooter.findViewById(R.id.tv)).setText("我是覆盖加载更多");
         mAdapter.setFooterLoadMore(loadMareCoverFooter);
 
@@ -97,11 +99,13 @@ public class AdapterUnifyDataSimpleActivity extends AppCompatActivity {
         ((TextView) footer2.findViewById(R.id.tv)).setText("第2个footer");
         mAdapter.addFooterView(footer2);
 
-        View refreshHeader = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
+        View refreshHeader = getLayoutInflater().inflate(R.layout.item_header_layout, recycle,
+                false);
         ((TextView) refreshHeader.findViewById(R.id.tv)).setText("我是下拉刷新");
         mAdapter.setHeaderRefresh(refreshHeader);
 
-        View refreshCoverHeader = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
+        View refreshCoverHeader = getLayoutInflater().inflate(R.layout.item_header_layout,
+                recycle, false);
         ((TextView) refreshCoverHeader.findViewById(R.id.tv)).setText("我要覆盖下拉刷新");
         mAdapter.setHeaderRefresh(refreshCoverHeader);
 

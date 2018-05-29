@@ -12,7 +12,7 @@ import android.view.View;
 
 import com.aliya.adapter.CompatAdapter;
 
-import static com.aliya.adapter.divider.GridArgs.NO_COLOR_ID;
+import static com.aliya.adapter.divider.GridBuilder.NO_COLOR_ID;
 
 /**
  * Grid 分割线
@@ -23,9 +23,9 @@ import static com.aliya.adapter.divider.GridArgs.NO_COLOR_ID;
 public class GridItemDecoration extends RecyclerView.ItemDecoration {
 
     private Paint mPaint; // 画笔
-    private GridArgs mArgs;
+    private GridBuilder mArgs;
 
-    public GridItemDecoration(@NonNull GridArgs args) {
+    protected GridItemDecoration(@NonNull GridBuilder args) {
         mArgs = args;
         if (mArgs.colorRes != NO_COLOR_ID || mArgs.color != Color.TRANSPARENT) {
             mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);

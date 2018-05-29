@@ -8,7 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.aliya.adapter.RecyclerAdapter;
-import com.aliya.adapter.divider.ListArgs;
+import com.aliya.adapter.divider.ListBuilder;
 import com.aliya.adapter.divider.ListItemDecoration;
 import com.aliya.adapter.simple.R;
 import com.aliya.adapter.simple.adapter.RecyclerAdapterSimple;
@@ -38,8 +38,8 @@ public class EmptyPageSimpleActivity extends AppCompatActivity implements View.O
 
         mRecycler = findViewById(R.id.recycler);
         mRecycler.setLayoutManager(new LinearLayoutManager(this));
-        mRecycler.addItemDecoration(new ListItemDecoration(
-                new ListArgs(this).setSpace(1).setColor(Color.parseColor("#cccccc"))));
+        mRecycler.addItemDecoration(new ListBuilder(this).
+                setSpace(1).setColor(Color.parseColor("#cccccc")).build());
 
         mAdapter = new RecyclerAdapterSimple(null);
 

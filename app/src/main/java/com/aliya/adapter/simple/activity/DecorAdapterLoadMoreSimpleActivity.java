@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.aliya.adapter.DecorAdapter;
-import com.aliya.adapter.divider.ListArgs;
+import com.aliya.adapter.divider.ListBuilder;
 import com.aliya.adapter.divider.ListItemDecoration;
 import com.aliya.adapter.simple.R;
 import com.aliya.adapter.simple.adapter.OriginalAdapterSimple;
@@ -57,8 +57,8 @@ public class DecorAdapterLoadMoreSimpleActivity extends AppCompatActivity implem
 
         recycle.setAdapter(mAdapter);
 
-        recycle.addItemDecoration(new ListItemDecoration(
-                new ListArgs(this).setSpace(5).setColor(Color.BLUE)));
+        recycle.addItemDecoration(
+                new ListBuilder(this).setSpace(5).setColor(Color.BLUE).build());
 
         View inflate = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
         ((TextView) inflate.findViewById(R.id.tv)).setText("第1个header");

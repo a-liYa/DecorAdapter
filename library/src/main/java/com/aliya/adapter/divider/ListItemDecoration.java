@@ -11,7 +11,7 @@ import android.view.View;
 
 import com.aliya.adapter.CompatAdapter;
 
-import static com.aliya.adapter.divider.ListArgs.NO_COLOR_ID;
+import static com.aliya.adapter.divider.ListBuilder.NO_COLOR_ID;
 
 /**
  * 自定义RecyclerView的线性布局分割线
@@ -22,9 +22,9 @@ import static com.aliya.adapter.divider.ListArgs.NO_COLOR_ID;
 public class ListItemDecoration extends RecyclerView.ItemDecoration {
 
     protected Paint mPaint; // 画笔
-    protected ListArgs mArgs;
+    protected ListBuilder mArgs;
 
-    public ListItemDecoration(@NonNull ListArgs args) {
+    protected ListItemDecoration(@NonNull ListBuilder args) {
         mArgs = args;
         if (mArgs.colorRes != NO_COLOR_ID || mArgs.color != Color.TRANSPARENT) {
             mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);

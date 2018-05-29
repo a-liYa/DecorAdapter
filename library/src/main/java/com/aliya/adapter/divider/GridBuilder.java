@@ -14,9 +14,9 @@ import android.util.TypedValue;
  * @author a_liYa
  * @date 2018/5/27 21:42.
  */
-public class GridArgs {
+public class GridBuilder {
 
-    public static final int NO_COLOR_ID = 0;
+    protected static final int NO_COLOR_ID = 0;
 
     float space = 0;      // item间隔 单位 : px
     boolean includeEdge;  // 默认false 不包含边缘
@@ -28,7 +28,7 @@ public class GridArgs {
 
     final Context context;
 
-    public GridArgs(Context context) {
+    public GridBuilder(Context context) {
         this.context = context;
     }
 
@@ -38,24 +38,28 @@ public class GridArgs {
      * @param space 单位：dp
      * @return this
      */
-    public GridArgs setSpace(float space) {
+    public GridBuilder setSpace(float space) {
         this.space = dp2px(space);
         return this;
     }
 
-    public GridArgs setIncludeEdge(boolean includeEdge) {
+    public GridBuilder setIncludeEdge(boolean includeEdge) {
         this.includeEdge = includeEdge;
         return this;
     }
 
-    public GridArgs setColor(int color) {
+    public GridBuilder setColor(int color) {
         this.color = color;
         return this;
     }
 
-    public GridArgs setColorRes(int colorRes) {
+    public GridBuilder setColorRes(int colorRes) {
         this.colorRes = colorRes;
         return this;
+    }
+
+    public GridItemDecoration build() {
+        return new GridItemDecoration(this);
     }
 
     /**

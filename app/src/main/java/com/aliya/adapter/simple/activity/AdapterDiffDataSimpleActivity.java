@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.aliya.adapter.RecyclerAdapter;
 import com.aliya.adapter.click.OnItemClickListener;
 import com.aliya.adapter.click.OnItemLongClickListener;
-import com.aliya.adapter.divider.ListArgs;
+import com.aliya.adapter.divider.ListBuilder;
 import com.aliya.adapter.divider.ListItemDecoration;
 import com.aliya.adapter.simple.R;
 import com.aliya.adapter.simple.adapter.DiffDataSimpleAdapter;
@@ -77,8 +77,8 @@ public class AdapterDiffDataSimpleActivity extends AppCompatActivity {
             }
         });
 
-        recycle.addItemDecoration(new ListItemDecoration(
-                new ListArgs(this).setSpace(5).setColor(Color.BLUE)));
+        recycle.addItemDecoration(
+                new ListBuilder(this).setSpace(5).setColor(Color.BLUE).build());
 
         View inflate = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
         ((TextView) inflate.findViewById(R.id.tv)).setText("第1个header");

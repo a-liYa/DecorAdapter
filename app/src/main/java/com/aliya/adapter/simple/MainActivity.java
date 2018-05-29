@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.aliya.adapter.RecyclerAdapter;
 import com.aliya.adapter.RecyclerViewHolder;
-import com.aliya.adapter.divider.ListArgs;
+import com.aliya.adapter.divider.ListBuilder;
 import com.aliya.adapter.divider.ListItemDecoration;
 import com.aliya.adapter.simple.activity.AdapterDiffDataSimpleActivity;
 import com.aliya.adapter.simple.activity.AdapterUnifyDataSimpleActivity;
@@ -50,12 +50,12 @@ public class MainActivity extends AppCompatActivity {
         recycle = findViewById(R.id.recycler);
 
         recycle.setLayoutManager(new LinearLayoutManager(this));
-        recycle.addItemDecoration(new ListItemDecoration(
-                new ListArgs(this).setSpace(1)
+        recycle.addItemDecoration(
+                new ListBuilder(this).setSpace(1)
                         .setColorRes(R.color.colorDivider)
                         .setIgnoreLastItem(true)
-                        .setMargin(5)
-        ));
+                        .setMargin(5).build()
+        );
 
         recycle.setAdapter(new Adapter(items));
 

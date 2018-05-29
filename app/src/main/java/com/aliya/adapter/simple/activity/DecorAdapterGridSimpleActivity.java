@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.aliya.adapter.DecorAdapter;
 import com.aliya.adapter.click.OnItemClickListener;
 import com.aliya.adapter.click.OnItemLongClickListener;
-import com.aliya.adapter.divider.GridArgs;
+import com.aliya.adapter.divider.GridBuilder;
 import com.aliya.adapter.divider.GridItemDecoration;
 import com.aliya.adapter.simple.R;
 import com.aliya.adapter.simple.adapter.OriginalAdapterSimple;
@@ -63,12 +63,12 @@ public class DecorAdapterGridSimpleActivity extends AppCompatActivity {
             }
         });
 
-        recycle.addItemDecoration(new GridItemDecoration(
-                new GridArgs(this)
+        recycle.addItemDecoration(
+                new GridBuilder(this)
                         .setSpace(5)
                         .setColorRes(R.color.colorDivider)
-                        .setIncludeEdge(true)
-        ));
+                        .setIncludeEdge(true).build()
+        );
 
         View inflate = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
         ((TextView) inflate.findViewById(R.id.tv)).setText("第1个header");

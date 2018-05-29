@@ -14,9 +14,9 @@ import android.util.TypedValue;
  * @author a_liYa
  * @date 2018/5/27 20:33.
  */
-public class ListArgs {
+public class ListBuilder {
 
-    public static final int NO_COLOR_ID = 0;
+    protected static final int NO_COLOR_ID = 0;
 
     int space;                  // 分割线高度
     int marginLeft;             // 左边距
@@ -32,50 +32,54 @@ public class ListArgs {
 
     final Context context;
 
-    public ListArgs(Context context) {
+    public ListBuilder(Context context) {
         this.context = context;
         space = dp2px(0.5f);
     }
 
-    public ListArgs setSpace(float space) {
+    public ListBuilder setSpace(float space) {
         this.space = dp2px(space);
         return this;
     }
 
-    public ListArgs setMarginLeft(float marginLeft) {
+    public ListBuilder setMarginLeft(float marginLeft) {
         this.marginLeft = dp2px(marginLeft);
         return this;
     }
 
-    public ListArgs setMarginRight(float marginRight) {
+    public ListBuilder setMarginRight(float marginRight) {
         this.marginRight = dp2px(marginRight);
         return this;
     }
 
-    public ListArgs setMargin(float margin) {
+    public ListBuilder setMargin(float margin) {
         this.marginLeft = dp2px(margin);
         this.marginRight = dp2px(margin);
         return this;
     }
 
-    public ListArgs setVertical(boolean vertical) {
+    public ListBuilder setVertical(boolean vertical) {
         isVertical = vertical;
         return this;
     }
 
-    public ListArgs setIgnoreLastItem(boolean ignore) {
+    public ListBuilder setIgnoreLastItem(boolean ignore) {
         this.ignoreLastItem = ignore;
         return this;
     }
 
-    public ListArgs setColor(int color) {
+    public ListBuilder setColor(int color) {
         this.color = color;
         return this;
     }
 
-    public ListArgs setColorRes(int colorRes) {
+    public ListBuilder setColorRes(int colorRes) {
         this.colorRes = colorRes;
         return this;
+    }
+
+    public ListItemDecoration build() {
+        return new ListItemDecoration(this);
     }
 
     protected int dp2px(float dp) {

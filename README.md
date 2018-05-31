@@ -6,11 +6,11 @@ RecyclerView.Adapter的装饰器
 
 核心功能：  
 
-1. addHeaderView  
-2. addFooterView
+1. addHeader
+2. addFooter
 3. setHeaderRefresh
 4. setFooterLoadMore
-5. setEmptyView
+5. setEmpty
 6. setOnItemClickListener
 7. setOnItemLongClickListener
 
@@ -32,14 +32,14 @@ Api声明：
      *
      * @param page page item
      */
-    public final void addHeaderView(PageItem page);
+    public final void addHeader(PageItem page);
     
     /**
      * 添加 footer PageItem
      *
      * @param page page item
      */
-    public final void addFooterView(PageItem page);
+    public final void addFooter(PageItem page);
     
     /**
      * 专门为下拉刷新提供的方法, 保证下拉刷新header永远在第一个
@@ -60,7 +60,7 @@ Api声明：
      *
      * @param page page item
      */
-    public final void setEmptyView(PageItem page);
+    public final void setEmpty(PageItem page);
     
     public final void setOnItemClickListener(OnItemClickListener listener);
     

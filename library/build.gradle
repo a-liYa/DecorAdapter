@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 
-def vCode = 31
-def vName = '0.3.1'
+def vCode = 40
+def vName = '0.4.0'
 
 android {
     compileSdkVersion 26
@@ -22,9 +22,9 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    provided 'com.android.support:appcompat-v7:26.1.0'
-    provided 'com.android.support:recyclerview-v7:26.1.0'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    compileOnly 'com.android.support:appcompat-v7:26.1.0'
+    compileOnly 'com.android.support:recyclerview-v7:26.1.0'
 }
 
 ext {

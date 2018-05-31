@@ -18,13 +18,13 @@ import com.aliya.adapter.page.PageItem;
  * {@link RecyclerView.Adapter}的装饰者
  * <p>
  * 实现功能：
- * 1. 设置Header {@link #addFooterView(PageItem)}
- * 2. 设置Footer {@link #addFooterView(PageItem)}
+ * 1. 设置Header {@link #addHeader(PageItem)}
+ * 2. 设置Footer {@link #addFooter(PageItem)}
  * 3. 设置OnItemClick     {@link #setOnItemClickListener(OnItemClickListener)}
  * 4. 设置OnItemLongClick {@link #setOnItemLongClickListener(OnItemLongClickListener)}
  * 5. 设置HeaderRefresh   {@link #setHeaderRefresh(PageItem)}
  * 6. 设置FooterLoadMore  {@link #setFooterLoadMore(PageItem)}
- * 7. 设置EmptyView       {@link #setEmptyView(PageItem)}
+ * 7. 设置EmptyView       {@link #setEmpty(PageItem)}
  *
  * @author a_liYa
  * @date 2017/8/23 19:37.
@@ -127,10 +127,10 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
      * 添加 header view
      *
      * @param view item view
-     * @see #addHeaderView(PageItem)
+     * @see #addHeader(PageItem)
      */
     public final void addHeaderView(View view) {
-        addHeaderView(new PageItem(view));
+        addHeader(new PageItem(view));
     }
 
     /**
@@ -140,7 +140,7 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
      *
      * @param page page item
      */
-    public final void addHeaderView(PageItem page) {
+    public final void addHeader(PageItem page) {
         mHeaderViews.put(VIEW_TYPE_HEADER + 1 + mHeaderViews.size(), page);
     }
 
@@ -148,10 +148,10 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
      * 添加 footer view
      *
      * @param view item view
-     * @see #addFooterView(PageItem)
+     * @see #addFooter(PageItem)
      */
     public final void addFooterView(View view) {
-        addFooterView(new PageItem(view));
+        addFooter(new PageItem(view));
     }
 
     /**
@@ -161,7 +161,7 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
      *
      * @param page page item
      */
-    public final void addFooterView(PageItem page) {
+    public final void addFooter(PageItem page) {
         mFooterViews.put(VIEW_TYPE_FOOTER + mFooterViews.size(), page);
     }
 
@@ -209,10 +209,10 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
      * Sets the view to show if the adapter item count is empty
      *
      * @param view item view
-     * @see #setEmptyView(PageItem)
+     * @see #setEmpty(PageItem)
      */
     public final void setEmptyView(View view) {
-        setEmptyView(new PageItem(view));
+        setEmpty(new PageItem(view));
     }
 
     /**
@@ -220,7 +220,7 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
      *
      * @param page page item
      */
-    public final void setEmptyView(PageItem page) {
+    public final void setEmpty(PageItem page) {
         emptyView = page;
     }
 

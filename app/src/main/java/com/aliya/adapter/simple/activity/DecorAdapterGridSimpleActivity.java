@@ -12,7 +12,6 @@ import com.aliya.adapter.DecorAdapter;
 import com.aliya.adapter.click.OnItemClickListener;
 import com.aliya.adapter.click.OnItemLongClickListener;
 import com.aliya.adapter.divider.GridBuilder;
-import com.aliya.adapter.divider.GridItemDecoration;
 import com.aliya.adapter.simple.R;
 import com.aliya.adapter.simple.adapter.OriginalAdapterSimple;
 

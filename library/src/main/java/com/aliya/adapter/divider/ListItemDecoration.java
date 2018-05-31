@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.LayoutParams;
 import android.view.View;
@@ -31,7 +32,7 @@ public class ListItemDecoration extends RecyclerView.ItemDecoration {
         }
     }
 
-    private void drawHorizontal(Canvas c, RecyclerView parent) {
+    private void verticalDraw(Canvas c, RecyclerView parent) {
         if (parent.getAdapter() == null) return;
         final int left = parent.getPaddingLeft();
         final int right = parent.getWidth() - parent.getPaddingRight();
@@ -62,7 +63,7 @@ public class ListItemDecoration extends RecyclerView.ItemDecoration {
         }
     }
 
-    protected void drawVertical(Canvas c, RecyclerView parent) {
+    protected void horizontalDraw(Canvas c, RecyclerView parent) {
         if (parent.getAdapter() == null) return;
         final int top = parent.getPaddingTop();
         final int bottom = parent.getHeight() - parent.getPaddingBottom();
@@ -91,25 +92,34 @@ public class ListItemDecoration extends RecyclerView.ItemDecoration {
         }
     }
 
-    // 绘制
     @Override
     public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
-        if (mPaint == null || parent.getAdapter() == null) return;
+        if (mPaint == null || parent.getAdapter() == null || parent.getLayoutManager() == null) {
+            return;
+        }
+        boolean isVertical = true;
+        if (parent.getLayoutManager() instanceof LinearLayoutManager) {
+            isVertical = ((LinearLayoutManager) parent.getLayoutManager()).getOrientation() == LinearLayoutManager.VERTICAL;
+        }
 
         mPaint.setColor(mArgs.getColor()); // 设置颜色
-        if (mArgs.isVertical) {
-            drawVertical(c, parent);
+        if (isVertical) {
+            verticalDraw(c, parent);
         } else {
-            drawHorizontal(c, parent);
+            horizontalDraw(c, parent);
         }
     }
 
-    // 在绘制ItemDivider之前,需要调用此方法。以便RecyclerView给该条目预留空间,供我们绘制Divider
     @Override
-    public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State
-            state) {
+    public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+        // 在绘制ItemDivider之前,需要调用此方法。以便RecyclerView给该条目预留空间,供我们绘制Divider
         super.getItemOffsets(outRect, view, parent, state);
-        if (parent.getAdapter() == null) return;
+        if (parent.getAdapter() == null || parent.getLayoutManager() == null) return;
+
+        boolean isVertical = true;
+        if (parent.getLayoutManager() instanceof LinearLayoutManager) {
+            isVertical = ((LinearLayoutManager) parent.getLayoutManager()).getOrientation() == LinearLayoutManager.VERTICAL;
+        }
 
         int position = parent.getChildAdapterPosition(view);
         int footerCount = 0;
@@ -128,10 +138,10 @@ public class ListItemDecoration extends RecyclerView.ItemDecoration {
             }
         }
 
-        if (mArgs.isVertical) {
-            outRect.set(0, 0, mArgs.space, 0);
-        } else {
+        if (isVertical) {
             outRect.set(0, 0, 0, mArgs.space);
+        } else {
+            outRect.set(0, 0, mArgs.space, 0);
         }
     }
 

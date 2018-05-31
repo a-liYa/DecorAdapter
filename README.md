@@ -117,7 +117,6 @@ RecycleView.addItemDecoration(
 		.setColorRes(R.color.colorDivider)  // 分割线颜色
 		.setIgnoreLastItem(true)            // 是否忽略最后一条
 		.setMargin(5)                       // 两边间距
-		.setVertical(true)                  // 间隔线是否为竖直
 		.build()
 );
 ```

@@ -22,7 +22,6 @@ public class ListBuilder {
     int marginLeft;             // 左边距
     int marginRight;            // 右边距
 
-    boolean isVertical;         // 是否为竖直方向
     boolean ignoreLastItem;     // 是否忽略最后一条
 
     @ColorInt
@@ -55,11 +54,6 @@ public class ListBuilder {
     public ListBuilder setMargin(float margin) {
         this.marginLeft = dp2px(margin);
         this.marginRight = dp2px(margin);
-        return this;
-    }
-
-    public ListBuilder setVertical(boolean vertical) {
-        isVertical = vertical;
         return this;
     }
 

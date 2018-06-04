@@ -10,11 +10,11 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.aliya.adapter.DecorAdapter;
+import com.aliya.adapter.click.OnItemClickListener;
 import com.aliya.adapter.divider.ListBuilder;
-import com.aliya.adapter.divider.ListItemDecoration;
+import com.aliya.adapter.page.LoadMore;
 import com.aliya.adapter.simple.R;
 import com.aliya.adapter.simple.adapter.OriginalAdapterSimple;
-import com.aliya.adapter.page.LoadMore;
 import com.aliya.adapter.simple.callback.LoadingCallBack;
 import com.aliya.adapter.simple.page.LoadMoreFooter;
 import com.aliya.adapter.simple.page.RefreshHeader;
@@ -115,6 +115,12 @@ public class DecorAdapterLoadMoreSimpleActivity extends AppCompatActivity implem
         mRefreshHeader = new RefreshHeader(recycle, this);
         mAdapter.setHeaderRefresh(mRefreshHeader.itemView);
 
+        mAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(View itemView, int position) {
+                Log.e("TAG", "onItemClick " + position);
+            }
+        });
     }
 
     @Override

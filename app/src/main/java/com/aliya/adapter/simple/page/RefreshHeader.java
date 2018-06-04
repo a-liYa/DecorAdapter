@@ -4,6 +4,7 @@ import android.animation.ValueAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -72,7 +73,9 @@ public class RefreshHeader extends PageItem {
                             }
 
                         } else if (dy < 0) { // 上滑
-                            if (eY != NO_VALUE) heightTo(dampedOperation(y - eY));
+                            if (eY != NO_VALUE) {
+                                heightTo(dampedOperation(y - eY));
+                            }
 
                             if (eY != NO_VALUE && itemView.getLayoutParams().height == 0) {
                                 eY = NO_VALUE;
@@ -84,7 +87,14 @@ public class RefreshHeader extends PageItem {
                 case MotionEvent.ACTION_CANCEL:
                     startTouching = false;
                     autoRecovery();
-                    return eY != NO_VALUE && (eY = NO_VALUE) == NO_VALUE; // 下拉过就拦截点击事件
+
+                    boolean cancelClick = false;
+                    if (eY != NO_VALUE && Math.abs(y - eY) > ViewConfiguration.getTouchSlop()) {
+                        // 触发下拉且移动范围大于 touch_slop
+                        cancelClick = true;
+                    }
+                    eY = NO_VALUE;
+                    return cancelClick;
             }
             if (eY != NO_VALUE) {
                 e.setLocation(e.getX(), eY);

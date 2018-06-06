@@ -35,6 +35,8 @@ public class RefreshHeader extends PageItem {
     boolean refreshing;
     boolean startTouching;
 
+    boolean enabled = true; // 是否可用
+
     RecyclerView mRecycler;
 
     private ValueAnimator mIcSearchAnimator;
@@ -48,7 +50,7 @@ public class RefreshHeader extends PageItem {
 
         @Override
         public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
-            if (refreshing) return false;
+            if (!enabled || refreshing) return false;
 
             final float y = e.getY();
 
@@ -57,7 +59,7 @@ public class RefreshHeader extends PageItem {
                     startTouching = true;
                     break;
                 case MotionEvent.ACTION_MOVE:
-                    if (startTouching || (startTouching = true) == false) {
+                    if (startTouching) {
                         float dy = y - lastY;
                         if (dy > 0) { // 下拉
                             if (eY == NO_VALUE) {
@@ -81,6 +83,9 @@ public class RefreshHeader extends PageItem {
                                 eY = NO_VALUE;
                             }
                         }
+                    } else {
+                        eY = NO_VALUE;
+                        startTouching = true;
                     }
                     break;
                 case MotionEvent.ACTION_UP:
@@ -286,7 +291,19 @@ public class RefreshHeader extends PageItem {
         mListener = listener;
     }
 
-//    public static String friendlyTime(long time) {
+    /**
+     * 设置下拉刷新是否可用
+     *
+     * @param enabled true : 可用
+     * @return this
+     */
+    public RefreshHeader setEnabled(boolean enabled) {
+        this.enabled = enabled;
+        this.startTouching = false;
+        return this;
+    }
+
+    //    public static String friendlyTime(long time) {
 //        //获取time距离当前的秒数
 //        int ct = (int) ((System.currentTimeMillis() - time) / 1000);
 //

@@ -37,6 +37,7 @@
         <activity
             android:name=".activity.EmptyPageSimpleActivity"
             android:label="空页面" />
+        <activity android:name=".activity.TestRefreshActivity"></activity>
     </application>
 
 </manifest>

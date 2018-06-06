@@ -72,8 +72,7 @@ public class DecorAdapterLoadMoreSimpleActivity extends AppCompatActivity implem
         ((TextView) inflate2.findViewById(R.id.tv)).setText("第3个header");
         mAdapter.addHeaderView(inflate2);
 
-        mAdapter.setFooterLoadMore(new LoadMoreFooter(recycle,
-                new LoadMoreFooter.LoadMoreListener<String>() {
+        mAdapter.setFooterLoadMore(new LoadMoreFooter( new LoadMoreFooter.LoadMoreListener<String>() {
 
             @Override
             public void onLoadMoreSuccess(String data, LoadMore loadMore) {

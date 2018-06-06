@@ -1,7 +1,6 @@
 package com.aliya.adapter.simple.page;
 
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.aliya.adapter.page.LoadMore;
@@ -26,17 +25,19 @@ public class LoadMoreFooter<M> extends PageItem implements LoadMore, View.OnClic
     private RelativeLayout mErrorMoreView;
     private View mNoMoreView;
 
-    public LoadMoreFooter(ViewGroup parent, LoadMoreListener<M> loadMoreListener) {
-        super(parent, R.layout.item_footer_load_more);
+    public LoadMoreFooter(LoadMoreListener<M> loadMoreListener) {
+        super(R.layout.item_footer_load_more);
+        this.loadMoreListener = loadMoreListener;
+    }
 
+    @Override
+    public void onViewCreate(View itemView) {
         mLoadMoreView = findViewById(R.id.rl_more_loading);
         mErrorMoreView = findViewById(R.id.rl_more_error);
         mNoMoreView = findViewById(R.id.layout_no_more);
 
         mErrorMoreView.setOnClickListener(this);
         itemView.addOnAttachStateChangeListener(this);
-
-        this.loadMoreListener = loadMoreListener;
     }
 
     // 防止加载少量数据，加载更多布局没出屏幕，不会回调 onViewAttachedToWindow

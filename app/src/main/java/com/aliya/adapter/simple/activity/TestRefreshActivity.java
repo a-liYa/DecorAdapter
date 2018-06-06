@@ -46,7 +46,7 @@ public class TestRefreshActivity extends AppCompatActivity implements RefreshHea
             }
         };
         mAdapter.setHeaderRefresh(mRefreshHeader = new RefreshHeader(mRecycler, this));
-        mMoreFooter = new LoadMoreFooter<>(mRecycler, this);
+        mMoreFooter = new LoadMoreFooter<>(this);
         mMoreFooter.onEmpty();
         mAdapter.setFooterLoadMore(mMoreFooter);
         mRecycler.setAdapter(mAdapter);

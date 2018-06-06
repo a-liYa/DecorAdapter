@@ -172,6 +172,9 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
      * @see #setHeaderRefresh(PageItem)
      */
     public final void setHeaderRefresh(View view) {
+        if (view == null) {
+            throw new IllegalArgumentException("DecorAdapter#setHeaderRefresh(view) 参数不能为Null");
+        }
         setHeaderRefresh(new PageItem(view));
     }
 
@@ -191,6 +194,9 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
      * @see #setFooterLoadMore(PageItem)
      */
     public final void setFooterLoadMore(View view) {
+        if (view == null) {
+            throw new IllegalArgumentException("DecorAdapter#setFooterLoadMore(view) 参数不能为Null");
+        }
         setFooterLoadMore(new PageItem(view));
     }
 

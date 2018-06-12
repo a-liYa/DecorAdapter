@@ -48,12 +48,12 @@ public class GridBuilder {
         return this;
     }
 
-    public GridBuilder setColor(int color) {
+    public GridBuilder setColor(@ColorInt int color) {
         this.color = color;
         return this;
     }
 
-    public GridBuilder setColorRes(int colorRes) {
+    public GridBuilder setColorRes(@ColorRes int colorRes) {
         this.colorRes = colorRes;
         return this;
     }

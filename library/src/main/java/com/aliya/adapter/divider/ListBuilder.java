@@ -62,12 +62,12 @@ public class ListBuilder {
         return this;
     }
 
-    public ListBuilder setColor(int color) {
+    public ListBuilder setColor(@ColorInt int color) {
         this.color = color;
         return this;
     }
 
-    public ListBuilder setColorRes(int colorRes) {
+    public ListBuilder setColorRes(@ColorRes int colorRes) {
         this.colorRes = colorRes;
         return this;
     }

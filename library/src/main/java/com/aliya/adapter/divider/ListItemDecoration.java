@@ -33,7 +33,7 @@ public class ListItemDecoration extends RecyclerView.ItemDecoration {
         }
     }
 
-    protected void verticalDraw(Canvas c, RecyclerView parent) {
+    private void verticalDraw(Canvas c, RecyclerView parent) {
         if (parent.getAdapter() == null) return;
         final int left = parent.getPaddingLeft() +  mArgs.marginLeft;
         final int right = parent.getWidth() - parent.getPaddingRight() - mArgs.marginRight;
@@ -61,12 +61,12 @@ public class ListItemDecoration extends RecyclerView.ItemDecoration {
             int top = child.getBottom() + params.bottomMargin;
             int bottom = top + getItemOffset(child);
             if (bottom > top) {
-                c.drawRect(left, top, right, bottom, mPaint);
+                onDrawItemDecor(c, child, parent, left, top, right, bottom);
             }
         }
     }
 
-    protected void horizontalDraw(Canvas c, RecyclerView parent) {
+    private void horizontalDraw(Canvas c, RecyclerView parent) {
         if (parent.getAdapter() == null) return;
         final int top = parent.getPaddingTop() + mArgs.marginLeft;
         final int bottom = parent.getHeight() - parent.getPaddingBottom() - mArgs.marginRight;
@@ -91,9 +91,23 @@ public class ListItemDecoration extends RecyclerView.ItemDecoration {
             int left = child.getRight() + params.rightMargin;
             int right = left + getItemOffset(child);
             if (right > left) {
-                c.drawRect(left, top , right, bottom, mPaint);
+                onDrawItemDecor(c, child, parent, left, top, right, bottom);
             }
         }
+    }
+
+    /**
+     * 绘制 item 分割线
+     *
+     * @param c      Canvas
+     * @param child  The child view to decorate
+     * @param left   The left side of the rectangle to be drawn
+     * @param right  The right side of the rectangle to be drawn
+     * @param top    The top side of the rectangle to be drawn
+     * @param bottom The bottom side of the rectangle to be drawn
+     */
+    protected void onDrawItemDecor(Canvas c, View child, RecyclerView parent, int left, int top, int right, int bottom) {
+        c.drawRect(left, top, right, bottom, mPaint);
     }
 
     @Override
@@ -112,6 +126,11 @@ public class ListItemDecoration extends RecyclerView.ItemDecoration {
         } else {
             horizontalDraw(c, parent);
         }
+    }
+
+    @Override
+    public final void onDraw(Canvas c, RecyclerView parent) {
+        super.onDraw(c, parent);
     }
 
     @Override

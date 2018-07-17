@@ -111,7 +111,7 @@ class Adapter extends RecyclerAdapter<Entity> {
 ### 分割线的用法
 
 ```java
-RecycleView.addItemDecoration(
+recycleView.addItemDecoration(
 	new ListBuilder(getApplicationContext())
 		.setSpace(1)                        // 分割线间距
 		.setColorRes(R.color.colorDivider)  // 分割线颜色

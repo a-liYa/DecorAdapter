@@ -22,6 +22,7 @@ import com.aliya.adapter.simple.activity.DecorAdapterLoadMoreSimpleActivity;
 import com.aliya.adapter.simple.activity.EmptyPageSimpleActivity;
 import com.aliya.adapter.simple.activity.OverlaySimpleActivity;
 import com.aliya.adapter.simple.activity.TestRefreshActivity;
+import com.aliya.adapter.simple.decoration.SubListItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,12 +53,14 @@ public class MainActivity extends AppCompatActivity {
 
         recycle.setLayoutManager(new LinearLayoutManager(this));
         recycle.addItemDecoration(
+                new SubListItemDecoration(
                 new ListBuilder(getApplicationContext())
                         .setSpace(1)                        // 分割线间距
                         .setColorRes(R.color.colorDivider)  // 分割线颜色
                         .setIgnoreLastItem(true)            // 是否忽略最后一条
                         .setMargin(5)                       // 两边间距
-                        .build()
+//                        .build()
+                )
         );
 
         recycle.setAdapter(new Adapter(items));

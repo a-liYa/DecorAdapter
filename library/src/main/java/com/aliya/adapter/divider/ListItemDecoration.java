@@ -101,6 +101,7 @@ public class ListItemDecoration extends RecyclerView.ItemDecoration {
      *
      * @param c      Canvas
      * @param child  The child view to decorate
+     * @param parent RecyclerView this ItemDecoration is drawing into
      * @param left   The left side of the rectangle to be drawn
      * @param right  The right side of the rectangle to be drawn
      * @param top    The top side of the rectangle to be drawn

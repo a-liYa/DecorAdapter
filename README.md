@@ -1,7 +1,7 @@
 # DecorAdapter
 
 ```
-RecyclerView.Adapter的装饰器
+RecyclerView.Adapter的功能封装
 ```
 
 核心功能：  

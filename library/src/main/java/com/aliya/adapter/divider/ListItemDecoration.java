@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView.LayoutParams;
 import android.view.View;
 
 import com.aliya.adapter.CompatAdapter;
+import com.aliya.adapter.R;
 
 import static com.aliya.adapter.divider.ListBuilder.NO_COLOR_ID;
 
@@ -32,10 +33,10 @@ public class ListItemDecoration extends RecyclerView.ItemDecoration {
         }
     }
 
-    private void verticalDraw(Canvas c, RecyclerView parent) {
+    protected void verticalDraw(Canvas c, RecyclerView parent) {
         if (parent.getAdapter() == null) return;
-        final int left = parent.getPaddingLeft();
-        final int right = parent.getWidth() - parent.getPaddingRight();
+        final int left = parent.getPaddingLeft() +  mArgs.marginLeft;
+        final int right = parent.getWidth() - parent.getPaddingRight() - mArgs.marginRight;
         int footerCount = 0;
         CompatAdapter adapter = null;
         if (parent.getAdapter() instanceof CompatAdapter) {
@@ -58,15 +59,17 @@ public class ListItemDecoration extends RecyclerView.ItemDecoration {
             }
             LayoutParams params = (LayoutParams) child.getLayoutParams();
             int top = child.getBottom() + params.bottomMargin;
-            int bottom = top + mArgs.space;
-            c.drawRect(left + mArgs.marginLeft, top, right - mArgs.marginRight, bottom, mPaint);
+            int bottom = top + getItemOffset(child);
+            if (bottom > top) {
+                c.drawRect(left, top, right, bottom, mPaint);
+            }
         }
     }
 
     protected void horizontalDraw(Canvas c, RecyclerView parent) {
         if (parent.getAdapter() == null) return;
-        final int top = parent.getPaddingTop();
-        final int bottom = parent.getHeight() - parent.getPaddingBottom();
+        final int top = parent.getPaddingTop() + mArgs.marginLeft;
+        final int bottom = parent.getHeight() - parent.getPaddingBottom() - mArgs.marginRight;
         int footerCount = 0;
         CompatAdapter adapter = null;
         if (parent.getAdapter() instanceof CompatAdapter) {
@@ -84,11 +87,12 @@ public class ListItemDecoration extends RecyclerView.ItemDecoration {
             if (adapter != null && adapter.isInnerPosition(position)) {
                 continue;
             }
-            LayoutParams params = (LayoutParams) child
-                    .getLayoutParams();
+            LayoutParams params = (LayoutParams) child.getLayoutParams();
             int left = child.getRight() + params.rightMargin;
-            int right = left + mArgs.space;
-            c.drawRect(left, top + mArgs.marginLeft, right, bottom - mArgs.marginRight, mPaint);
+            int right = left + getItemOffset(child);
+            if (right > left) {
+                c.drawRect(left, top , right, bottom, mPaint);
+            }
         }
     }
 
@@ -113,7 +117,6 @@ public class ListItemDecoration extends RecyclerView.ItemDecoration {
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
         // 在绘制ItemDivider之前,需要调用此方法。以便RecyclerView给该条目预留空间,供我们绘制Divider
-        super.getItemOffsets(outRect, view, parent, state);
         if (parent.getAdapter() == null || parent.getLayoutManager() == null) return;
 
         boolean isVertical = true;
@@ -137,12 +140,29 @@ public class ListItemDecoration extends RecyclerView.ItemDecoration {
                 return;
             }
         }
-
+        setItemOffset(view, mArgs.space);
         if (isVertical) {
             outRect.set(0, 0, 0, mArgs.space);
         } else {
             outRect.set(0, 0, mArgs.space, 0);
         }
+    }
+
+    @Override
+    public final void getItemOffsets(Rect outRect, int itemPosition, RecyclerView parent) {
+        super.getItemOffsets(outRect, itemPosition, parent);
+    }
+
+    protected final void setItemOffset(View child, int offset) {
+        child.setTag(R.id.tag_item_offset, offset);
+    }
+
+    protected final int getItemOffset(View child) {
+        Object tag = child.getTag(R.id.tag_item_offset);
+        if (tag instanceof Integer) {
+            return (Integer) tag;
+        }
+        return 0;
     }
 
 }

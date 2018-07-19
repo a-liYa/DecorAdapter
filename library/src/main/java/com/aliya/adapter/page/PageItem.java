@@ -27,6 +27,12 @@ public class PageItem {
         onViewCreate(itemView);
     }
 
+    /**
+     * 此构造方法实现懒加载模式，加载时机{@link com.aliya.adapter.DecorAdapter#onCreateOverlayViewHolder(ViewGroup, int)}，
+     * 通过 {@link #onCreateView(ViewGroup)} 加载布局
+     *
+     * @param layoutRes a layout resource reference
+     */
     public PageItem(@LayoutRes int layoutRes) {
         this.layoutRes = layoutRes;
     }

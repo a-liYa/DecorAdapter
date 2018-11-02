@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 
-def vCode = 50
-def vName = '0.5.0'
+def vCode = 60
+def vName = '0.6.0'
 
 android {
     compileSdkVersion 26
@@ -30,7 +30,7 @@ dependencies {
 ext {
     publishArtifact = 'decoradapter'
     publishVersion = vName // 发布到Jcenter的版本号
-    publishDesc = '封装RecyclerView.Adapter,使用起来更简单'
+    publishDesc = '封装 RecyclerView.Adapter, 使用起来更简单'
     publishWebsite = 'https://github.com/a-liYa/DecorAdapter'
 }
 

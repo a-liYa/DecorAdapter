@@ -80,7 +80,7 @@ class ViewHolder extends RecyclerViewHolder<Entity> implements ItemClickCallback
 	}
 
 	@Override
-	public void bindView(Entity data) {
+	public void bindData(Entity data) {
 		mTextView.setText(data.getContent());
 	}
 	

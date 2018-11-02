@@ -37,7 +37,7 @@ public class UnifyDataSimpleAdapter extends RecyclerAdapter<String> {
         }
 
         @Override
-        public void bindView(String data) {
+        public void bindData(String data) {
             tv.setText(data);
         }
     }

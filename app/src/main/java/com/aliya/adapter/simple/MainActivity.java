@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        public void bindView(Entity data) {
+        public void bindData(Entity data) {
             mTextView.setText(data.getContent());
         }
 

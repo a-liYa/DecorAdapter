@@ -23,7 +23,7 @@ public class SimpleViewHolder extends RecyclerViewHolder {
     }
 
     @Override
-    public void bindView(Object data) {
+    public void bindData(Object data) {
         mTextView.setText("item内容 - " + data);
     }
 

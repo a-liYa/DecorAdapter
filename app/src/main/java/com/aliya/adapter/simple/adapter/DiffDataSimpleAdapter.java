@@ -60,7 +60,7 @@ public class DiffDataSimpleAdapter extends RecyclerAdapter {
         }
 
         @Override
-        public void bindView(String data) {
+        public void bindData(String data) {
             tv.setText("我是String类型 - " + data);
         }
     }
@@ -76,7 +76,7 @@ public class DiffDataSimpleAdapter extends RecyclerAdapter {
         }
 
         @Override
-        public void bindView(Integer data) {
+        public void bindData(Integer data) {
             tv.setText("我是Integer类型 - " + data);
         }
     }
@@ -92,7 +92,7 @@ public class DiffDataSimpleAdapter extends RecyclerAdapter {
         }
 
         @Override
-        public void bindView(Void data) {
+        public void bindData(Void data) {
             tv.setText("我是Void类型 - " + data);
         }
     }

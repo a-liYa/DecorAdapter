@@ -125,7 +125,7 @@ public class OverlaySimpleActivity extends AppCompatActivity {
         }
 
         @Override
-        public void bindView(Object data) {
+        public void bindData(Object data) {
             tv.setText("" + data);
         }
 

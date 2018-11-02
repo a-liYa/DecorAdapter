@@ -37,7 +37,7 @@ public class RecyclerAdapterSimple extends RecyclerAdapter<String> {
         }
 
         @Override
-        public void bindView(String data) {
+        public void bindData(String data) {
             tv.setText("数据 -> " + data);
         }
     }

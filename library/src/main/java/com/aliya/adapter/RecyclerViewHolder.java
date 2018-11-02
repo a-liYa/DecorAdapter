@@ -28,8 +28,7 @@ public abstract class RecyclerViewHolder<T> extends RecyclerView.ViewHolder {
 
     public void setData(T data) {
         this.mData = data;
-        bindView(mData);
-        bindView();
+        bindData(mData);
     }
 
     public T getData() {
@@ -39,15 +38,20 @@ public abstract class RecyclerViewHolder<T> extends RecyclerView.ViewHolder {
     /**
      * bind data to view
      *
-     * @param data .
+     * @param data 数据
      */
-    public abstract void bindView(T data);
+    public void bindData(T data) {
+        bindView(data);
+    }
 
     /**
-     * @deprecated Override use {@link #bindView(Object)}
+     * bind data to view
+     *
+     * @param data .
+     * @deprecated Override use {@link #bindData(Object)}
      */
     @Deprecated
-    public void bindView() {
+    public void bindView(T data) {
     }
 
     /**

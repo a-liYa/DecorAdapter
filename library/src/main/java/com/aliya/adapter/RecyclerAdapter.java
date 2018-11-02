@@ -180,7 +180,7 @@ public abstract class RecyclerAdapter<T> extends DecorAdapter {
         }
 
         @Override
-        public void bindView(Object data) {
+        public void bindData(Object data) {
             itemView.setClickable(false); // 设置条目不可点击
         }
 

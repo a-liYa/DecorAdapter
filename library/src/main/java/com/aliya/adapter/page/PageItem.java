@@ -24,7 +24,7 @@ public class PageItem {
 
     public PageItem(@NonNull View itemView) {
         this.itemView = itemView;
-        onViewCreate(itemView);
+        onViewCreated(itemView);
     }
 
     /**
@@ -40,12 +40,12 @@ public class PageItem {
     public final View onCreateView(ViewGroup parent) {
         if (itemView == null) {
             itemView = inflate(layoutRes, parent, false);
-            onViewCreate(itemView);
+            onViewCreated(itemView);
         }
         return itemView;
     }
 
-    public void onViewCreate(View itemView) {}
+    public void onViewCreated(View itemView) {}
 
     public <T extends View> T findViewById(@IdRes int id) {
         return (T) itemView.findViewById(id);

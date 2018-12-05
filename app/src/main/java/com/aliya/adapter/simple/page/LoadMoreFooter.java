@@ -31,13 +31,15 @@ public class LoadMoreFooter<M> extends PageItem implements LoadMore, View.OnClic
     }
 
     @Override
-    public void onViewCreate(View itemView) {
+    public void onViewCreated(View itemView) {
         mLoadMoreView = findViewById(R.id.rl_more_loading);
         mErrorMoreView = findViewById(R.id.rl_more_error);
         mNoMoreView = findViewById(R.id.layout_no_more);
 
         mErrorMoreView.setOnClickListener(this);
+        itemView.removeOnAttachStateChangeListener(this);
         itemView.addOnAttachStateChangeListener(this);
+        updateState();
     }
 
     // 防止加载少量数据，加载更多布局没出屏幕，不会回调 onViewAttachedToWindow
@@ -64,9 +66,11 @@ public class LoadMoreFooter<M> extends PageItem implements LoadMore, View.OnClic
     }
 
     protected void updateState() {
-        mLoadMoreView.setVisibility(state == TYPE_LOADING ? View.VISIBLE : View.GONE);
-        mErrorMoreView.setVisibility(state == TYPE_ERROR ? View.VISIBLE : View.GONE);
-        mNoMoreView.setVisibility(state == TYPE_NO_MORE ? View.VISIBLE : View.GONE);
+        if (itemView != null) {
+            mLoadMoreView.setVisibility(state == TYPE_LOADING ? View.VISIBLE : View.GONE);
+            mErrorMoreView.setVisibility(state == TYPE_ERROR ? View.VISIBLE : View.GONE);
+            mNoMoreView.setVisibility(state == TYPE_NO_MORE ? View.VISIBLE : View.GONE);
+        }
     }
 
     @Override

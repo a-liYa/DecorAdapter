@@ -11,6 +11,7 @@ import com.aliya.adapter.simple.callback.LoadingCallBack;
 /**
  * 加载更多，自定义示例
  *
+ * @param <M> 网络数据范型
  * @author a_liYa
  * @date 2017/8/24 18:11.
  */
@@ -125,7 +126,7 @@ public class LoadMoreFooter<M> extends PageItem implements LoadMore, View.OnClic
      * @author a_liYa
      * @date 2017/8/24 20:02.
      */
-    public interface LoadMoreListener<M>{
+    public interface LoadMoreListener<M> {
 
         void onLoadMoreSuccess(M data, LoadMore loadMore);
 

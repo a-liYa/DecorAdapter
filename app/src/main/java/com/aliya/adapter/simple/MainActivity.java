@@ -21,6 +21,7 @@ import com.aliya.adapter.simple.activity.DecorAdapterListSimpleActivity;
 import com.aliya.adapter.simple.activity.DecorAdapterLoadMoreSimpleActivity;
 import com.aliya.adapter.simple.activity.EmptyPageSimpleActivity;
 import com.aliya.adapter.simple.activity.OverlaySimpleActivity;
+import com.aliya.adapter.simple.activity.TestActivity;
 import com.aliya.adapter.simple.activity.TestRefreshActivity;
 import com.aliya.adapter.simple.decoration.SubListItemDecoration;
 
@@ -41,7 +42,8 @@ public class MainActivity extends AppCompatActivity {
         items.add(new Entity("下拉刷新 - 上拉加载", DecorAdapterLoadMoreSimpleActivity.class));
         items.add(new Entity("悬浮吸顶 - 示例", OverlaySimpleActivity.class));
         items.add(new Entity("Adapter空页面 - 示例", EmptyPageSimpleActivity.class));
-        items.add(new Entity("下拉刷新 - 测试", TestRefreshActivity.class));
+        items.add(new Entity("测试 - 下拉刷新", TestRefreshActivity.class));
+        items.add(new Entity("测试 - header footer 异常", TestActivity.class));
     }
 
     @Override

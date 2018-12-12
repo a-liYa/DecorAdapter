@@ -37,7 +37,12 @@
         <activity
             android:name=".activity.EmptyPageSimpleActivity"
             android:label="空页面" />
-        <activity android:name=".activity.TestRefreshActivity"></activity>
+        <activity
+            android:name=".activity.TestRefreshActivity"
+            android:label="测试下拉刷新" />
+        <activity
+            android:name=".activity.TestActivity"
+            android:label="测试 header footer 异常" />
     </application>
 
 </manifest>

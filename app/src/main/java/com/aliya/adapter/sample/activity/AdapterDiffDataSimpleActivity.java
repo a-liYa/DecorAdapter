@@ -1,4 +1,4 @@
-package com.aliya.adapter.simple.activity;
+package com.aliya.adapter.sample.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -14,8 +14,8 @@ import com.aliya.adapter.click.OnItemClickListener;
 import com.aliya.adapter.click.OnItemLongClickListener;
 import com.aliya.adapter.divider.ListBuilder;
 import com.aliya.adapter.divider.ListItemDecoration;
-import com.aliya.adapter.simple.R;
-import com.aliya.adapter.simple.adapter.DiffDataSimpleAdapter;
+import com.aliya.adapter.sample.R;
+import com.aliya.adapter.sample.adapter.DiffDataSimpleAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

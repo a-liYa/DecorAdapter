@@ -1,4 +1,4 @@
-package com.aliya.adapter.simple.decoration;
+package com.aliya.adapter.sample.decoration;
 
 import android.graphics.Canvas;
 import android.graphics.Color;

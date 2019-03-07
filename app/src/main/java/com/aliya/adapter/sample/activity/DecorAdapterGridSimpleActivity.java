@@ -1,4 +1,4 @@
-package com.aliya.adapter.simple.activity;
+package com.aliya.adapter.sample.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,8 +12,8 @@ import com.aliya.adapter.DecorAdapter;
 import com.aliya.adapter.click.OnItemClickListener;
 import com.aliya.adapter.click.OnItemLongClickListener;
 import com.aliya.adapter.divider.GridBuilder;
-import com.aliya.adapter.simple.R;
-import com.aliya.adapter.simple.adapter.OriginalAdapterSimple;
+import com.aliya.adapter.sample.R;
+import com.aliya.adapter.sample.adapter.OriginalAdapterSimple;
 
 import java.util.ArrayList;
 import java.util.List;

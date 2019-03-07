@@ -1,4 +1,4 @@
-package com.aliya.adapter.simple.activity;
+package com.aliya.adapter.sample.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -16,9 +16,9 @@ import com.aliya.adapter.RecyclerViewHolder;
 import com.aliya.adapter.divider.ListBuilder;
 import com.aliya.adapter.divider.ListItemDecoration;
 import com.aliya.adapter.divider.OverlayItemDecoration;
-import com.aliya.adapter.simple.R;
-import com.aliya.adapter.simple.holder.HeaderHolderSimple;
-import com.aliya.adapter.simple.holder.SimpleViewHolder;
+import com.aliya.adapter.sample.R;
+import com.aliya.adapter.sample.holder.HeaderHolderSimple;
+import com.aliya.adapter.sample.holder.SimpleViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;

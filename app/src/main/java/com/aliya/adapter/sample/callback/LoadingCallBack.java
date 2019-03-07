@@ -1,4 +1,4 @@
-package com.aliya.adapter.simple.callback;
+package com.aliya.adapter.sample.callback;
 
 /**
  * 加载数据回调接口

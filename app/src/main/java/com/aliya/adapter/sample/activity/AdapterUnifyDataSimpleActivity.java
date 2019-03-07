@@ -1,4 +1,4 @@
-package com.aliya.adapter.simple.activity;
+package com.aliya.adapter.sample.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -14,19 +14,19 @@ import com.aliya.adapter.click.OnItemClickListener;
 import com.aliya.adapter.click.OnItemLongClickListener;
 import com.aliya.adapter.divider.ListBuilder;
 import com.aliya.adapter.divider.ListItemDecoration;
-import com.aliya.adapter.simple.R;
-import com.aliya.adapter.simple.adapter.OriginalAdapterSimple;
+import com.aliya.adapter.sample.R;
+import com.aliya.adapter.sample.adapter.UnifyDataSimpleAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * {@link DecorAdapter} 列表样式 示例
+ * BaseRecyclerAdapter统一数据类型的使用示例
  *
  * @author a_liYa
- * @date 2017/8/24 下午5:23.
+ * @date 2017/8/24 17:20.
  */
-public class DecorAdapterListSimpleActivity extends AppCompatActivity {
+public class AdapterUnifyDataSimpleActivity extends AppCompatActivity {
 
     RecyclerView recycle;
     private DecorAdapter mAdapter;
@@ -46,7 +46,7 @@ public class DecorAdapterListSimpleActivity extends AppCompatActivity {
             list.add(String.valueOf(i));
         }
 
-        mAdapter = new DecorAdapter(new OriginalAdapterSimple(list));
+        mAdapter = new UnifyDataSimpleAdapter(list);
 
         recycle.setAdapter(mAdapter);
 
@@ -65,7 +65,9 @@ public class DecorAdapterListSimpleActivity extends AppCompatActivity {
         });
 
         recycle.addItemDecoration(
-                new ListBuilder(this).setSpace(5).setColor(Color.BLUE).build());
+                new ListBuilder(this)
+                        .setSpace(5)
+                        .setColor(Color.parseColor("#cccccc")).build());
 
         View inflate = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
         ((TextView) inflate.findViewById(R.id.tv)).setText("第1个header");
@@ -79,13 +81,15 @@ public class DecorAdapterListSimpleActivity extends AppCompatActivity {
         ((TextView) inflate2.findViewById(R.id.tv)).setText("第3个header");
         mAdapter.addHeaderView(inflate2);
 
-        View footer = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
-        ((TextView) footer.findViewById(R.id.tv)).setText("我是加载更多");
-        mAdapter.setFooterLoadMore(footer);
+        View loadMareFooter = getLayoutInflater().inflate(R.layout.item_header_layout, recycle,
+                false);
+        ((TextView) loadMareFooter.findViewById(R.id.tv)).setText("我是加载更多");
+        mAdapter.setFooterLoadMore(loadMareFooter);
 
-        View footer0 = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
-        ((TextView) footer0.findViewById(R.id.tv)).setText("我是覆盖加载更多");
-        mAdapter.setFooterLoadMore(footer0);
+        View loadMareCoverFooter = getLayoutInflater().inflate(R.layout.item_header_layout,
+                recycle, false);
+        ((TextView) loadMareCoverFooter.findViewById(R.id.tv)).setText("我是覆盖加载更多");
+        mAdapter.setFooterLoadMore(loadMareCoverFooter);
 
         View footer1 = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
         ((TextView) footer1.findViewById(R.id.tv)).setText("第1个footer");
@@ -95,13 +99,15 @@ public class DecorAdapterListSimpleActivity extends AppCompatActivity {
         ((TextView) footer2.findViewById(R.id.tv)).setText("第2个footer");
         mAdapter.addFooterView(footer2);
 
-        View refresh = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
-        ((TextView) refresh.findViewById(R.id.tv)).setText("我是下拉刷新");
-        mAdapter.setHeaderRefresh(refresh);
+        View refreshHeader = getLayoutInflater().inflate(R.layout.item_header_layout, recycle,
+                false);
+        ((TextView) refreshHeader.findViewById(R.id.tv)).setText("我是下拉刷新");
+        mAdapter.setHeaderRefresh(refreshHeader);
 
-        View refresh1 = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
-        ((TextView) refresh1.findViewById(R.id.tv)).setText("我要覆盖下拉刷新");
-        mAdapter.setHeaderRefresh(refresh1);
+        View refreshCoverHeader = getLayoutInflater().inflate(R.layout.item_header_layout,
+                recycle, false);
+        ((TextView) refreshCoverHeader.findViewById(R.id.tv)).setText("我要覆盖下拉刷新");
+        mAdapter.setHeaderRefresh(refreshCoverHeader);
+
     }
-
 }

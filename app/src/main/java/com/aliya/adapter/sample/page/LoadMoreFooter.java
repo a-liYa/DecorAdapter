@@ -1,12 +1,13 @@
-package com.aliya.adapter.simple.page;
+package com.aliya.adapter.sample.page;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.aliya.adapter.page.LoadMore;
 import com.aliya.adapter.page.PageItem;
-import com.aliya.adapter.simple.R;
-import com.aliya.adapter.simple.callback.LoadingCallBack;
+import com.aliya.adapter.sample.R;
+import com.aliya.adapter.sample.callback.LoadingCallBack;
 
 /**
  * 加载更多，自定义示例
@@ -43,6 +44,7 @@ public class LoadMoreFooter<M> extends PageItem implements LoadMore, View.OnClic
         updateState();
     }
 
+    // TODO: 2018/12/12 待优化，此处应该可以删除了
     // 防止加载少量数据，加载更多布局没出屏幕，不会回调 onViewAttachedToWindow
     private Runnable mKeepRunnable = new Runnable() {
         @Override
@@ -76,6 +78,7 @@ public class LoadMoreFooter<M> extends PageItem implements LoadMore, View.OnClic
 
     @Override
     public void onViewAttachedToWindow(View view) {
+        Log.e("TAG", "onViewAttachedToWindow: ");
         if (itemView == view) {
             if (!isLoading && state != TYPE_ERROR && state != TYPE_NO_MORE) {
                 loadMore();
@@ -92,6 +95,7 @@ public class LoadMoreFooter<M> extends PageItem implements LoadMore, View.OnClic
 
     @Override
     public void onViewDetachedFromWindow(View view) {
+        Log.e("TAG", "onViewDetachedFromWindow: ");
         itemView.removeCallbacks(mKeepRunnable);
     }
 

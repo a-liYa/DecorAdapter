@@ -1,4 +1,4 @@
-package com.aliya.adapter.simple.activity;
+package com.aliya.adapter.sample.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -13,11 +13,11 @@ import com.aliya.adapter.DecorAdapter;
 import com.aliya.adapter.click.OnItemClickListener;
 import com.aliya.adapter.divider.ListBuilder;
 import com.aliya.adapter.page.LoadMore;
-import com.aliya.adapter.simple.R;
-import com.aliya.adapter.simple.adapter.OriginalAdapterSimple;
-import com.aliya.adapter.simple.callback.LoadingCallBack;
-import com.aliya.adapter.simple.page.LoadMoreFooter;
-import com.aliya.adapter.simple.page.RefreshHeader;
+import com.aliya.adapter.sample.R;
+import com.aliya.adapter.sample.adapter.OriginalAdapterSimple;
+import com.aliya.adapter.sample.callback.LoadingCallBack;
+import com.aliya.adapter.sample.page.LoadMoreFooter;
+import com.aliya.adapter.sample.page.RefreshHeader;
 
 import java.util.ArrayList;
 import java.util.List;

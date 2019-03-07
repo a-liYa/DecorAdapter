@@ -1,4 +1,4 @@
-package com.aliya.adapter.simple.activity;
+package com.aliya.adapter.sample.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
@@ -10,10 +10,10 @@ import android.view.ViewGroup;
 import com.aliya.adapter.RecyclerAdapter;
 import com.aliya.adapter.RecyclerViewHolder;
 import com.aliya.adapter.page.LoadMore;
-import com.aliya.adapter.simple.R;
-import com.aliya.adapter.simple.callback.LoadingCallBack;
-import com.aliya.adapter.simple.page.LoadMoreFooter;
-import com.aliya.adapter.simple.page.RefreshHeader;
+import com.aliya.adapter.sample.R;
+import com.aliya.adapter.sample.callback.LoadingCallBack;
+import com.aliya.adapter.sample.page.LoadMoreFooter;
+import com.aliya.adapter.sample.page.RefreshHeader;
 
 /**
  * 测试下拉刷新与AppBar冲突

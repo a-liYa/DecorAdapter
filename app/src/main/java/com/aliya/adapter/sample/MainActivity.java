@@ -1,4 +1,4 @@
-package com.aliya.adapter.simple;
+package com.aliya.adapter.sample;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,16 +14,16 @@ import android.widget.TextView;
 import com.aliya.adapter.RecyclerAdapter;
 import com.aliya.adapter.RecyclerViewHolder;
 import com.aliya.adapter.divider.ListBuilder;
-import com.aliya.adapter.simple.activity.AdapterDiffDataSimpleActivity;
-import com.aliya.adapter.simple.activity.AdapterUnifyDataSimpleActivity;
-import com.aliya.adapter.simple.activity.DecorAdapterGridSimpleActivity;
-import com.aliya.adapter.simple.activity.DecorAdapterListSimpleActivity;
-import com.aliya.adapter.simple.activity.DecorAdapterLoadMoreSimpleActivity;
-import com.aliya.adapter.simple.activity.EmptyPageSimpleActivity;
-import com.aliya.adapter.simple.activity.OverlaySimpleActivity;
-import com.aliya.adapter.simple.activity.TestActivity;
-import com.aliya.adapter.simple.activity.TestRefreshActivity;
-import com.aliya.adapter.simple.decoration.SubListItemDecoration;
+import com.aliya.adapter.sample.activity.AdapterDiffDataSimpleActivity;
+import com.aliya.adapter.sample.activity.AdapterUnifyDataSimpleActivity;
+import com.aliya.adapter.sample.activity.DecorAdapterGridSimpleActivity;
+import com.aliya.adapter.sample.activity.DecorAdapterListSimpleActivity;
+import com.aliya.adapter.sample.activity.DecorAdapterLoadMoreSimpleActivity;
+import com.aliya.adapter.sample.activity.EmptyPageSimpleActivity;
+import com.aliya.adapter.sample.activity.OverlaySimpleActivity;
+import com.aliya.adapter.sample.activity.TestActivity;
+import com.aliya.adapter.sample.activity.TestRefreshActivity;
+import com.aliya.adapter.sample.decoration.SubListItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;

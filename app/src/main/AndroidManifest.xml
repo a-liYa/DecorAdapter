@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.aliya.adapter.simple">
+    package="com.aliya.adapter.sample">
 
     <application
         android:allowBackup="true"
@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name="com.aliya.adapter.sample.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,31 +17,31 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.AdapterUnifyDataSimpleActivity"
+            android:name="com.aliya.adapter.sample.activity.AdapterUnifyDataSimpleActivity"
             android:label="通用示例" />
         <activity
-            android:name=".activity.DecorAdapterListSimpleActivity"
+            android:name="com.aliya.adapter.sample.activity.DecorAdapterListSimpleActivity"
             android:label="列表样式" />
         <activity
-            android:name=".activity.DecorAdapterGridSimpleActivity"
+            android:name="com.aliya.adapter.sample.activity.DecorAdapterGridSimpleActivity"
             android:label="Grid样式" />
         <activity
-            android:name=".activity.AdapterDiffDataSimpleActivity"
+            android:name="com.aliya.adapter.sample.activity.AdapterDiffDataSimpleActivity"
             android:label="多item类型" />
         <activity
-            android:name=".activity.DecorAdapterLoadMoreSimpleActivity"
+            android:name="com.aliya.adapter.sample.activity.DecorAdapterLoadMoreSimpleActivity"
             android:label="下拉刷新 - 上拉加载" />
         <activity
-            android:name=".activity.OverlaySimpleActivity"
+            android:name="com.aliya.adapter.sample.activity.OverlaySimpleActivity"
             android:label="悬浮吸顶" />
         <activity
-            android:name=".activity.EmptyPageSimpleActivity"
+            android:name="com.aliya.adapter.sample.activity.EmptyPageSimpleActivity"
             android:label="空页面" />
         <activity
-            android:name=".activity.TestRefreshActivity"
+            android:name="com.aliya.adapter.sample.activity.TestRefreshActivity"
             android:label="测试下拉刷新" />
         <activity
-            android:name=".activity.TestActivity"
+            android:name="com.aliya.adapter.sample.activity.TestActivity"
             android:label="测试 header footer 异常" />
     </application>
 

@@ -1,4 +1,4 @@
-package com.aliya.adapter.simple.activity;
+package com.aliya.adapter.sample.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -15,15 +15,16 @@ import com.aliya.adapter.RecyclerAdapter;
 import com.aliya.adapter.RecyclerViewHolder;
 import com.aliya.adapter.click.OnItemClickListener;
 import com.aliya.adapter.page.LoadMore;
-import com.aliya.adapter.simple.R;
-import com.aliya.adapter.simple.callback.LoadingCallBack;
-import com.aliya.adapter.simple.page.LoadMoreFooter;
+import com.aliya.adapter.sample.R;
+import com.aliya.adapter.sample.callback.LoadingCallBack;
+import com.aliya.adapter.sample.page.LoadMoreFooter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class TestActivity extends AppCompatActivity implements LoadMoreFooter
-        .LoadMoreListener<String>,OnItemClickListener {
+        .LoadMoreListener<String>, OnItemClickListener {
 
     private List<String> data;
     private RecyclerAdapter<String> adapter;
@@ -45,15 +46,15 @@ public class TestActivity extends AppCompatActivity implements LoadMoreFooter
         mRecycler.setLayoutManager(new LinearLayoutManager(this));
         mRecycler.setAdapter(adapter = new TestAdapter(data));
         adapter.setFooterLoadMore(new LoadMoreFooter<>(this));
-//        adapter.setFooterLoadMore(new LoadMoreFooter<>(this));
         adapter.setOnItemClickListener(this);
         mRecycler.getItemAnimator().setChangeDuration(5000);
+
     }
 
     @Override
     public void onLoadMoreSuccess(String data, LoadMore loadMore) {
-        this.data.add(data);
-        adapter.notifyItemRangeChanged(this.data.size() - 1, 2);
+//        adapter.notifyItemRangeChanged(this.data.size() - 1, 2);
+        adapter.addData(Arrays.asList(data), true);
     }
 
     @Override
@@ -88,31 +89,8 @@ public class TestActivity extends AppCompatActivity implements LoadMoreFooter
                     ((TextView) childAt).setText(data);
                 }
             };
-//                return new RecyclerViewHolder<String>(loadMore) {
-//                    @Override
-//                    public void bindView(final String str) {
-////                        ((TextView) itemView).setText(str);
-//                        View childAt = ((ViewGroup) itemView).getChildAt(0);
-//                        ((TextView) childAt).setText(str);
-//
-//                        Log.e("TAG", "bindView: " );
-//                        new Handler().postDelayed(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                data.add(data.size() - 2, "new one");
-//                                adapter.notifyItemRangeChanged(data.size() - 2, 1);
-//                            }
-//                        }, 3000);
-//                    }
-//                };
+
         }
     }
-
-//    class FooterPageItem extends PageItem {
-//
-//        public FooterPageItem(int layoutRes) {
-//            super(layoutRes);
-//        }
-//    }
 
 }

@@ -1,4 +1,4 @@
-package com.aliya.adapter.simple.page;
+package com.aliya.adapter.sample.page;
 
 import android.animation.ValueAnimator;
 import android.support.v7.widget.RecyclerView;
@@ -10,7 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.aliya.adapter.page.PageItem;
-import com.aliya.adapter.simple.R;
+import com.aliya.adapter.sample.R;
 
 import static android.view.animation.Animation.INFINITE;
 

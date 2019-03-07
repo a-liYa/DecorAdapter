@@ -1,11 +1,11 @@
-package com.aliya.adapter.simple.adapter;
+package com.aliya.adapter.sample.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.aliya.adapter.simple.R;
+import com.aliya.adapter.sample.R;
 
 import java.util.List;
 

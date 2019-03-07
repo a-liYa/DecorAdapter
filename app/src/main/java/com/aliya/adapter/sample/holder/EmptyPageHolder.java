@@ -1,10 +1,10 @@
-package com.aliya.adapter.simple.holder;
+package com.aliya.adapter.sample.holder;
 
 import android.support.annotation.NonNull;
 import android.view.ViewGroup;
 
 import com.aliya.adapter.page.PageItem;
-import com.aliya.adapter.simple.R;
+import com.aliya.adapter.sample.R;
 
 /**
  * 空页面 - 封装

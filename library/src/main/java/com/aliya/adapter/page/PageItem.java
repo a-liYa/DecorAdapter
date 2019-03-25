@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 
 /**
  * page item，为了规范header、footer使用，提供的通用父类
@@ -17,7 +16,6 @@ import android.widget.FrameLayout;
 public class PageItem {
 
     public View itemView;
-    public FrameLayout itemViewWrapper;
     private int layoutRes;
 
     public PageItem(@NonNull ViewGroup parent, @LayoutRes int layoutRes) {
@@ -44,38 +42,10 @@ public class PageItem {
             itemView = inflate(layoutRes, parent, false);
             onViewCreated(itemView);
         }
-        itemViewWrapper = new FrameLayout(parent.getContext());
-        itemViewWrapper.addOnAttachStateChangeListener(mOnAttachStateChangeListener);
-        ViewGroup.LayoutParams params = itemView.getLayoutParams();
-        if (itemView.getParent() instanceof ViewGroup) {
-            ((ViewGroup) itemView.getParent()).removeView(itemView);
-        }
-        itemViewWrapper.addView(itemView, params);
-        if (params != null) itemViewWrapper.setLayoutParams(params);
-
-        return itemViewWrapper;
+        return itemView;
     }
 
-    private View.OnAttachStateChangeListener mOnAttachStateChangeListener =
-            new View.OnAttachStateChangeListener() {
-                @Override
-                public void onViewAttachedToWindow(View v) {
-                    if (itemView.getParent() != v) {
-                        if (itemView.getParent() instanceof ViewGroup) {
-                            ((ViewGroup) itemView.getParent()).removeView(itemView);
-                        }
-                        ((ViewGroup)v).addView(itemView, itemView.getLayoutParams());
-                    }
-                }
-
-                @Override
-                public void onViewDetachedFromWindow(View v) {
-
-                }
-            };
-
-    public void onViewCreated(View itemView) {
-    }
+    public void onViewCreated(View itemView) {}
 
     public <T extends View> T findViewById(@IdRes int id) {
         return (T) itemView.findViewById(id);

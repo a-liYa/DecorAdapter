@@ -13,12 +13,12 @@ import com.aliya.adapter.sample.R;
  * @author a_liYa
  * @date 2017/9/23 15:42.
  */
-public class SimpleViewHolder extends RecyclerViewHolder {
+public class SampleViewHolder extends RecyclerViewHolder {
 
     TextView mTextView;
 
-    public SimpleViewHolder(@NonNull ViewGroup parent) {
-        super(parent, R.layout.item_demo_simple);
+    public SampleViewHolder(@NonNull ViewGroup parent) {
+        super(parent, R.layout.item_demo_sample);
         mTextView = itemView.findViewById(R.id.tv);
     }
 

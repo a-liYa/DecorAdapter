@@ -15,7 +15,7 @@ import com.aliya.adapter.sample.R;
 public class EmptyPageHolder extends PageItem {
 
     public EmptyPageHolder(@NonNull ViewGroup parent) {
-        super(parent, R.layout.item_empty_simple);
+        super(parent, R.layout.item_empty_sample);
     }
 
 }

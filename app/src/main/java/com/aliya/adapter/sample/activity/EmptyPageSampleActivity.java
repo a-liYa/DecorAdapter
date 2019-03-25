@@ -9,12 +9,11 @@ import android.view.View;
 
 import com.aliya.adapter.RecyclerAdapter;
 import com.aliya.adapter.divider.ListBuilder;
-import com.aliya.adapter.divider.ListItemDecoration;
 import com.aliya.adapter.sample.R;
-import com.aliya.adapter.sample.adapter.RecyclerAdapterSimple;
+import com.aliya.adapter.sample.adapter.RecyclerAdapterSample;
 import com.aliya.adapter.sample.holder.EmptyPageHolder;
-import com.aliya.adapter.sample.holder.FooterHolderSimple;
-import com.aliya.adapter.sample.holder.HeaderHolderSimple;
+import com.aliya.adapter.sample.holder.FooterHolderSample;
+import com.aliya.adapter.sample.holder.HeaderHolderSample;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +24,7 @@ import java.util.List;
  * @author a_liYa
  * @date 2017/9/24 下午3:17.
  */
-public class EmptyPageSimpleActivity extends AppCompatActivity implements View.OnClickListener {
+public class EmptyPageSampleActivity extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView mRecycler;
 
@@ -34,20 +33,20 @@ public class EmptyPageSimpleActivity extends AppCompatActivity implements View.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_empty_page_simple);
+        setContentView(R.layout.activity_empty_page_sample);
 
         mRecycler = findViewById(R.id.recycler);
         mRecycler.setLayoutManager(new LinearLayoutManager(this));
         mRecycler.addItemDecoration(new ListBuilder(this).
                 setSpace(1).setColor(Color.parseColor("#cccccc")).build());
 
-        mAdapter = new RecyclerAdapterSimple(null);
+        mAdapter = new RecyclerAdapterSample(null);
 
         mAdapter.setEmptyView(new EmptyPageHolder(mRecycler).itemView);
-        mAdapter.addHeaderView(new HeaderHolderSimple(mRecycler, "我是页眉一").itemView);
-        mAdapter.setFooterLoadMore(new FooterHolderSimple(mRecycler, "我是加载更多").itemView);
-        mAdapter.addFooterView(new FooterHolderSimple(mRecycler, "我是页脚1").itemView);
-        mAdapter.addFooterView(new FooterHolderSimple(mRecycler, "我是页脚2").itemView);
+        mAdapter.addHeaderView(new HeaderHolderSample(mRecycler, "我是页眉一").itemView);
+        mAdapter.setFooterLoadMore(new FooterHolderSample(mRecycler, "我是加载更多").itemView);
+        mAdapter.addFooterView(new FooterHolderSample(mRecycler, "我是页脚1").itemView);
+        mAdapter.addFooterView(new FooterHolderSample(mRecycler, "我是页脚2").itemView);
 
         mRecycler.setAdapter(mAdapter);
 

@@ -75,7 +75,7 @@ class ViewHolder extends RecyclerViewHolder<Entity> implements ItemClickCallback
 	TextView mTextView;
 
 	public ViewHolder(@NonNull ViewGroup parent) {
-   		super(parent, R.layout.item_main_simple);
+   		super(parent, R.layout.item_main_sample);
 		mTextView = itemView.findViewById(R.id.tv_item);
 	}
 

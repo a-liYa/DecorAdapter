@@ -16,10 +16,10 @@ import java.util.List;
  * @author a_liYa
  * @date 2017/8/23 20:17.
  */
-public class DiffDataSimpleAdapter extends RecyclerAdapter {
+public class DiffDataSampleAdapter extends RecyclerAdapter {
 
 
-    public DiffDataSimpleAdapter(List data) {
+    public DiffDataSampleAdapter(List data) {
         super(data);
     }
 
@@ -54,7 +54,7 @@ public class DiffDataSimpleAdapter extends RecyclerAdapter {
         TextView tv;
 
         public StringHolder(ViewGroup parent) {
-            super(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_demo_simple, parent,
+            super(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_demo_sample, parent,
                     false));
             tv = itemView.findViewById(R.id.tv);
         }
@@ -70,7 +70,7 @@ public class DiffDataSimpleAdapter extends RecyclerAdapter {
         TextView tv;
 
         public IntegerHolder(ViewGroup parent) {
-            super(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_demo_simple, parent,
+            super(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_demo_sample, parent,
                     false));
             tv = itemView.findViewById(R.id.tv);
         }
@@ -86,7 +86,7 @@ public class DiffDataSimpleAdapter extends RecyclerAdapter {
         TextView tv;
 
         public VoidHolder(ViewGroup parent) {
-            super(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_demo_simple, parent,
+            super(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_demo_sample, parent,
                     false));
             tv = itemView.findViewById(R.id.tv);
         }

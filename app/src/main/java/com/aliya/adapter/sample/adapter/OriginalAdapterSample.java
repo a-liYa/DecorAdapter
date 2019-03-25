@@ -15,11 +15,11 @@ import java.util.List;
  * @author a_liYa
  * @date 2017/8/23 20:17.
  */
-public class OriginalAdapterSimple extends RecyclerView.Adapter {
+public class OriginalAdapterSample extends RecyclerView.Adapter {
 
     List<String> datas;
 
-    public OriginalAdapterSimple(List<String> datas) {
+    public OriginalAdapterSample(List<String> datas) {
         this.datas = datas;
     }
 
@@ -43,7 +43,7 @@ public class OriginalAdapterSimple extends RecyclerView.Adapter {
         TextView tv;
 
         public Holder(ViewGroup parent) {
-            super(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_demo_simple, parent,
+            super(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_demo_sample, parent,
                     false));
             tv = itemView.findViewById(R.id.tv);
         }

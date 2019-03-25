@@ -171,10 +171,6 @@ public class RefreshHeader extends PageItem {
         }
     };
 
-    public RefreshHeader(RecyclerView recycler) {
-        this(recycler, null);
-    }
-
     public RefreshHeader(RecyclerView recycler, OnRefreshListener listener) {
         super(recycler, R.layout.layout_header_refresh);
         this.mRecycler = recycler;

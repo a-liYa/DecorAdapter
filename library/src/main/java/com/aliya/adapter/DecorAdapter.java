@@ -295,9 +295,9 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (mHeaders.get(viewType) != null) {
-            return new SimpleViewHolder(mHeaders.get(viewType).onCreateView(parent));
+            return new SampleViewHolder(mHeaders.get(viewType).onCreateView(parent));
         } else if (mFooters.get(viewType) != null) {
-            return new SimpleViewHolder(mFooters.get(viewType).onCreateView(parent));
+            return new SampleViewHolder(mFooters.get(viewType).onCreateView(parent));
         }
         if (adapter != null) {
             return adapter.onCreateViewHolder(parent, viewType);
@@ -496,8 +496,8 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
      * @author a_liYa
      * @date 2017/9/24 下午8:21.
      */
-    private static final class SimpleViewHolder extends RecyclerView.ViewHolder {
-        public SimpleViewHolder(View itemView) {
+    private static final class SampleViewHolder extends RecyclerView.ViewHolder {
+        public SampleViewHolder(View itemView) {
             super(itemView);
         }
     }

@@ -4,7 +4,7 @@ android {
     compileSdkVersion 26
 
     defaultConfig {
-        applicationId "com.aliya.adapter.simple"
+        applicationId "com.aliya.adapter.sample"
         minSdkVersion 16
         targetSdkVersion 26
         versionCode 1

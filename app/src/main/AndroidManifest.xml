@@ -17,25 +17,25 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.aliya.adapter.sample.activity.AdapterUnifyDataSimpleActivity"
+            android:name="com.aliya.adapter.sample.activity.AdapterUnifyDataSampleActivity"
             android:label="通用示例" />
         <activity
-            android:name="com.aliya.adapter.sample.activity.DecorAdapterListSimpleActivity"
+            android:name="com.aliya.adapter.sample.activity.DecorAdapterListSampleActivity"
             android:label="列表样式" />
         <activity
-            android:name="com.aliya.adapter.sample.activity.DecorAdapterGridSimpleActivity"
+            android:name="com.aliya.adapter.sample.activity.DecorAdapterGridSampleActivity"
             android:label="Grid样式" />
         <activity
-            android:name="com.aliya.adapter.sample.activity.AdapterDiffDataSimpleActivity"
+            android:name="com.aliya.adapter.sample.activity.AdapterDiffDataSampleActivity"
             android:label="多item类型" />
         <activity
-            android:name="com.aliya.adapter.sample.activity.DecorAdapterLoadMoreSimpleActivity"
+            android:name="com.aliya.adapter.sample.activity.DecorAdapterLoadMoreSampleActivity"
             android:label="下拉刷新 - 上拉加载" />
         <activity
-            android:name="com.aliya.adapter.sample.activity.OverlaySimpleActivity"
+            android:name="com.aliya.adapter.sample.activity.OverlaySampleActivity"
             android:label="悬浮吸顶" />
         <activity
-            android:name="com.aliya.adapter.sample.activity.EmptyPageSimpleActivity"
+            android:name="com.aliya.adapter.sample.activity.EmptyPageSampleActivity"
             android:label="空页面" />
         <activity
             android:name="com.aliya.adapter.sample.activity.TestRefreshActivity"

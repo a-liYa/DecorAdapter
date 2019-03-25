@@ -14,11 +14,10 @@ import com.aliya.adapter.OverlayViewHolder;
 import com.aliya.adapter.RecyclerAdapter;
 import com.aliya.adapter.RecyclerViewHolder;
 import com.aliya.adapter.divider.ListBuilder;
-import com.aliya.adapter.divider.ListItemDecoration;
 import com.aliya.adapter.divider.OverlayItemDecoration;
 import com.aliya.adapter.sample.R;
-import com.aliya.adapter.sample.holder.HeaderHolderSimple;
-import com.aliya.adapter.sample.holder.SimpleViewHolder;
+import com.aliya.adapter.sample.holder.HeaderHolderSample;
+import com.aliya.adapter.sample.holder.SampleViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +28,7 @@ import java.util.List;
  * @author a_liYa
  * @date 2017/9/23 下午3:34.
  */
-public class OverlaySimpleActivity extends AppCompatActivity {
+public class OverlaySampleActivity extends AppCompatActivity {
 
     RecyclerView recycle;
     private Adapter mAdapter;
@@ -37,7 +36,7 @@ public class OverlaySimpleActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_overlay_simple);
+        setContentView(R.layout.activity_overlay_sample);
 
         recycle = findViewById(R.id.recycler);
 
@@ -48,10 +47,10 @@ public class OverlaySimpleActivity extends AppCompatActivity {
         );
         recycle.addItemDecoration(new OverlayItemDecoration());
         mAdapter = new Adapter(createTestData());
-        mAdapter.addHeaderView(new HeaderHolderSimple(recycle, "我是页头").itemView);
-        mAdapter.addHeaderView(new HeaderHolderSimple(recycle, "我是页头").itemView);
-        mAdapter.addHeaderView(new HeaderHolderSimple(recycle, "我是页头").itemView);
-        mAdapter.addHeaderView(new HeaderHolderSimple(recycle, "我是页头").itemView);
+        mAdapter.addHeaderView(new HeaderHolderSample(recycle, "我是页头").itemView);
+        mAdapter.addHeaderView(new HeaderHolderSample(recycle, "我是页头").itemView);
+        mAdapter.addHeaderView(new HeaderHolderSample(recycle, "我是页头").itemView);
+        mAdapter.addHeaderView(new HeaderHolderSample(recycle, "我是页头").itemView);
         recycle.setAdapter(mAdapter);
     }
 
@@ -82,7 +81,7 @@ public class OverlaySimpleActivity extends AppCompatActivity {
             if (TYPE_OVERLAY == viewType) {
                 return new OverlayHolder(parent);
             }
-            return new SimpleViewHolder(parent);
+            return new SampleViewHolder(parent);
         }
 
         @Override
@@ -120,7 +119,7 @@ public class OverlaySimpleActivity extends AppCompatActivity {
         TextView tv;
 
         public OverlayHolder(@NonNull ViewGroup parent) {
-            super(parent, R.layout.item_overlay_simple);
+            super(parent, R.layout.item_overlay_sample);
             tv = itemView.findViewById(R.id.tv);
         }
 

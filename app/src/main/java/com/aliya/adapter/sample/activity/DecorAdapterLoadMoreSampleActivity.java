@@ -14,7 +14,7 @@ import com.aliya.adapter.click.OnItemClickListener;
 import com.aliya.adapter.divider.ListBuilder;
 import com.aliya.adapter.page.LoadMore;
 import com.aliya.adapter.sample.R;
-import com.aliya.adapter.sample.adapter.OriginalAdapterSimple;
+import com.aliya.adapter.sample.adapter.OriginalAdapterSample;
 import com.aliya.adapter.sample.callback.LoadingCallBack;
 import com.aliya.adapter.sample.page.LoadMoreFooter;
 import com.aliya.adapter.sample.page.RefreshHeader;
@@ -28,7 +28,7 @@ import java.util.List;
  * @author a_liYa
  * @date 2017/8/25 上午9:05.
  */
-public class DecorAdapterLoadMoreSimpleActivity extends AppCompatActivity implements
+public class DecorAdapterLoadMoreSampleActivity extends AppCompatActivity implements
         RefreshHeader.OnRefreshListener {
 
     RecyclerView recycle;
@@ -41,7 +41,7 @@ public class DecorAdapterLoadMoreSimpleActivity extends AppCompatActivity implem
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recycler_simple);
+        setContentView(R.layout.activity_recycler_sample);
 
         recycle = findViewById(R.id.recycler);
 
@@ -53,7 +53,7 @@ public class DecorAdapterLoadMoreSimpleActivity extends AppCompatActivity implem
             mList.add(String.valueOf(i));
         }
 
-        mAdapter = new DecorAdapter(new OriginalAdapterSimple(mList));
+        mAdapter = new DecorAdapter(new OriginalAdapterSample(mList));
 
         recycle.setAdapter(mAdapter);
 

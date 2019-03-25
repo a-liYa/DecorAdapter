@@ -13,7 +13,7 @@ import com.aliya.adapter.click.OnItemClickListener;
 import com.aliya.adapter.click.OnItemLongClickListener;
 import com.aliya.adapter.divider.GridBuilder;
 import com.aliya.adapter.sample.R;
-import com.aliya.adapter.sample.adapter.OriginalAdapterSimple;
+import com.aliya.adapter.sample.adapter.OriginalAdapterSample;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ import java.util.List;
  * @author a_liYa
  * @date 2017/8/24 下午5:23.
  */
-public class DecorAdapterGridSimpleActivity extends AppCompatActivity {
+public class DecorAdapterGridSampleActivity extends AppCompatActivity {
 
     RecyclerView recycle;
     private DecorAdapter mAdapter;
@@ -32,7 +32,7 @@ public class DecorAdapterGridSimpleActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recycler_simple);
+        setContentView(R.layout.activity_recycler_sample);
 
         recycle = findViewById(R.id.recycler);
 
@@ -44,7 +44,7 @@ public class DecorAdapterGridSimpleActivity extends AppCompatActivity {
             list.add(String.valueOf(i));
         }
 
-        mAdapter = new DecorAdapter(new OriginalAdapterSimple(list));
+        mAdapter = new DecorAdapter(new OriginalAdapterSample(list));
 
         recycle.setAdapter(mAdapter);
 

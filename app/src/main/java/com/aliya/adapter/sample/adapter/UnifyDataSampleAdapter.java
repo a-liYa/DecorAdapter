@@ -1,6 +1,6 @@
 package com.aliya.adapter.sample.adapter;
 
-import android.support.annotation.NonNull;
+import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -11,35 +11,34 @@ import com.aliya.adapter.sample.R;
 import java.util.List;
 
 /**
- * RecyclerAdapter 的简单示例
+ * 统一数据 Adapter
  *
  * @author a_liYa
- * @date 2017/9/24 16:54.
+ * @date 2017/8/23 20:17.
  */
-public class RecyclerAdapterSimple extends RecyclerAdapter<String> {
+public class UnifyDataSampleAdapter extends RecyclerAdapter<String> {
 
-    public RecyclerAdapterSimple(List<String> data) {
+    public UnifyDataSampleAdapter(List<String> data) {
         super(data);
     }
 
     @Override
     public RecyclerViewHolder onAbsCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(parent);
+        return new Holder(parent);
     }
 
-    static class ViewHolder extends RecyclerViewHolder<String> {
+    class Holder extends RecyclerViewHolder<String> {
 
         TextView tv;
 
-        public ViewHolder(@NonNull ViewGroup parent) {
-            super(inflate(R.layout.item_demo_simple, parent, false));
+        public Holder(ViewGroup parent) {
+            super(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_demo_sample, parent, false));
             tv = itemView.findViewById(R.id.tv);
         }
 
         @Override
         public void bindData(String data) {
-            tv.setText("数据 -> " + data);
+            tv.setText(data);
         }
     }
-
 }

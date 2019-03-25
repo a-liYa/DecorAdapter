@@ -9,21 +9,17 @@ import com.aliya.adapter.page.PageItem;
 import com.aliya.adapter.sample.R;
 
 /**
- * 页脚的实现 - 示例
+ * 页眉的实现 - 示例
  *
  * @author a_liYa
  * @date 2017/9/24 17:00.
  */
-public class FooterHolderSimple extends PageItem {
+public class HeaderHolderSample extends PageItem {
 
     TextView tv;
 
-    public FooterHolderSimple(@NonNull ViewGroup parent) {
-        this(parent, null);
-    }
-
-    public FooterHolderSimple(@NonNull ViewGroup parent, String title) {
-        super(parent, R.layout.item_footer_simple_layout);
+    public HeaderHolderSample(@NonNull ViewGroup parent, String title) {
+        super(parent, R.layout.item_header_sample_layout);
         tv = itemView.findViewById(R.id.tv);
         if (!TextUtils.isEmpty(title)) {
             tv.setText(title);

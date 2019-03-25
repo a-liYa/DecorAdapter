@@ -14,13 +14,13 @@ import android.widget.TextView;
 import com.aliya.adapter.RecyclerAdapter;
 import com.aliya.adapter.RecyclerViewHolder;
 import com.aliya.adapter.divider.ListBuilder;
-import com.aliya.adapter.sample.activity.AdapterDiffDataSimpleActivity;
-import com.aliya.adapter.sample.activity.AdapterUnifyDataSimpleActivity;
-import com.aliya.adapter.sample.activity.DecorAdapterGridSimpleActivity;
-import com.aliya.adapter.sample.activity.DecorAdapterListSimpleActivity;
-import com.aliya.adapter.sample.activity.DecorAdapterLoadMoreSimpleActivity;
-import com.aliya.adapter.sample.activity.EmptyPageSimpleActivity;
-import com.aliya.adapter.sample.activity.OverlaySimpleActivity;
+import com.aliya.adapter.sample.activity.AdapterDiffDataSampleActivity;
+import com.aliya.adapter.sample.activity.AdapterUnifyDataSampleActivity;
+import com.aliya.adapter.sample.activity.DecorAdapterGridSampleActivity;
+import com.aliya.adapter.sample.activity.DecorAdapterListSampleActivity;
+import com.aliya.adapter.sample.activity.DecorAdapterLoadMoreSampleActivity;
+import com.aliya.adapter.sample.activity.EmptyPageSampleActivity;
+import com.aliya.adapter.sample.activity.OverlaySampleActivity;
 import com.aliya.adapter.sample.activity.TestActivity;
 import com.aliya.adapter.sample.activity.TestRefreshActivity;
 import com.aliya.adapter.sample.decoration.SubListItemDecoration;
@@ -35,13 +35,13 @@ public class MainActivity extends AppCompatActivity {
     private static List<Entity> items = new ArrayList<>();
 
     static {
-        items.add(new Entity("普通用法 - 示例", AdapterUnifyDataSimpleActivity.class));
-        items.add(new Entity("列表样式 - 示例", DecorAdapterListSimpleActivity.class));
-        items.add(new Entity("Grid样式 - 示例", DecorAdapterGridSimpleActivity.class));
-        items.add(new Entity("多item类型 - 示例", AdapterDiffDataSimpleActivity.class));
-        items.add(new Entity("下拉刷新 - 上拉加载", DecorAdapterLoadMoreSimpleActivity.class));
-        items.add(new Entity("悬浮吸顶 - 示例", OverlaySimpleActivity.class));
-        items.add(new Entity("Adapter空页面 - 示例", EmptyPageSimpleActivity.class));
+        items.add(new Entity("普通用法 - 示例", AdapterUnifyDataSampleActivity.class));
+        items.add(new Entity("列表样式 - 示例", DecorAdapterListSampleActivity.class));
+        items.add(new Entity("Grid样式 - 示例", DecorAdapterGridSampleActivity.class));
+        items.add(new Entity("多item类型 - 示例", AdapterDiffDataSampleActivity.class));
+        items.add(new Entity("下拉刷新 - 上拉加载", DecorAdapterLoadMoreSampleActivity.class));
+        items.add(new Entity("悬浮吸顶 - 示例", OverlaySampleActivity.class));
+        items.add(new Entity("Adapter空页面 - 示例", EmptyPageSampleActivity.class));
         items.add(new Entity("测试 - 下拉刷新", TestRefreshActivity.class));
         items.add(new Entity("测试 - header footer 异常", TestActivity.class));
     }
@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
         TextView mTextView;
 
         public ViewHolder(@NonNull ViewGroup parent) {
-            super(parent, R.layout.item_main_simple);
+            super(parent, R.layout.item_main_sample);
             mTextView = itemView.findViewById(R.id.tv_item);
             mTextView.setOnClickListener(this);
         }

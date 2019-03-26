@@ -232,7 +232,7 @@ public class RefreshHeader extends PageItem {
         if (val <= minHeight) {
             return val;
         } else {
-            return (float) (minHeight * Math.pow(val / minHeight, 1 / 1.5d));
+            return (float) (minHeight * Math.pow(val / minHeight, 1 / 2d));
         }
     }
 

@@ -13,7 +13,7 @@ import com.aliya.adapter.page.LoadMore;
 import com.aliya.adapter.sample.R;
 import com.aliya.adapter.sample.callback.LoadingCallBack;
 import com.aliya.adapter.sample.page.LoadMoreFooter;
-import com.aliya.adapter.sample.page.RefreshHeader;
+import com.aliya.adapter.sample.page.Refresh2Header;
 
 /**
  * 测试下拉刷新与AppBar冲突
@@ -21,12 +21,12 @@ import com.aliya.adapter.sample.page.RefreshHeader;
  * @author a_liYa
  * @date 2018/6/5 下午6:51.
  */
-public class TestRefreshActivity extends AppCompatActivity implements RefreshHeader
+public class TestRefreshActivity extends AppCompatActivity implements Refresh2Header
         .OnRefreshListener, LoadMoreFooter.LoadMoreListener<Object> {
 
     AppBarLayout mAppBar;
     RecyclerView mRecycler;
-    RefreshHeader mRefreshHeader;
+    Refresh2Header mRefreshHeader;
     private RecyclerAdapter mAdapter;
     private LoadMoreFooter<Object> mMoreFooter;
 
@@ -45,7 +45,7 @@ public class TestRefreshActivity extends AppCompatActivity implements RefreshHea
                 return null;
             }
         };
-        mAdapter.setHeaderRefresh(mRefreshHeader = new RefreshHeader(mRecycler, this));
+        mAdapter.setHeaderRefresh(mRefreshHeader = new Refresh2Header(mRecycler, this));
         mMoreFooter = new LoadMoreFooter<>(this);
         mMoreFooter.onEmpty();
         mAdapter.setFooterLoadMore(mMoreFooter);

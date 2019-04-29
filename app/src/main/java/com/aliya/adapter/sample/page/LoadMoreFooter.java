@@ -1,6 +1,5 @@
 package com.aliya.adapter.sample.page;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 
@@ -78,7 +77,6 @@ public class LoadMoreFooter<M> extends PageItem implements LoadMore, View.OnClic
 
     @Override
     public void onViewAttachedToWindow(View view) {
-        Log.e("TAG", "onViewAttachedToWindow: ");
         if (itemView == view) {
             if (!isLoading && state != TYPE_ERROR && state != TYPE_NO_MORE) {
                 loadMore();
@@ -95,7 +93,6 @@ public class LoadMoreFooter<M> extends PageItem implements LoadMore, View.OnClic
 
     @Override
     public void onViewDetachedFromWindow(View view) {
-        Log.e("TAG", "onViewDetachedFromWindow: ");
         itemView.removeCallbacks(mKeepRunnable);
     }
 

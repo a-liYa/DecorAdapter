@@ -5,30 +5,31 @@ import android.support.v7.widget.RecyclerView;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.aliya.adapter.page.PageItem;
 import com.aliya.adapter.sample.R;
 
-import static android.view.animation.Animation.INFINITE;
-
 /**
- * 下拉刷新 - header （浙江新闻）
+ * 下拉刷新 - header （浙江24小时）
  *
  * @author a_liYa
  * @date 2017/8/4 13:48.
  */
-public class RefreshHeader extends PageItem {
+public class Refresh2Header extends PageItem {
 
     public static final String HINT_NORMAL = "下拉可以刷新";
     public static final String HINT_RELEASE = "松开立即刷新";
-    public static final String HINT_LOADING = "正在刷新中";
+    public static final String HINT_LOADING = "正在刷新数据中…";
 
     private TextView mTvState;
-    private ImageView mIvSearch;
-    private RelativeLayout mContainer;
+    private ImageView mIvIcon;
+    private LinearLayout mContainer;
     /**
      * 正在刷新
      */
@@ -155,10 +156,12 @@ public class RefreshHeader extends PageItem {
                 if (bottom - top > itemView.getMinimumHeight() && !refreshing) {
                     if (!HINT_RELEASE.equals(text)) {
                         mTvState.setText(HINT_RELEASE);
+                        mIvIcon.setImageResource(R.mipmap.icon_refresh_up);
                     }
                 } else if (bottom - top < itemView.getMinimumHeight() && !refreshing) {
                     if (!HINT_NORMAL.equals(text)) {
                         mTvState.setText(HINT_NORMAL);
+                        mIvIcon.setImageResource(R.mipmap.icon_refresh_down);
                     }
                 } else if (!startTouching) {
                     if (!HINT_LOADING.equals(text)) {
@@ -171,8 +174,8 @@ public class RefreshHeader extends PageItem {
         }
     };
 
-    public RefreshHeader(RecyclerView recycler, OnRefreshListener listener) {
-        super(recycler, R.layout.layout_header_refresh);
+    public Refresh2Header(RecyclerView recycler, OnRefreshListener listener) {
+        super(recycler, R.layout.layout_header_refresh2);
         this.mRecycler = recycler;
         this.mListener = listener;
 
@@ -181,7 +184,7 @@ public class RefreshHeader extends PageItem {
 
         mTvState = findViewById(R.id.tv_state);
         mContainer = findViewById(R.id.container);
-        mIvSearch = findViewById(R.id.iv_search);
+        mIvIcon = findViewById(R.id.iv_icon);
     }
 
 
@@ -237,22 +240,18 @@ public class RefreshHeader extends PageItem {
     }
 
     private void startSearchAnim() {
-        final float R = mIvSearch.getMinimumHeight() / 5f;
-        if (mIcSearchAnimator == null) {
-            mIcSearchAnimator = ValueAnimator.ofFloat(0, 2 * (float) Math.PI);
-            mIcSearchAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                @Override
-                public void onAnimationUpdate(ValueAnimator animation) {
-                    float val = (float) animation.getAnimatedValue();
-                    mIvSearch.setTranslationX((float) Math.cos(val) * R);
-                    mIvSearch.setTranslationY((float) Math.sin(val) * R);
-                }
-            });
-            mIcSearchAnimator.setDuration(1200);
-            mIcSearchAnimator.setRepeatCount(INFINITE);
-        }
-        mIcSearchAnimator.start();
-
+        mIvIcon.setImageResource(R.mipmap.icon_refreshing);
+        RotateAnimation animation = new RotateAnimation(
+                0f,
+                359f,
+                Animation.RELATIVE_TO_SELF,
+                0.5f,
+                Animation.RELATIVE_TO_SELF,
+                0.5f);
+        animation.setInterpolator(new LinearInterpolator());
+        animation.setDuration(500);
+        animation.setRepeatCount(Animation.INFINITE);
+        mIvIcon.startAnimation(animation);
     }
 
     private void heightTo(float height) {
@@ -276,9 +275,8 @@ public class RefreshHeader extends PageItem {
         } else {
             if (mIcSearchAnimator != null) {
                 mIcSearchAnimator.cancel();
-                mIvSearch.setTranslationX(0);
-                mIvSearch.setTranslationY(0);
             }
+            mIvIcon.clearAnimation();
             animChangeHeight(itemView.getHeight(), 0);
         }
     }
@@ -293,7 +291,7 @@ public class RefreshHeader extends PageItem {
      * @param enabled true : 可用
      * @return this
      */
-    public RefreshHeader setEnabled(boolean enabled) {
+    public Refresh2Header setEnabled(boolean enabled) {
         this.enabled = enabled;
         this.startTouching = false;
         return this;

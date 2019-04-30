@@ -4,6 +4,7 @@ import android.animation.ValueAnimator;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.SimpleOnItemTouchListener;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
@@ -27,8 +28,10 @@ public abstract class RefreshPage extends PageItem {
     boolean startTouching;
 
     boolean enabled = true; // 是否可用
+    protected int collapseDelay;
+    protected int triggerHeight;
 
-    RecyclerView mRecycler;
+    private RecyclerView mRecycler;
     private OnRefreshListener mListener;
 
     public RefreshPage(@NonNull RecyclerView parent, int layoutRes, OnRefreshListener listener) {
@@ -39,6 +42,7 @@ public abstract class RefreshPage extends PageItem {
         itemView.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
             @Override
             public void onViewAttachedToWindow(View v) {
+                Log.e("TAG", "onViewAttachedToWindow: " + v.getParent());
                 if (v == itemView && mRecycler != null) {
                     mRecycler.removeOnItemTouchListener(itemTouchListener);
                     mRecycler.addOnItemTouchListener(itemTouchListener);
@@ -47,6 +51,7 @@ public abstract class RefreshPage extends PageItem {
 
             @Override
             public void onViewDetachedFromWindow(View v) {
+                Log.e("TAG", "onViewDetachedFromWindow: " + v.getParent());
                 if (v == itemView && mRecycler != null) {
                     startTouching = false;
                     mRecycler.removeOnItemTouchListener(itemTouchListener);
@@ -58,17 +63,17 @@ public abstract class RefreshPage extends PageItem {
             public void onLayoutChange(View v, int left, int top, int right, int bottom,
                                        int oldLeft, int oldTop, int oldRight, int oldBottom) {
                 if (v == itemView) {
-                    if (bottom - top > itemView.getMinimumHeight() && !refreshing) {
+                    if (bottom - top > triggerHeight && !refreshing) {
                         if (refreshStatus != LOOSEN_UP) {
                             refreshStatus = LOOSEN_UP;
                             onRefreshStatusChange(refreshStatus);
                         }
-                    } else if (bottom - top < itemView.getMinimumHeight() && !refreshing) {
+                    } else if (bottom - top < triggerHeight && !refreshing) {
                         if (refreshStatus != DROP_DOWN) {
                             refreshStatus = DROP_DOWN;
                             onRefreshStatusChange(refreshStatus);
                         }
-                    } else if (!startTouching) {
+                    } else if (!startTouching && refreshStatus != COMPLETE) {
                         if (refreshStatus != REFRESHING) {
                             refreshStatus = REFRESHING;
                             onRefreshStatusChange(refreshStatus);
@@ -128,13 +133,10 @@ public abstract class RefreshPage extends PageItem {
                 case MotionEvent.ACTION_UP:
                 case MotionEvent.ACTION_CANCEL:
                     startTouching = false;
-                    autoRecovery();
+                    handleLoosen();
 
-                    boolean cancelClick = false;
-                    if (eY != NO_VALUE && Math.abs(y - eY) > ViewConfiguration.getTouchSlop()) {
-                        // 触发下拉且移动范围大于 touch_slop
-                        cancelClick = true;
-                    }
+                    boolean cancelClick = // 触发下拉且移动范围大于 touch_slop
+                            eY != NO_VALUE && Math.abs(y - eY) > ViewConfiguration.getTouchSlop();
                     eY = NO_VALUE;
                     return cancelClick;
             }
@@ -151,7 +153,7 @@ public abstract class RefreshPage extends PageItem {
             if (disallowIntercept && startTouching) {
                 eY = NO_VALUE;
                 startTouching = false;
-                autoRecovery();
+                handleLoosen();
             }
         }
     };
@@ -162,7 +164,7 @@ public abstract class RefreshPage extends PageItem {
      * 阻尼运算，原始值 val 阻尼运算之后返回
      */
     protected float onDampedOperation(float val) {
-        int minHeight = itemView.getMinimumHeight();
+        int minHeight = triggerHeight;
         if (minHeight <= 0) {
             return val;
         }
@@ -173,25 +175,23 @@ public abstract class RefreshPage extends PageItem {
         }
     }
 
-    // 自动复原
-    private void autoRecovery() {
+    // 处理松开逻辑
+    private void handleLoosen() {
         int height = itemView.getHeight();
-        int minHeight = itemView.getMinimumHeight();
 
-        if (height >= minHeight) {
-            if (height > minHeight) {
-                smoothHeightTo(height, minHeight);
-            }
+        if (height >= triggerHeight) {
+            smoothHeightTo(triggerHeight);
             refreshing = true;
             if (mListener != null) {
                 mListener.onRefresh();
             }
         } else {
-            smoothHeightTo(height, 0);
+            smoothHeightTo(0);
         }
     }
 
-    private void smoothHeightTo(int from, int to) {
+    private void smoothHeightTo(int to) {
+        int from = itemView.getHeight();
         if (from != to) {
             ValueAnimator animator = ValueAnimator.ofInt(from, to);
             animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -199,7 +199,6 @@ public abstract class RefreshPage extends PageItem {
                 public void onAnimationUpdate(ValueAnimator animation) {
                     heightTo((int) animation.getAnimatedValue());
                 }
-
             });
             animator.start();
         }
@@ -229,15 +228,30 @@ public abstract class RefreshPage extends PageItem {
      * 刷新完成
      */
     public void setRefreshing(boolean refreshing) {
-        this.refreshing = refreshing;
         if (refreshing) {
-            smoothHeightTo(itemView.getHeight(), itemView.getMinimumHeight());
+            this.refreshing = true;
+            smoothHeightTo(triggerHeight);
         } else {
-            if (refreshStatus != COMPLETE) {
-                refreshStatus = COMPLETE;
-                onRefreshStatusChange(refreshStatus);
-            }
-            smoothHeightTo(itemView.getHeight(), 0);
+            refreshComplete();
+        }
+    }
+
+    private void refreshComplete() {
+        if (refreshStatus != COMPLETE) {
+            refreshStatus = COMPLETE;
+            onRefreshStatusChange(refreshStatus);
+        }
+        if (collapseDelay > 0) {
+            itemView.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    smoothHeightTo(0);
+                    RefreshPage.this.refreshing = false;
+                }
+            }, collapseDelay);
+        } else {
+            smoothHeightTo(0);
+            this.refreshing = false;
         }
     }
 

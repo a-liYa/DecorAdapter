@@ -17,17 +17,15 @@
             android:id="@+id/iv_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:src="@mipmap/icon_refresh_down" />
 
         <TextView
             android:id="@+id/tv_state"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/iv_map"
+            android:layout_marginTop="5dp"
             android:text="正在刷新中"
-            android:textColor="#a5a5a5"
-            android:textSize="11sp" />
+            android:textColor="#a0a4a9"
+            android:textSize="14sp" />
     </LinearLayout>
 </FrameLayout>

@@ -19,10 +19,6 @@ import com.aliya.adapter.sample.R;
  */
 public class Refresh2Header extends RefreshPage {
 
-    public static final String HINT_NORMAL = "下拉可以刷新";
-    public static final String HINT_RELEASE = "松开立即刷新";
-    public static final String HINT_LOADING = "正在刷新数据中…";
-
     private TextView mTvState;
     private ImageView mIvIcon;
 
@@ -30,6 +26,8 @@ public class Refresh2Header extends RefreshPage {
         super(recycler, R.layout.layout_header_refresh2, listener);
         mTvState = findViewById(R.id.tv_state);
         mIvIcon = findViewById(R.id.iv_icon);
+        collapseDelay = 500;
+        triggerHeight = itemView.getMinimumHeight();
     }
 
     @Override
@@ -37,25 +35,27 @@ public class Refresh2Header extends RefreshPage {
         Log.e("TAG", "onRefreshStatusChange: " + status);
         switch (status) {
             case DROP_DOWN:
-                mTvState.setText(HINT_NORMAL);
+                mTvState.setText("下拉可以刷新");
                 mIvIcon.setImageResource(R.mipmap.icon_refresh_down);
                 break;
             case LOOSEN_UP:
-                mTvState.setText(HINT_RELEASE);
+                mTvState.setText("松开立即刷新");
                 mIvIcon.setImageResource(R.mipmap.icon_refresh_up);
                 break;
             case REFRESHING:
-                mTvState.setText(HINT_LOADING);
-                startRefreshAnim();
+                mTvState.setText("正在刷新中...");
+                mIvIcon.setImageResource(R.mipmap.icon_refreshing);
+                refreshAnimation();
                 break;
             case COMPLETE:
                 mIvIcon.clearAnimation();
+                mTvState.setText("刷新完成");
+                mIvIcon.setImageResource(R.mipmap.icon_refresh_done);
                 break;
         }
     }
 
-    private void startRefreshAnim() {
-        mIvIcon.setImageResource(R.mipmap.icon_refreshing);
+    private void refreshAnimation() {
         RotateAnimation animation = new RotateAnimation(
                 0f,
                 359f,

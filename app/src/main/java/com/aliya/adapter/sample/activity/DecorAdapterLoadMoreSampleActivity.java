@@ -111,8 +111,8 @@ public class DecorAdapterLoadMoreSampleActivity extends AppCompatActivity implem
 
         View refresh = getLayoutInflater().inflate(R.layout.item_header_layout, recycle, false);
         ((TextView) refresh.findViewById(R.id.tv)).setText("我是下拉刷新");
-        mRefreshHeader = new RefreshHeader(recycle, this);
-        mAdapter.setHeaderRefresh(mRefreshHeader.itemView);
+        mRefreshHeader = new RefreshHeader(this);
+        mAdapter.setHeaderRefresh(mRefreshHeader);
 
         mAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override

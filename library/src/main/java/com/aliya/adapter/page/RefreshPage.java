@@ -1,13 +1,13 @@
 package com.aliya.adapter.page;
 
 import android.animation.ValueAnimator;
-import android.support.annotation.NonNull;
+import android.support.annotation.CallSuper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.SimpleOnItemTouchListener;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
+import android.view.ViewParent;
 
 /**
  * RefreshPage
@@ -31,30 +31,36 @@ public abstract class RefreshPage extends PageItem {
     protected int collapseDelay;
     protected int triggerHeight;
 
-    private RecyclerView mRecycler;
     private OnRefreshListener mListener;
 
-    public RefreshPage(@NonNull RecyclerView parent, int layoutRes, OnRefreshListener listener) {
-        super(parent, layoutRes);
-        mRecycler = parent;
+    public RefreshPage(int layoutRes, OnRefreshListener listener) {
+        super(layoutRes);
         mListener = listener;
+    }
 
+    @CallSuper
+    @Override
+    public void onViewCreated(final View itemView) {
         itemView.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
             @Override
             public void onViewAttachedToWindow(View v) {
-                Log.e("TAG", "onViewAttachedToWindow: " + v.getParent());
-                if (v == itemView && mRecycler != null) {
-                    mRecycler.removeOnItemTouchListener(itemTouchListener);
-                    mRecycler.addOnItemTouchListener(itemTouchListener);
+                if (v == itemView) {
+                    ViewParent parent = v.getParent();
+                    if (parent instanceof RecyclerView) {
+                        ((RecyclerView) parent).removeOnItemTouchListener(itemTouchListener);
+                        ((RecyclerView) parent).addOnItemTouchListener(itemTouchListener);
+                    }
                 }
             }
 
             @Override
             public void onViewDetachedFromWindow(View v) {
-                Log.e("TAG", "onViewDetachedFromWindow: " + v.getParent());
-                if (v == itemView && mRecycler != null) {
+                if (v == itemView) {
                     startTouching = false;
-                    mRecycler.removeOnItemTouchListener(itemTouchListener);
+                    ViewParent parent = v.getParent();
+                    if (parent instanceof RecyclerView) {
+                        ((RecyclerView) parent).removeOnItemTouchListener(itemTouchListener);
+                    }
                 }
             }
         });

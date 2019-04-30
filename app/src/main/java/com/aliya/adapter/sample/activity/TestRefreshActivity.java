@@ -5,6 +5,7 @@ import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.aliya.adapter.RecyclerAdapter;
@@ -45,7 +46,7 @@ public class TestRefreshActivity extends AppCompatActivity implements Refresh2He
                 return null;
             }
         };
-        mAdapter.setHeaderRefresh(mRefreshHeader = new Refresh2Header(mRecycler, this));
+        mAdapter.setHeaderRefresh(mRefreshHeader = new Refresh2Header(this));
         mMoreFooter = new LoadMoreFooter<>(this);
         mMoreFooter.onEmpty();
         mAdapter.setFooterLoadMore(mMoreFooter);
@@ -68,6 +69,13 @@ public class TestRefreshActivity extends AppCompatActivity implements Refresh2He
             }
 
         });
+        mAppBar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mRefreshHeader.setRefreshing(true);
+                onRefresh();
+            }
+        });
     }
 
     @Override
@@ -82,14 +90,11 @@ public class TestRefreshActivity extends AppCompatActivity implements Refresh2He
 
     @Override
     public void onLoadMoreSuccess(Object data, LoadMore loadMore) {
-
     }
 
     @Override
     public void onLoadMore(LoadingCallBack<Object> callback) {
-
     }
-
 
     public static abstract class AppBarStateChangeListener implements AppBarLayout
             .OnOffsetChangedListener {

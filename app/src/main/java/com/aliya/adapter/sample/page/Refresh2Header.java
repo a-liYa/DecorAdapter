@@ -1,7 +1,7 @@
 package com.aliya.adapter.sample.page;
 
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
@@ -22,11 +22,16 @@ public class Refresh2Header extends RefreshPage {
     private TextView mTvState;
     private ImageView mIvIcon;
 
-    public Refresh2Header(RecyclerView recycler, OnRefreshListener listener) {
-        super(recycler, R.layout.layout_header_refresh2, listener);
+    public Refresh2Header(OnRefreshListener listener) {
+        super(R.layout.layout_header_refresh2, listener);
+        collapseDelay = 500;
+    }
+
+    @Override
+    public void onViewCreated(View itemView) {
+        super.onViewCreated(itemView);
         mTvState = findViewById(R.id.tv_state);
         mIvIcon = findViewById(R.id.iv_icon);
-        collapseDelay = 500;
         triggerHeight = itemView.getMinimumHeight();
     }
 

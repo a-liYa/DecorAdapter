@@ -38,6 +38,7 @@ public class RefreshHeader extends RefreshPage {
     @Override
     protected void onRefreshStatusChange(int status) {
         switch (status) {
+
             case DROP_DOWN:
                 mTvState.setText("下拉可以刷新");
                 break;

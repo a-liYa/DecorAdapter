@@ -268,5 +268,4 @@ public abstract class RefreshPage extends PageItem {
 
         void onRefresh();
     }
-
 }

@@ -1,6 +1,5 @@
 package com.aliya.adapter.sample.page;
 
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
@@ -37,7 +36,6 @@ public class Refresh2Header extends RefreshPage {
 
     @Override
     protected void onRefreshStatusChange(int status) {
-        Log.e("TAG", "onRefreshStatusChange: " + status);
         switch (status) {
             case DROP_DOWN:
                 mTvState.setText("下拉可以刷新");

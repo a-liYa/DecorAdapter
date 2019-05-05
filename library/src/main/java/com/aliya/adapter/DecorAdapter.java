@@ -18,13 +18,14 @@ import com.aliya.adapter.page.PageItem;
  * {@link RecyclerView.Adapter}的装饰者
  * <p>
  * 实现功能：
- * 1. 设置Header {@link #addHeader(PageItem)}
- * 2. 设置Footer {@link #addFooter(PageItem)}
+ * 1. 设置Header          {@link #addHeader(PageItem)}
+ * 2. 设置Footer          {@link #addFooter(PageItem)}
  * 3. 设置OnItemClick     {@link #setOnItemClickListener(OnItemClickListener)}
  * 4. 设置OnItemLongClick {@link #setOnItemLongClickListener(OnItemLongClickListener)}
  * 5. 设置HeaderRefresh   {@link #setHeaderRefresh(PageItem)}
  * 6. 设置FooterLoadMore  {@link #setFooterLoadMore(PageItem)}
  * 7. 设置EmptyView       {@link #setEmpty(PageItem)}
+ * 8. 删除PageItem        {@link #removePageItem(PageItem)}
  *
  * @author a_liYa
  * @date 2017/8/23 19:37.

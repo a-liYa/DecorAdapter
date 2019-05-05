@@ -42,6 +42,8 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
     private SparseArrayCompat<PageItem> mHeaders = new SparseArrayCompat<>();
     private SparseArrayCompat<PageItem> mFooters = new SparseArrayCompat<>();
 
+    private int mHeaderIndex;
+    private int mFooterIndex;
     private RecyclerView.Adapter adapter;
 
     private OnItemClickListener mOnItemClickListener;
@@ -91,7 +93,7 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
                     }
                     boolean longClick = false;
                     if (mOnItemLongClickListener != null) {
-                        longClick = longClick | mOnItemLongClickListener
+                        longClick = mOnItemLongClickListener
                                 .onItemLongClick(holder.itemView, cleanPosition(position));
                     }
                     if (holder instanceof ItemLongClickCallback) {
@@ -129,8 +131,8 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
      * @param view item view
      * @see #addHeader(PageItem)
      */
-    public final void addHeaderView(View view) {
-        addHeader(new PageItem(view));
+    public final PageItem addHeaderView(View view) {
+        return addHeader(new PageItem(view));
     }
 
     /**
@@ -140,8 +142,9 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
      *
      * @param page page item
      */
-    public final void addHeader(PageItem page) {
-        mHeaders.put(VIEW_TYPE_HEADER + 1 + mHeaders.size(), page);
+    public final PageItem addHeader(PageItem page) {
+        mHeaders.put(VIEW_TYPE_HEADER + 1 + mHeaderIndex++, page);
+        return page;
     }
 
     /**
@@ -150,8 +153,8 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
      * @param view item view
      * @see #addFooter(PageItem)
      */
-    public final void addFooterView(View view) {
-        addFooter(new PageItem(view));
+    public final PageItem addFooterView(View view) {
+        return addFooter(new PageItem(view));
     }
 
     /**
@@ -161,8 +164,9 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
      *
      * @param page page item
      */
-    public final void addFooter(PageItem page) {
-        mFooters.put(VIEW_TYPE_FOOTER + mFooters.size(), page);
+    public final PageItem addFooter(PageItem page) {
+        mFooters.put(VIEW_TYPE_FOOTER + mFooterIndex++, page);
+        return page;
     }
 
     /**
@@ -171,11 +175,11 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
      * @param view item view
      * @see #setHeaderRefresh(PageItem)
      */
-    public final void setHeaderRefresh(View view) {
+    public final PageItem setHeaderRefresh(View view) {
         if (view == null) {
             throw new IllegalArgumentException("DecorAdapter#setHeaderRefresh(view) 参数不能为Null");
         }
-        setHeaderRefresh(new PageItem(view));
+        return setHeaderRefresh(new PageItem(view));
     }
 
     /**
@@ -183,8 +187,9 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
      *
      * @param page page item
      */
-    public final void setHeaderRefresh(PageItem page) {
+    public final PageItem setHeaderRefresh(PageItem page) {
         mHeaders.put(VIEW_TYPE_PULL_REFRESH, page);
+        return page;
     }
 
     /**
@@ -193,11 +198,11 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
      * @param view item view
      * @see #setFooterLoadMore(PageItem)
      */
-    public final void setFooterLoadMore(View view) {
+    public final PageItem setFooterLoadMore(View view) {
         if (view == null) {
             throw new IllegalArgumentException("DecorAdapter#setFooterLoadMore(view) 参数不能为Null");
         }
-        setFooterLoadMore(new PageItem(view));
+        return setFooterLoadMore(new PageItem(view));
     }
 
     /**
@@ -205,8 +210,9 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
      *
      * @param page page item
      */
-    public final void setFooterLoadMore(PageItem page) {
+    public final PageItem setFooterLoadMore(PageItem page) {
         mFooters.put(VIEW_TYPE_LOAD_MORE, page);
+        return page;
     }
 
     protected PageItem emptyView;
@@ -228,6 +234,28 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
      */
     public final void setEmpty(PageItem page) {
         emptyView = page;
+    }
+
+    /**
+     * Removes a previously-added page item.
+     *
+     * @param page The page item to remove
+     * @return removed page item position at adapter, -1 means it doesn't exist
+     */
+    public final int removePageItem(PageItem page) {
+        int position = -1;
+        if (mHeaders.containsValue(page)) {
+            position = mHeaders.indexOfValue(page);
+            mHeaders.removeAt(position);
+        } else if (mFooters.containsValue(page)) {
+            int index = mFooters.indexOfValue(page);
+            mFooters.removeAt(index);
+            position = getItemCount() - getFooterCount() + index;
+        }
+        if (emptyView == page) { // 删除空页面
+            emptyView = null;
+        }
+        return position;
     }
 
     @Override
@@ -335,13 +363,17 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
     @CallSuper
     @Override
     public int getItemCount() {
-        if (isEmptyData()) { // 设置 empty view
-            if (emptyView != null) {
+        if (isEmptyData()) {
+            // 设置 empty view
+            if (emptyView != null && !mFooters.containsKey(VIEW_TYPE_EMPTY)) {
                 mFooters.put(VIEW_TYPE_EMPTY, emptyView);
             }
             return getHeaderCount() + getFooterCount();
-        } else { // remove empty view
-            mFooters.remove(VIEW_TYPE_EMPTY);
+        } else {
+            // remove empty view
+            if (emptyView != null && mFooters.containsKey(VIEW_TYPE_EMPTY)) {
+                mFooters.remove(VIEW_TYPE_EMPTY);
+            }
             if (adapter == null) {
                 return getHeaderCount() + getFooterCount();
             }

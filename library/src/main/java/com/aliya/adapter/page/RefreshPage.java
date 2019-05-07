@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.SimpleOnItemTouchListener;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewConfiguration;
 import android.view.ViewParent;
 
 /**
@@ -31,6 +30,7 @@ public abstract class RefreshPage extends PageItem {
     protected int collapseDelay;
     protected int triggerHeight;
 
+    private int mOverScrollMode;
     private RecyclerView mRecyclerView;
     private OnRefreshListener mListener;
 
@@ -49,6 +49,7 @@ public abstract class RefreshPage extends PageItem {
                     ViewParent parent = v.getParent();
                     if (parent instanceof RecyclerView) {
                         mRecyclerView = (RecyclerView) parent;
+                        mOverScrollMode = mRecyclerView.getOverScrollMode();
                         mRecyclerView.removeOnItemTouchListener(itemTouchListener);
                         mRecyclerView.addOnItemTouchListener(itemTouchListener);
                     }
@@ -59,6 +60,7 @@ public abstract class RefreshPage extends PageItem {
             public void onViewDetachedFromWindow(View v) {
                 if (v == itemView && mRecyclerView != null) {
                     startTouching = false;
+                    mRecyclerView.setOverScrollMode(mOverScrollMode);
                     mRecyclerView.removeOnItemTouchListener(itemTouchListener);
                 }
             }
@@ -110,21 +112,20 @@ public abstract class RefreshPage extends PageItem {
                         float dy = y - lastY;
                         if (dy > 0) { // 下拉
                             if (eY == NO_VALUE) {
+                                mRecyclerView.setOverScrollMode(View.OVER_SCROLL_NEVER);
                                 int top = itemView.getTop() - rv.getPaddingTop();
                                 if (top <= 0 && top + dy > 0) {
                                     eY = y - (top + dy);
                                 }
                             }
-
-                            if (eY != NO_VALUE) {
-                                heightTo(onDampedOperation(y - eY));
+                        }
+                        if (eY != NO_VALUE) { // 触发刷新控件可见
+                            heightTo(onDampedOperation(y - eY));
+                            if (y - eY >= 0) {
                                 rv.scrollToPosition(0);
                             }
-                        } else if (dy < 0) { // 上滑
-                            if (eY != NO_VALUE) {
-                                heightTo(onDampedOperation(y - eY));
-                            }
-
+                        }
+                        if (dy < 0) { // 上滑
                             if (eY != NO_VALUE && itemView.getLayoutParams().height == 0) {
                                 eY = NO_VALUE;
                             }
@@ -136,18 +137,11 @@ public abstract class RefreshPage extends PageItem {
                     break;
                 case MotionEvent.ACTION_UP:
                 case MotionEvent.ACTION_CANCEL:
+                    eY = NO_VALUE;
                     startTouching = false;
                     handleLoosen();
-
-                    boolean cancelClick = // 触发下拉且移动范围大于 touch_slop
-                            eY != NO_VALUE && Math.abs(y - eY) > ViewConfiguration.getTouchSlop();
-                    eY = NO_VALUE;
-                    return cancelClick;
+                    break;
             }
-            if (eY != NO_VALUE) {
-                e.setLocation(e.getX(), eY);
-            }
-
             lastY = y;
             return false;
         }

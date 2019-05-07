@@ -31,6 +31,7 @@ public abstract class RefreshPage extends PageItem {
     protected int collapseDelay;
     protected int triggerHeight;
 
+    private RecyclerView mRecyclerView;
     private OnRefreshListener mListener;
 
     public RefreshPage(int layoutRes, OnRefreshListener listener) {
@@ -47,20 +48,18 @@ public abstract class RefreshPage extends PageItem {
                 if (v == itemView) {
                     ViewParent parent = v.getParent();
                     if (parent instanceof RecyclerView) {
-                        ((RecyclerView) parent).removeOnItemTouchListener(itemTouchListener);
-                        ((RecyclerView) parent).addOnItemTouchListener(itemTouchListener);
+                        mRecyclerView = (RecyclerView) parent;
+                        mRecyclerView.removeOnItemTouchListener(itemTouchListener);
+                        mRecyclerView.addOnItemTouchListener(itemTouchListener);
                     }
                 }
             }
 
             @Override
             public void onViewDetachedFromWindow(View v) {
-                if (v == itemView) {
+                if (v == itemView && mRecyclerView != null) {
                     startTouching = false;
-                    ViewParent parent = v.getParent();
-                    if (parent instanceof RecyclerView) {
-                        ((RecyclerView) parent).removeOnItemTouchListener(itemTouchListener);
-                    }
+                    mRecyclerView.removeOnItemTouchListener(itemTouchListener);
                 }
             }
         });
@@ -121,7 +120,6 @@ public abstract class RefreshPage extends PageItem {
                                 heightTo(onDampedOperation(y - eY));
                                 rv.scrollToPosition(0);
                             }
-
                         } else if (dy < 0) { // 上滑
                             if (eY != NO_VALUE) {
                                 heightTo(onDampedOperation(y - eY));

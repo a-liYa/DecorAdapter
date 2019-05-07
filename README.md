@@ -13,6 +13,7 @@ RecyclerView.Adapter的功能封装
 5. setEmpty
 6. setOnItemClickListener
 7. setOnItemLongClickListener
+8. removePageItem
 
 
 其他功能：  
@@ -21,6 +22,7 @@ RecyclerView.Adapter的功能封装
 2. OverlayViewHolder - 悬浮吸顶 ViewHolder
 3. ListItemDecoration - List类型分割线  
 4. GridItemDecoration - Grid类型分割线
+5. RefreshPage - 下拉刷新
 
 
 Api声明：
@@ -32,28 +34,28 @@ Api声明：
      *
      * @param page page item
      */
-    public final void addHeader(PageItem page);
+    public final PageItem addHeader(PageItem page);
     
     /**
      * 添加 footer PageItem
      *
      * @param page page item
      */
-    public final void addFooter(PageItem page);
+    public final PageItem addFooter(PageItem page);
     
     /**
      * 专门为下拉刷新提供的方法, 保证下拉刷新header永远在第一个
      *
      * @param page page item
      */
-    public final void setHeaderRefresh(PageItem page);
+    public final PageItem setHeaderRefresh(PageItem page);
     
     /**
      * 专门为加载更多提供的方法，保证加载更多footer永远在最后一个
      *
      * @param page page item
      */
-    public final void setFooterLoadMore(PageItem page);
+    public final PageItem setFooterLoadMore(PageItem page);
     
     /**
      * Sets the view to show if the adapter item count is empty
@@ -61,6 +63,14 @@ Api声明：
      * @param page page item
      */
     public final void setEmpty(PageItem page);
+    
+    /**
+     * Removes a previously-added page item.
+     *
+     * @param page The page item to remove
+     * @return removed page item position at adapter, -1 means it doesn't exist
+     */    
+    public final int removePageItem(PageItem page);
     
     public final void setOnItemClickListener(OnItemClickListener listener);
     
@@ -107,6 +117,13 @@ class Adapter extends RecyclerAdapter<Entity> {
 	}
 }
 ```
+
+### 下拉刷新的实现
+
+参见：  
+
+* 实现一 [RefreshHeader](./app/src/main/java/com/aliya/adapter/sample/page/RefreshHeader.java)
+* 实现二 [Refresh2Header](./app/src/main/java/com/aliya/adapter/sample/page/Refresh2Header.java)
 
 ### 分割线的用法
 

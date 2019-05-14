@@ -1,9 +1,12 @@
 package com.aliya.adapter.page;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.support.annotation.CallSuper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.SimpleOnItemTouchListener;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewParent;
@@ -99,7 +102,7 @@ public abstract class RefreshPage extends PageItem {
 
         @Override
         public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
-            if (!enabled || refreshing) return false;
+            if (!enabled || refreshing || isAnimationStart) return false;
 
             final float y = e.getY();
 
@@ -188,14 +191,24 @@ public abstract class RefreshPage extends PageItem {
         }
     }
 
+    private boolean isAnimationStart;
+
     private void smoothHeightTo(int to) {
         int from = itemView.getHeight();
         if (from != to) {
+            isAnimationStart = true;
             ValueAnimator animator = ValueAnimator.ofInt(from, to);
             animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                 @Override
                 public void onAnimationUpdate(ValueAnimator animation) {
                     heightTo((int) animation.getAnimatedValue());
+                }
+            });
+            animator.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    Log.e("TAG", "onAnimationEnd: ");
+                    isAnimationStart = false;
                 }
             });
             animator.start();

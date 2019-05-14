@@ -234,6 +234,10 @@ public abstract class RefreshPage extends PageItem {
         }
     }
 
+    public boolean isRefreshing() {
+        return refreshing;
+    }
+
     private void refreshComplete() {
         if (refreshStatus != COMPLETE) {
             refreshStatus = COMPLETE;

@@ -6,7 +6,6 @@ import android.animation.ValueAnimator;
 import android.support.annotation.CallSuper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.SimpleOnItemTouchListener;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewParent;
@@ -145,6 +144,10 @@ public abstract class RefreshPage extends PageItem {
                     handleLoosen();
                     break;
             }
+
+            if (eY != NO_VALUE) {
+                e.setLocation(e.getX(), eY);
+            }
             lastY = y;
             return false;
         }
@@ -207,7 +210,6 @@ public abstract class RefreshPage extends PageItem {
             animator.addListener(new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationEnd(Animator animation) {
-                    Log.e("TAG", "onAnimationEnd: ");
                     isAnimationStart = false;
                 }
             });
@@ -248,7 +250,7 @@ public abstract class RefreshPage extends PageItem {
     }
 
     public boolean isRefreshing() {
-        return refreshing;
+        return refreshing || isAnimationStart;
     }
 
     private void refreshComplete() {

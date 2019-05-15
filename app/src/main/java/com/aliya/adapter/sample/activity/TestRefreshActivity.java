@@ -47,6 +47,7 @@ public class TestRefreshActivity extends AppCompatActivity implements Refresh2He
             }
         };
         mAdapter.setHeaderRefresh(mRefreshHeader = new Refresh2Header(this));
+        mRefreshHeader.setFitParentScroll(true);
         mMoreFooter = new LoadMoreFooter<>(this);
         mMoreFooter.onEmpty();
         mAdapter.setFooterLoadMore(mMoreFooter);
@@ -57,13 +58,13 @@ public class TestRefreshActivity extends AppCompatActivity implements Refresh2He
             @Override
             public void onStateChanged(AppBarLayout appBarLayout, State state) {
                 if (state == State.EXPANDED) {
-                    //展开状态
+                    // 展开状态
                     mRefreshHeader.setEnabled(true);
                 } else if (state == State.COLLAPSED) {
-                    //折叠状态
+                    // 折叠状态
                     mRefreshHeader.setEnabled(false);
                 } else {
-                    //中间状态
+                    // 中间状态
                     mRefreshHeader.setEnabled(false);
                 }
             }
@@ -72,8 +73,10 @@ public class TestRefreshActivity extends AppCompatActivity implements Refresh2He
         mAppBar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mRefreshHeader.setRefreshing(true);
-                onRefresh();
+                if (!mRefreshHeader.isRefreshing()) {
+                    mRefreshHeader.setRefreshing(true);
+                    onRefresh();
+                }
             }
         });
     }

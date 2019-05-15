@@ -28,7 +28,8 @@ public abstract class RefreshPage extends PageItem {
     boolean refreshing;
     boolean startTouching;
 
-    boolean enabled = true; // 是否可用
+    boolean enabled = true;     // 是否可用
+    boolean fitParentScroll;    // 是否适配RecyclerView父控件滑动（eg: AppBarLayout）
     protected int collapseDelay;
     protected int triggerHeight;
 
@@ -145,7 +146,7 @@ public abstract class RefreshPage extends PageItem {
                     break;
             }
 
-            if (eY != NO_VALUE) {
+            if (fitParentScroll && eY != NO_VALUE) {
                 e.setLocation(e.getX(), eY);
             }
             lastY = y;
@@ -235,6 +236,10 @@ public abstract class RefreshPage extends PageItem {
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
         this.startTouching = false;
+    }
+
+    public void setFitParentScroll(boolean fitParentScroll) {
+        this.fitParentScroll = fitParentScroll;
     }
 
     /**

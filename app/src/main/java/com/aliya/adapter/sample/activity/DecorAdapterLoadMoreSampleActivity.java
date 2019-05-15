@@ -13,6 +13,7 @@ import com.aliya.adapter.DecorAdapter;
 import com.aliya.adapter.click.OnItemClickListener;
 import com.aliya.adapter.divider.ListBuilder;
 import com.aliya.adapter.page.LoadMore;
+import com.aliya.adapter.page.RefreshPage;
 import com.aliya.adapter.sample.R;
 import com.aliya.adapter.sample.adapter.OriginalAdapterSample;
 import com.aliya.adapter.sample.callback.LoadingCallBack;
@@ -36,7 +37,7 @@ public class DecorAdapterLoadMoreSampleActivity extends AppCompatActivity implem
 
     private int count;
     private List<String> mList;
-    private RefreshHeader mRefreshHeader;
+    private RefreshPage mRefreshHeader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

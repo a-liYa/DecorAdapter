@@ -264,17 +264,24 @@ public abstract class RefreshPage extends PageItem {
             onRefreshStatusChange(refreshStatus);
         }
         if (collapseDelay > 0) {
-            itemView.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    smoothHeightTo(0);
-                    RefreshPage.this.refreshing = false;
-                }
-            }, collapseDelay);
+            if (itemView.getParent() == null) {
+                completeAction();
+            } else {
+                itemView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        completeAction();
+                    }
+                }, collapseDelay);
+            }
         } else {
-            smoothHeightTo(0);
-            this.refreshing = false;
+            completeAction();
         }
+    }
+
+    private void completeAction() {
+        smoothHeightTo(0);
+        RefreshPage.this.refreshing = false;
     }
 
     /**

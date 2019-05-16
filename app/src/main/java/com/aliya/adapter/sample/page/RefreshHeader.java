@@ -11,7 +11,7 @@ import com.aliya.adapter.sample.R;
 import static android.view.animation.Animation.INFINITE;
 
 /**
- * 下拉刷新 - header （浙江新闻）
+ * 下拉刷新 - header （样式一）
  *
  * @author a_liYa
  * @date 2017/8/4 13:48.

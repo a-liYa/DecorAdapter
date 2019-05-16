@@ -11,7 +11,7 @@ import com.aliya.adapter.page.RefreshPage;
 import com.aliya.adapter.sample.R;
 
 /**
- * 下拉刷新 - header （浙江24小时）
+ * 下拉刷新 - header （样式二）
  *
  * @author a_liYa
  * @date 2017/8/4 13:48.

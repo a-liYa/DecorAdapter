@@ -222,7 +222,7 @@ public abstract class RefreshPage extends PageItem {
         if (height < 0) {
             height = 0f;
         }
-        if (height != itemView.getHeight()) {
+        if (height != itemView.getLayoutParams().height) {
             itemView.getLayoutParams().height = Math.round(height);
             itemView.requestLayout();
         }

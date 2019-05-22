@@ -198,7 +198,7 @@ public abstract class RefreshPage extends PageItem {
     private boolean isAnimationStart;
 
     private void smoothHeightTo(int to) {
-        int from = itemView.getHeight();
+        int from = itemView.getLayoutParams().height;
         if (from != to) {
             isAnimationStart = true;
             ValueAnimator animator = ValueAnimator.ofInt(from, to);

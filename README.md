@@ -12,7 +12,7 @@ RecyclerView.Adapter的功能封装
 
 ```
 
-implementation 'com.aliya:decoradapter:0.7.4'
+implementation 'com.aliya:decoradapter:0.7.5'
 
 ```
 

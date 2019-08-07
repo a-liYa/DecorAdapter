@@ -41,6 +41,16 @@ public class PageItem {
         if (itemView == null) {
             itemView = inflate(layoutRes, parent, false);
             onViewCreated(itemView);
+        } else if (itemView.getParent() instanceof ViewGroup) {
+            /**
+             * @see android.support.v7.widget.RecyclerView.Adapter#createViewHolder(ViewGroup, int)
+             * <code>
+             *    if (holder.itemView.getParent() != null) {
+             *        throw new IllegalStateException("ViewHolder views must not be attached when created. Ensure that you are not passing 'true' to the attachToRoot parameter of LayoutInflater.inflate(..., boolean attachToRoot)");
+             *    }
+             * </code>
+             */
+            ((ViewGroup) itemView.getParent()).removeView(itemView);
         }
         return itemView;
     }

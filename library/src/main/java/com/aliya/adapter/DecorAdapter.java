@@ -535,4 +535,11 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
         }
     }
 
+    // 待添加方法
+//    public static int cleanAdapterPosition(RecyclerView.ViewHolder viewHolder) {
+//        if (viewHolder != null) {
+//
+//        }
+//    }
+
 }

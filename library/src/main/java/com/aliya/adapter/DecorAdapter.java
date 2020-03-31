@@ -132,8 +132,8 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
      * @param view item view
      * @see #addHeader(PageItem)
      */
-    public final PageItem addHeaderView(View view) {
-        return addHeader(new PageItem(view));
+    public final void addHeaderView(View view) {
+        addHeader(new PageItem(view));
     }
 
     /**
@@ -143,9 +143,8 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
      *
      * @param page page item
      */
-    public final PageItem addHeader(PageItem page) {
+    public final void addHeader(PageItem page) {
         mHeaders.put(VIEW_TYPE_HEADER + 1 + mHeaderIndex++, page);
-        return page;
     }
 
     /**
@@ -154,8 +153,8 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
      * @param view item view
      * @see #addFooter(PageItem)
      */
-    public final PageItem addFooterView(View view) {
-        return addFooter(new PageItem(view));
+    public final void addFooterView(View view) {
+        addFooter(new PageItem(view));
     }
 
     /**
@@ -165,9 +164,8 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
      *
      * @param page page item
      */
-    public final PageItem addFooter(PageItem page) {
+    public final void addFooter(PageItem page) {
         mFooters.put(VIEW_TYPE_FOOTER + mFooterIndex++, page);
-        return page;
     }
 
     /**
@@ -176,11 +174,11 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
      * @param view item view
      * @see #setHeaderRefresh(PageItem)
      */
-    public final PageItem setHeaderRefresh(View view) {
+    public final void setHeaderRefresh(View view) {
         if (view == null) {
             throw new IllegalArgumentException("DecorAdapter#setHeaderRefresh(view) 参数不能为Null");
         }
-        return setHeaderRefresh(new PageItem(view));
+        setHeaderRefresh(new PageItem(view));
     }
 
     /**
@@ -188,9 +186,8 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
      *
      * @param page page item
      */
-    public final PageItem setHeaderRefresh(PageItem page) {
+    public final void setHeaderRefresh(PageItem page) {
         mHeaders.put(VIEW_TYPE_PULL_REFRESH, page);
-        return page;
     }
 
     /**
@@ -199,11 +196,11 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
      * @param view item view
      * @see #setFooterLoadMore(PageItem)
      */
-    public final PageItem setFooterLoadMore(View view) {
+    public final void setFooterLoadMore(View view) {
         if (view == null) {
             throw new IllegalArgumentException("DecorAdapter#setFooterLoadMore(view) 参数不能为Null");
         }
-        return setFooterLoadMore(new PageItem(view));
+        setFooterLoadMore(new PageItem(view));
     }
 
     /**
@@ -211,9 +208,8 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
      *
      * @param page page item
      */
-    public final PageItem setFooterLoadMore(PageItem page) {
+    public final void setFooterLoadMore(PageItem page) {
         mFooters.put(VIEW_TYPE_LOAD_MORE, page);
-        return page;
     }
 
     protected PageItem emptyView;

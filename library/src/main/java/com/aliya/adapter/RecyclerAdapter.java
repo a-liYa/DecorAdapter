@@ -35,7 +35,7 @@ public abstract class RecyclerAdapter<T> extends DecorAdapter {
         if (isEmptyData()) {
             return super.getItemCount();
         }
-        return super.getItemCount() + datas.size();
+        return super.getItemCount() + getDataSize();
     }
 
     @Override

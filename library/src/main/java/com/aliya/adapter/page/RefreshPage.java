@@ -73,12 +73,12 @@ public abstract class RefreshPage extends PageItem {
             public void onLayoutChange(View v, int left, int top, int right, int bottom,
                                        int oldLeft, int oldTop, int oldRight, int oldBottom) {
                 if (v == itemView) {
-                    if (bottom - top > triggerHeight && !refreshing) {
+                    if (bottom - top > triggerHeight && !isRefreshing()) {
                         if (refreshStatus != LOOSEN_UP) {
                             refreshStatus = LOOSEN_UP;
                             onRefreshStatusChange(refreshStatus);
                         }
-                    } else if (bottom - top < triggerHeight && !refreshing) {
+                    } else if (bottom - top < triggerHeight && !isRefreshing()) {
                         if (refreshStatus != DROP_DOWN) {
                             refreshStatus = DROP_DOWN;
                             onRefreshStatusChange(refreshStatus);

@@ -29,10 +29,10 @@ public class RefreshHeader extends RefreshPage {
 
     @Override
     public void onViewCreated(View itemView) {
-        super.onViewCreated(itemView);
+        triggerHeight = itemView.getMinimumHeight();
         mTvState = findViewById(R.id.tv_state);
         mIvSearch = findViewById(R.id.iv_search);
-        triggerHeight = itemView.getMinimumHeight();
+        super.onViewCreated(itemView);
     }
 
     @Override

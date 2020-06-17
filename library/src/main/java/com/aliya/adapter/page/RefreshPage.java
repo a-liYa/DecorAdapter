@@ -97,6 +97,9 @@ public abstract class RefreshPage extends PageItem {
                 }
             }
         });
+        if (refreshing) {
+            smoothHeightTo(triggerHeight);
+        }
     }
 
     RecyclerView.OnItemTouchListener itemTouchListener = new SimpleOnItemTouchListener() {
@@ -252,9 +255,13 @@ public abstract class RefreshPage extends PageItem {
     public void setRefreshing(boolean refreshing) {
         if (refreshing) {
             this.refreshing = true;
-            smoothHeightTo(triggerHeight);
+            if (itemView != null) {
+                smoothHeightTo(triggerHeight);
+            }
         } else {
-            refreshComplete();
+            if (itemView != null) {
+                refreshComplete();
+            }
         }
     }
 

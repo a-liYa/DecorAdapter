@@ -5,6 +5,7 @@ import android.support.v4.util.SparseArrayCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -444,6 +445,12 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
         super.onViewAttachedToWindow(holder);
         if (adapter != null) {
             adapter.onViewAttachedToWindow(holder);
+        }
+        ViewGroup.LayoutParams lp = holder.itemView.getLayoutParams();
+        if (lp instanceof StaggeredGridLayoutManager.LayoutParams) {
+            if (isInnerPosition(holder.getLayoutPosition())) {
+                ((StaggeredGridLayoutManager.LayoutParams) lp).setFullSpan(true);
+            }
         }
     }
 

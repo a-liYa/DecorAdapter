@@ -21,6 +21,7 @@ import com.aliya.adapter.sample.activity.DecorAdapterListSampleActivity;
 import com.aliya.adapter.sample.activity.DecorAdapterLoadMoreSampleActivity;
 import com.aliya.adapter.sample.activity.EmptyPageSampleActivity;
 import com.aliya.adapter.sample.activity.OverlaySampleActivity;
+import com.aliya.adapter.sample.activity.StaggeredSampleActivity;
 import com.aliya.adapter.sample.activity.TestActivity;
 import com.aliya.adapter.sample.activity.TestRefreshActivity;
 import com.aliya.adapter.sample.decoration.SubListItemDecoration;
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         items.add(new Entity("普通用法 - 示例", AdapterUnifyDataSampleActivity.class));
         items.add(new Entity("列表样式 - 示例", DecorAdapterListSampleActivity.class));
         items.add(new Entity("Grid样式 - 示例", DecorAdapterGridSampleActivity.class));
+        items.add(new Entity("Staggered样式 - 示例", StaggeredSampleActivity.class));
         items.add(new Entity("多item类型 - 示例", AdapterDiffDataSampleActivity.class));
         items.add(new Entity("下拉刷新 - 上拉加载", DecorAdapterLoadMoreSampleActivity.class));
         items.add(new Entity("悬浮吸顶 - 示例", OverlaySampleActivity.class));

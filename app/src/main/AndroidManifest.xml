@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.aliya.adapter.sample.MainActivity">
+        <activity android:name=".activity.StaggeredSampleActivity"></activity>
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,31 +18,31 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.aliya.adapter.sample.activity.AdapterUnifyDataSampleActivity"
+            android:name=".activity.AdapterUnifyDataSampleActivity"
             android:label="通用示例" />
         <activity
-            android:name="com.aliya.adapter.sample.activity.DecorAdapterListSampleActivity"
+            android:name=".activity.DecorAdapterListSampleActivity"
             android:label="列表样式" />
         <activity
-            android:name="com.aliya.adapter.sample.activity.DecorAdapterGridSampleActivity"
+            android:name=".activity.DecorAdapterGridSampleActivity"
             android:label="Grid样式" />
         <activity
-            android:name="com.aliya.adapter.sample.activity.AdapterDiffDataSampleActivity"
+            android:name=".activity.AdapterDiffDataSampleActivity"
             android:label="多item类型" />
         <activity
-            android:name="com.aliya.adapter.sample.activity.DecorAdapterLoadMoreSampleActivity"
+            android:name=".activity.DecorAdapterLoadMoreSampleActivity"
             android:label="下拉刷新 - 上拉加载" />
         <activity
-            android:name="com.aliya.adapter.sample.activity.OverlaySampleActivity"
+            android:name=".activity.OverlaySampleActivity"
             android:label="悬浮吸顶" />
         <activity
-            android:name="com.aliya.adapter.sample.activity.EmptyPageSampleActivity"
+            android:name=".activity.EmptyPageSampleActivity"
             android:label="空页面" />
         <activity
-            android:name="com.aliya.adapter.sample.activity.TestRefreshActivity"
+            android:name=".activity.TestRefreshActivity"
             android:label="测试下拉刷新" />
         <activity
-            android:name="com.aliya.adapter.sample.activity.TestActivity"
+            android:name=".activity.TestActivity"
             android:label="测试 header footer 异常" />
     </application>
 

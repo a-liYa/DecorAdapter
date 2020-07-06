@@ -5,16 +5,20 @@ import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.aliya.adapter.RecyclerAdapter;
 import com.aliya.adapter.RecyclerViewHolder;
+import com.aliya.adapter.click.OnItemClickListener;
 import com.aliya.adapter.page.LoadMore;
 import com.aliya.adapter.sample.R;
 import com.aliya.adapter.sample.callback.LoadingCallBack;
 import com.aliya.adapter.sample.page.LoadMoreFooter;
 import com.aliya.adapter.sample.page.Refresh2Header;
+
+import java.util.ArrayList;
 
 /**
  * 测试下拉刷新与AppBar冲突
@@ -40,12 +44,26 @@ public class TestRefreshActivity extends AppCompatActivity implements Refresh2He
         mRecycler.setLayoutManager(new LinearLayoutManager(this));
         mAppBar = findViewById(R.id.appbar);
 
-        mAdapter = new RecyclerAdapter(null) {
+        ArrayList<String> list = new ArrayList<>();
+        list.add("1");
+        list.add("2");
+        list.add("3");
+        list.add("4");
+        list.add("5");
+        list.add("6");
+        mAdapter = new RecyclerAdapter(list) {
             @Override
             public RecyclerViewHolder onAbsCreateViewHolder(ViewGroup parent, int viewType) {
-                return null;
+                return new RecyclerViewHolder(parent, R.layout.item_demo_sample) {
+                };
             }
         };
+        mAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(View itemView, int position) {
+                Log.e("TAG", "onItemClick: " + position);
+            }
+        });
         mAdapter.setHeaderRefresh(mRefreshHeader = new Refresh2Header(this));
         mRefreshHeader.setFitParentScroll(true);
         mMoreFooter = new LoadMoreFooter<>(this);

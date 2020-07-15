@@ -19,7 +19,8 @@ public class GridBuilder {
     protected static final int NO_COLOR_ID = 0;
 
     float space = 0;      // item间隔 单位 : px
-    boolean includeEdge;  // 默认false 不包含边缘
+    boolean includeEdge;  // 默认 false 不包含边缘
+    boolean includeLineBlank; // 默认 false 不包括一行剩余空白部分
 
     @ColorInt
     int color = Color.TRANSPARENT;
@@ -55,6 +56,11 @@ public class GridBuilder {
 
     public GridBuilder setColorRes(@ColorRes int colorRes) {
         this.colorRes = colorRes;
+        return this;
+    }
+
+    public GridBuilder setIncludeLineBlank(boolean includeLineBlank) {
+        this.includeLineBlank = includeLineBlank;
         return this;
     }
 

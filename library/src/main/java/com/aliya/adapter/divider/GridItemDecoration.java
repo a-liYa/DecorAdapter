@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.LayoutParams;
+import android.util.Log;
 import android.view.View;
 
 import com.aliya.adapter.CompatAdapter;
@@ -15,7 +16,7 @@ import com.aliya.adapter.CompatAdapter;
 import static com.aliya.adapter.divider.GridBuilder.NO_COLOR_ID;
 
 /**
- * Grid 分割线
+ * Grid 分割线, 只支持 {@link android.support.v7.widget.LinearLayoutManager#VERTICAL}
  *
  * @author a_liYa
  * @date 16/10/22 14:30.
@@ -93,6 +94,7 @@ public class GridItemDecoration extends RecyclerView.ItemDecoration {
             if (takePosition != spanIndex) {
                 outRect.top = Math.round(mArgs.space); // item top
             }
+            Log.e("TAG", "getItemOffsets: " + spanIndex + " - " + outRect.toShortString());
         }
     }
 
@@ -117,7 +119,8 @@ public class GridItemDecoration extends RecyclerView.ItemDecoration {
         }
 
         int childCount = parent.getChildCount();
-        float lnX, lwX, tnY, twY, rnX, rwX, bnY, bwY;
+        // 缩写注释 liX -> leftInsideX; lox -> leftOutsideX.
+        float liX, loX, tiY, toY, riX, roX, biY, boY;
 
         for (int i = 0; i < childCount; i++) {
             final View child = parent.getChildAt(i);
@@ -137,13 +140,10 @@ public class GridItemDecoration extends RecyclerView.ItemDecoration {
             }
             final LayoutParams lp = (LayoutParams) child.getLayoutParams();
 
-            lnX = child.getLeft() - lp.leftMargin;
-
-            twY = tnY = child.getTop() - lp.topMargin;
-
-            rnX = child.getRight() + lp.rightMargin;
-
-            bwY = bnY = child.getBottom() + lp.bottomMargin;
+            liX = child.getLeft() - lp.leftMargin;
+            toY = tiY = child.getTop() - lp.topMargin;
+            riX = child.getRight() + lp.rightMargin;
+            boY = biY = child.getBottom() + lp.bottomMargin;
 
             int spanSize = spanSizeLookup.getSpanSize(position);
             int spanIndex = spanSizeLookup.getSpanIndex(position, spanCount);
@@ -154,38 +154,72 @@ public class GridItemDecoration extends RecyclerView.ItemDecoration {
                     totalSpanSize += spanSizeLookup.getSpanSize(position - ++preCount);
                 } while (spanSizeLookup.getSpanIndex(position - preCount, spanCount) != 0);
             }
+
+            Log.e("TAG",
+                    "onDraw: " + spanSize + " - " + spanIndex + " - " + preCount + " - " + totalSpanSize);
+
             if (mArgs.includeEdge) { // 包括边界
-                lwX = lnX - Math.round(mArgs.space - totalSpanSize * mArgs.space / spanCount);
-                rwX = rnX + Math.round((totalSpanSize + spanSize) * mArgs.space / spanCount);
+                loX = liX - Math.round(mArgs.space - totalSpanSize * mArgs.space / spanCount);
+                roX = riX + Math.round((totalSpanSize + spanSize) * mArgs.space / spanCount);
 
                 if (takePosition == spanIndex) { // top edge
-                    twY = tnY - Math.round(mArgs.space);
+                    toY = tiY - Math.round(mArgs.space);
                 }
-                bwY = bnY + Math.round(mArgs.space);
+                boY = biY + Math.round(mArgs.space);
             } else {
-                lwX = lnX - Math.round(totalSpanSize * mArgs.space / spanCount);
-                rwX = rnX + Math.round(mArgs.space - (totalSpanSize + spanSize) * mArgs.space /
+                loX = liX - Math.round(totalSpanSize * mArgs.space / spanCount);
+                roX = riX + Math.round(mArgs.space - (totalSpanSize + spanSize) * mArgs.space /
                         spanCount);
 
                 if (takePosition != spanIndex) { // item top
-                    twY = tnY - Math.round(mArgs.space);
+                    toY = tiY - Math.round(mArgs.space);
                 }
             }
 
-            if (lnX != lwX) {
-                c.drawRect(lwX, twY, lnX, bnY, mPaint);
+            if (liX != loX) {
+                c.drawRect(loX, toY, liX, biY, mPaint);
             }
-            if (tnY != twY) {
-                c.drawRect(lnX, twY, rwX, tnY, mPaint);
+            if (tiY != toY) {
+                c.drawRect(liX, toY, roX, tiY, mPaint);
             }
-            if (rnX != rwX) {
-                c.drawRect(rnX, tnY, rwX, bwY, mPaint);
+            if (riX != roX) {
+                c.drawRect(riX, tiY, roX, boY, mPaint);
             }
-            if (bnY != bwY) {
-                c.drawRect(lwX, bnY, rnX, bwY, mPaint);
+            if (biY != boY) {
+                c.drawRect(loX, biY, riX, boY, mPaint);
+            }
+
+            // 补全当前行剩余空白部分的分割线
+            if (mArgs.includeLineBlank) {
+                int nextPosition = position + 1;
+                // 判断当前 child 是否为该行的最后一个
+                if (nextPosition >= parent.getAdapter().getItemCount() ||
+                        spanSizeLookup.getSpanIndex(nextPosition, spanCount) == 0) {
+                    totalSpanSize += spanSizeLookup.getSpanSize(position);
+                    if (totalSpanSize < spanCount) { // 当前行有剩余
+                        // 画当前行 上分割线
+                        if (tiY != toY) {
+                            c.drawRect(roX, toY, parent.getWidth() - parent.getPaddingRight(),
+                                    tiY, mPaint);
+                        }
+                        // 画 item 间隔
+                        float itemWidth = riX - liX;
+                        int iteratorSpanIndex = totalSpanSize;
+                        while (mArgs.includeEdge ?
+                                iteratorSpanIndex <= spanCount : iteratorSpanIndex < spanCount) {
+                            float left =
+                                    riX + (mArgs.space + itemWidth) * (iteratorSpanIndex - totalSpanSize);
+                            c.drawRect(left, tiY, left + mArgs.space, biY, mPaint);
+                            iteratorSpanIndex++;
+                        }
+                        // 画当前行 下分割线
+                        if (biY != boY) {
+                            c.drawRect(roX, biY, parent.getWidth() - parent.getPaddingRight(),
+                                    boY, mPaint);
+                        }
+                    }
+                }
             }
         }
-
     }
-
 }

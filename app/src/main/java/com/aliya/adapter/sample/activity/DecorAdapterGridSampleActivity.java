@@ -36,11 +36,21 @@ public class DecorAdapterGridSampleActivity extends AppCompatActivity {
 
         recycle = findViewById(R.id.recycler);
 
-        recycle.setLayoutManager(new GridLayoutManager(this, 3));
+        final GridLayoutManager layoutManager = new GridLayoutManager(this, 4);
+        layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                if (position % 3 == 0){
+                    return layoutManager.getSpanCount();
+                }
+                return 1;
+            }
+        });
+        recycle.setLayoutManager(layoutManager);
 
         List<String> list = new ArrayList<>();
 
-        for (int i = 0; i < 21; i++) {
+        for (int i = 0; i < 6; i++) {
             list.add(String.valueOf(i));
         }
 
@@ -62,10 +72,12 @@ public class DecorAdapterGridSampleActivity extends AppCompatActivity {
             }
         });
 
+
         recycle.addItemDecoration(
                 new GridBuilder(this)
-                        .setSpace(5)
+                        .setSpace(1)
                         .setColorRes(R.color.colorDivider)
+                        .setIncludeLineBlank(true)
                         .setIncludeEdge(true).build()
         );
 

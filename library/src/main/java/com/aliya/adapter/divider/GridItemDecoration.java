@@ -8,7 +8,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.LayoutParams;
-import android.util.Log;
 import android.view.View;
 
 import com.aliya.adapter.CompatAdapter;
@@ -94,7 +93,6 @@ public class GridItemDecoration extends RecyclerView.ItemDecoration {
             if (takePosition != spanIndex) {
                 outRect.top = Math.round(mArgs.space); // item top
             }
-            Log.e("TAG", "getItemOffsets: " + spanIndex + " - " + outRect.toShortString());
         }
     }
 

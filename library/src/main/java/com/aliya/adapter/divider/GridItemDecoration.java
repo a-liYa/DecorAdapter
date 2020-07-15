@@ -155,9 +155,6 @@ public class GridItemDecoration extends RecyclerView.ItemDecoration {
                 } while (spanSizeLookup.getSpanIndex(position - preCount, spanCount) != 0);
             }
 
-            Log.e("TAG",
-                    "onDraw: " + spanSize + " - " + spanIndex + " - " + preCount + " - " + totalSpanSize);
-
             if (mArgs.includeEdge) { // 包括边界
                 loX = liX - Math.round(mArgs.space - totalSpanSize * mArgs.space / spanCount);
                 roX = riX + Math.round((totalSpanSize + spanSize) * mArgs.space / spanCount);

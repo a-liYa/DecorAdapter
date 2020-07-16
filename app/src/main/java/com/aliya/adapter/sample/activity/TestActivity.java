@@ -31,6 +31,7 @@ public class TestActivity extends AppCompatActivity implements LoadMoreFooter
 
     private int count = 0;
     private RecyclerView mRecycler;
+    private LoadMoreFooter<String> mLoadMoreFooter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,8 @@ public class TestActivity extends AppCompatActivity implements LoadMoreFooter
         mRecycler = findViewById(R.id.rv);
         mRecycler.setLayoutManager(new LinearLayoutManager(this));
         mRecycler.setAdapter(adapter = new TestAdapter(data));
-        adapter.setFooterLoadMore(new LoadMoreFooter<>(this));
+        mLoadMoreFooter = new LoadMoreFooter<>(this);
+        adapter.setFooterLoadMore(mLoadMoreFooter);
         adapter.setOnItemClickListener(this);
         mRecycler.getItemAnimator().setChangeDuration(5000);
 
@@ -64,7 +66,7 @@ public class TestActivity extends AppCompatActivity implements LoadMoreFooter
             public void run() {
                 callback.onSuccess("加载 " + count++);
             }
-        }, 2000);
+        }, 500);
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.aliya.adapter.sample.page;
 
+import android.os.Build;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 
@@ -7,6 +9,8 @@ import com.aliya.adapter.page.LoadMore;
 import com.aliya.adapter.page.PageItem;
 import com.aliya.adapter.sample.R;
 import com.aliya.adapter.sample.callback.LoadingCallBack;
+
+import java.lang.reflect.Field;
 
 /**
  * 加载更多，自定义示例
@@ -114,11 +118,37 @@ public class LoadMoreFooter<M> extends PageItem implements LoadMore, View.OnClic
     @Override
     public void onSuccess(M data) {
         itemView.removeCallbacks(mKeepRunnable);
-        itemView.postDelayed(mKeepRunnable, 500);
+        itemView.post(mKeepRunnable);
         isLoading = false;
         if (loadMoreListener != null) {
             loadMoreListener.onLoadMoreSuccess(data, this);
         }
+    }
+
+    private boolean shouldLoad() {
+        try {
+            Field field = View.class.getDeclaredField("mAttachInfo");
+            field.setAccessible(true);
+            Object o = field.get(itemView);
+            Log.e("TAG", String.valueOf(o));
+            return o != null;
+        } catch (Exception ignore) {
+
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            return itemView.isAttachedToWindow();
+        } else {
+            try {
+                Field field = View.class.getDeclaredField("mAttachInfo");
+                field.setAccessible(true);
+                Object o = field.get(itemView);
+                return o != null;
+            } catch (Exception ignore) {
+
+            }
+        }
+        return false;
     }
 
     /**

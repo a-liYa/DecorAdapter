@@ -24,7 +24,7 @@ public class LoadMoreFooter<M> extends PageItem implements LoadMore, View.OnClic
 
     private int state = 0;
     private boolean isLoading = false;
-    LoadMoreListener loadMoreListener;
+    LoadMoreListener<M> loadMoreListener;
 
     private RelativeLayout mLoadMoreView;
     private RelativeLayout mErrorMoreView;
@@ -118,7 +118,7 @@ public class LoadMoreFooter<M> extends PageItem implements LoadMore, View.OnClic
     @Override
     public void onSuccess(M data) {
         itemView.removeCallbacks(mKeepRunnable);
-        itemView.post(mKeepRunnable);
+        itemView.postDelayed(mKeepRunnable, 500);
         isLoading = false;
         if (loadMoreListener != null) {
             loadMoreListener.onLoadMoreSuccess(data, this);

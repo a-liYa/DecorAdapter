@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.RelativeLayout;
 
+import com.aliya.adapter.DecorAdapter;
 import com.aliya.adapter.page.LoadMore;
 import com.aliya.adapter.page.PageItem;
 import com.aliya.adapter.sample.R;
@@ -30,6 +31,7 @@ public class LoadMoreFooter<M> extends PageItem implements LoadMore, View.OnClic
     private View mNoMoreView;
     private RecyclerView mRecycler;
     private LinearLayoutManager mLayoutManager;
+    private int mFooterCount;
 
     public LoadMoreFooter(LoadMoreListener<M> loadMoreListener) {
         super(R.layout.item_footer_load_more);
@@ -47,11 +49,14 @@ public class LoadMoreFooter<M> extends PageItem implements LoadMore, View.OnClic
                 }
                 if (mRecycler != null) {
                     mLayoutManager = (LinearLayoutManager) mRecycler.getLayoutManager();
+                    if (mRecycler.getAdapter() instanceof DecorAdapter) {
+                        mFooterCount = ((DecorAdapter) mRecycler.getAdapter()).getFooterCount();
+                    }
                     mRecycler.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
                         @Override
                         public void onGlobalLayout() {
                             int lastCompletelyVisibleItemPosition = mLayoutManager.findLastCompletelyVisibleItemPosition();
-                            boolean idle = lastCompletelyVisibleItemPosition < mLayoutManager.getItemCount() - 2;
+                            boolean idle = lastCompletelyVisibleItemPosition < mLayoutManager.getItemCount() - 1 - mFooterCount;
                             if (idle) {
                                 mRecycler.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                             } else {

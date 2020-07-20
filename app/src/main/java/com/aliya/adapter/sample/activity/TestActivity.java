@@ -15,6 +15,7 @@ import com.aliya.adapter.RecyclerAdapter;
 import com.aliya.adapter.RecyclerViewHolder;
 import com.aliya.adapter.click.OnItemClickListener;
 import com.aliya.adapter.page.LoadMore;
+import com.aliya.adapter.page.PageItem;
 import com.aliya.adapter.sample.R;
 import com.aliya.adapter.sample.callback.LoadingCallBack;
 import com.aliya.adapter.sample.page.LoadMoreFooter;

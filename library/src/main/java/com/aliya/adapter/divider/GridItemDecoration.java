@@ -4,10 +4,11 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.LayoutParams;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.LayoutParams;
 import android.view.View;
 
 import com.aliya.adapter.CompatAdapter;
@@ -15,7 +16,7 @@ import com.aliya.adapter.CompatAdapter;
 import static com.aliya.adapter.divider.GridBuilder.NO_COLOR_ID;
 
 /**
- * Grid 分割线, 只支持 {@link android.support.v7.widget.LinearLayoutManager#VERTICAL}
+ * Grid 分割线, 只支持 {@link LinearLayoutManager#VERTICAL}
  *
  * @author a_liYa
  * @date 16/10/22 14:30.

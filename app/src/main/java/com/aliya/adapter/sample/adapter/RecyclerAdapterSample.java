@@ -1,6 +1,6 @@
 package com.aliya.adapter.sample.adapter;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.view.ViewGroup;
 import android.widget.TextView;
 

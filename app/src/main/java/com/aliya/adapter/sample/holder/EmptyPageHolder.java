@@ -1,6 +1,6 @@
 package com.aliya.adapter.sample.holder;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.view.ViewGroup;
 
 import com.aliya.adapter.page.PageItem;

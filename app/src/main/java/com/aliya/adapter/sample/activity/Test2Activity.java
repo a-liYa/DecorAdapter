@@ -3,20 +3,15 @@ package com.aliya.adapter.sample.activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.TextView;
 
-import com.aliya.adapter.RecyclerAdapter;
-import com.aliya.adapter.RecyclerViewHolder;
-import com.aliya.adapter.click.OnItemClickListener;
 import com.aliya.adapter.page.LoadMore;
 import com.aliya.adapter.sample.R;
 import com.aliya.adapter.sample.callback.LoadingCallBack;
 import com.aliya.adapter.sample.page.LoadMoreFooter;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.viewholder.BaseViewHolder;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,14 +24,16 @@ import androidx.recyclerview.widget.RecyclerView;
 /**
  * 演示加载更多刷新布局时同时调用notifyDataSetChanged()刷新会出现异常， 加载更多时快速上下滑动。
  *
+ * 这是使用三方库 BaseRecyclerViewAdapterHelper
+ *
  * @author a_liYa
- * @date 2020/8/28 17:42.
+ * @date 2020/8/28 17:34.
  */
-public class TestActivity extends AppCompatActivity implements LoadMoreFooter
-        .LoadMoreListener<String>, OnItemClickListener {
+public class Test2Activity extends AppCompatActivity implements LoadMoreFooter
+        .LoadMoreListener<String> {
 
     private List<String> data;
-    private RecyclerAdapter<String> adapter;
+    private TestAdapter adapter;
 
     private int count = 0;
     private RecyclerView mRecycler;
@@ -55,8 +52,7 @@ public class TestActivity extends AppCompatActivity implements LoadMoreFooter
         mRecycler = findViewById(R.id.rv);
         mRecycler.setLayoutManager(new LinearLayoutManager(this));
         mRecycler.setAdapter(adapter = new TestAdapter(data));
-        adapter.setFooterLoadMore(new LoadMoreFooter<>(this));
-        adapter.setOnItemClickListener(this);
+        adapter.setFooterView(new LoadMoreFooter<>(this).onCreateView(mRecycler));
         mRecycler.getItemAnimator().setChangeDuration(5000);
 
         mHandler = new Handler() {
@@ -70,8 +66,7 @@ public class TestActivity extends AppCompatActivity implements LoadMoreFooter
 
     @Override
     public void onLoadMoreSuccess(String data, LoadMore loadMore) {
-//        adapter.notifyItemRangeChanged(this.data.size() - 1, 2);
-        adapter.addData(Arrays.asList(data), true);
+        adapter.addData(Arrays.asList(data));
         mHandler.sendMessageDelayed(Message.obtain(), 100);
     }
 
@@ -85,29 +80,15 @@ public class TestActivity extends AppCompatActivity implements LoadMoreFooter
         }, 200);
     }
 
-    @Override
-    public void onItemClick(View itemView, int position) {
-        Log.e("TAG", "onItemClick: " + adapter.getDataSize() + " - " +
-                position + " - " + adapter.getItemCount());
-    }
-
-    private class TestAdapter extends RecyclerAdapter<String> {
+    private class TestAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
 
         public TestAdapter(List<String> data) {
-            super(data);
+            super(R.layout.atest, data);
         }
 
         @Override
-        public RecyclerViewHolder onAbsCreateViewHolder(ViewGroup parent, int viewType) {
-            return new RecyclerViewHolder<String>(LayoutInflater.from(TestActivity.this).inflate
-                    (R.layout.atest, parent, false)) {
-                @Override
-                public void bindView(String data) {
-                    View childAt = ((FrameLayout) itemView).getChildAt(0);
-                    ((TextView) childAt).setText(data);
-                }
-            };
-
+        protected void convert(@NotNull BaseViewHolder baseViewHolder, String s) {
+            baseViewHolder.setText(R.id.tv_text, s);
         }
     }
 

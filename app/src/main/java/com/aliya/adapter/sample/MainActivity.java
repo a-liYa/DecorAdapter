@@ -3,10 +3,6 @@ package com.aliya.adapter.sample;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -22,12 +18,18 @@ import com.aliya.adapter.sample.activity.DecorAdapterLoadMoreSampleActivity;
 import com.aliya.adapter.sample.activity.EmptyPageSampleActivity;
 import com.aliya.adapter.sample.activity.OverlaySampleActivity;
 import com.aliya.adapter.sample.activity.StaggeredSampleActivity;
+import com.aliya.adapter.sample.activity.Test2Activity;
 import com.aliya.adapter.sample.activity.TestActivity;
 import com.aliya.adapter.sample.activity.TestRefreshActivity;
 import com.aliya.adapter.sample.decoration.SubListItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -45,7 +47,8 @@ public class MainActivity extends AppCompatActivity {
         items.add(new Entity("悬浮吸顶 - 示例", OverlaySampleActivity.class));
         items.add(new Entity("Adapter空页面 - 示例", EmptyPageSampleActivity.class));
         items.add(new Entity("测试 - 下拉刷新", TestRefreshActivity.class));
-        items.add(new Entity("测试 - header footer 异常", TestActivity.class));
+        items.add(new Entity("测试 - footer加载 异常", TestActivity.class));
+        items.add(new Entity("测试 - footer加载 异常，三方库", Test2Activity.class));
     }
 
     @Override

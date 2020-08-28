@@ -27,4 +27,5 @@ dependencies {
     implementation deps.androidx.constraintlayout
     implementation deps.android.material
 
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
 }

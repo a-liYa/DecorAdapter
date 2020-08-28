@@ -9,7 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.StaggeredSampleActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -42,7 +41,13 @@
             android:name=".activity.TestRefreshActivity"
             android:label="测试下拉刷新" />
         <activity
+            android:name=".activity.StaggeredSampleActivity"
+            android:label="瀑布流样式" />
+        <activity
             android:name=".activity.TestActivity"
+            android:label="测试 header footer 异常" />
+        <activity
+            android:name=".activity.Test2Activity"
             android:label="测试 header footer 异常" />
     </application>
 

@@ -4,8 +4,7 @@ buildscript {
     repositories {
         apply from: "https://gitee.com/a_liYa/gradleconfig/raw/master/dependency/versions.gradle"
         addAliyunRepos(repositories)
-        google()
-//        addRepos(repositories)
+        addRepos(repositories)
     }
     dependencies {
 //        classpath deps.gradle_plugin
@@ -18,8 +17,8 @@ buildscript {
 allprojects {
     repositories {
         addAliyunRepos(repositories)
-        google()
-//        addRepos(repositories)
+        addRepos(repositories)
+        maven { url 'https://jitpack.io' }
     }
 
     tasks.withType(Javadoc) {

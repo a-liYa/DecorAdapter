@@ -1,11 +1,12 @@
 package com.aliya.adapter;
 
-import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * {@link RecyclerView.ViewHolder}的拓展, 结合{@link RecyclerAdapter}使用

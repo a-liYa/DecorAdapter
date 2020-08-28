@@ -1,11 +1,5 @@
 package com.aliya.adapter;
 
-import androidx.annotation.CallSuper;
-import androidx.collection.SparseArrayCompat;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.RecyclerView.ViewHolder;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -14,6 +8,13 @@ import com.aliya.adapter.click.ItemLongClickCallback;
 import com.aliya.adapter.click.OnItemClickListener;
 import com.aliya.adapter.click.OnItemLongClickListener;
 import com.aliya.adapter.page.PageItem;
+
+import androidx.annotation.CallSuper;
+import androidx.collection.SparseArrayCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.ViewHolder;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 /**
  * {@link RecyclerView.Adapter}的装饰者

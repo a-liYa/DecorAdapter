@@ -1,14 +1,15 @@
 package com.aliya.adapter;
 
+import android.view.View;
+import android.view.ViewGroup;
+
+import java.util.List;
+
 import androidx.annotation.CallSuper;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
-import android.view.View;
-import android.view.ViewGroup;
-
-import java.util.List;
 
 /**
  * Recycler.Adapter的封装, extends {@link DecorAdapter}

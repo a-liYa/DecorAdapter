@@ -4,9 +4,10 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Build;
+import android.util.TypedValue;
+
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
-import android.util.TypedValue;
 
 /**
  * 分割线参数相关

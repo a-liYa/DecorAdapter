@@ -2,16 +2,17 @@ package com.aliya.adapter.divider;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.aliya.adapter.OverlayViewHolder;
 import com.aliya.adapter.RecyclerAdapter;
+
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import static android.view.View.MeasureSpec.makeMeasureSpec;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;

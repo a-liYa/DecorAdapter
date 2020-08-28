@@ -1,11 +1,12 @@
 package com.aliya.adapter;
 
 import android.graphics.Canvas;
+import android.view.View;
+import android.view.ViewGroup;
+
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import android.view.View;
-import android.view.ViewGroup;
 
 /**
  * 悬浮、吸顶功能 - 标识 ViewHolder

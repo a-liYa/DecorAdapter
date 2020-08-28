@@ -3,12 +3,13 @@ package com.aliya.adapter.page;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
-import androidx.annotation.CallSuper;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.RecyclerView.SimpleOnItemTouchListener;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewParent;
+
+import androidx.annotation.CallSuper;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.SimpleOnItemTouchListener;
 
 /**
  * RefreshPage

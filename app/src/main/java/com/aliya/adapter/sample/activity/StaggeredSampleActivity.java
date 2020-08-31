@@ -1,9 +1,6 @@
 package com.aliya.adapter.sample.activity;
 
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -16,6 +13,10 @@ import com.aliya.adapter.sample.adapter.OriginalAdapterSample;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 public class StaggeredSampleActivity extends AppCompatActivity {
 

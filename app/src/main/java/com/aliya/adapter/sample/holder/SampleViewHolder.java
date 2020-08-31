@@ -1,11 +1,12 @@
 package com.aliya.adapter.sample.holder;
 
-import androidx.annotation.NonNull;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.aliya.adapter.RecyclerViewHolder;
 import com.aliya.adapter.sample.R;
+
+import androidx.annotation.NonNull;
 
 /**
  * 简单示例 - ViewHolder

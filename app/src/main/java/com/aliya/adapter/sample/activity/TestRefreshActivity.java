@@ -1,10 +1,6 @@
 package com.aliya.adapter.sample.activity;
 
 import android.os.Bundle;
-import com.google.android.material.appbar.AppBarLayout;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +13,13 @@ import com.aliya.adapter.sample.R;
 import com.aliya.adapter.sample.callback.LoadingCallBack;
 import com.aliya.adapter.sample.page.LoadMoreFooter;
 import com.aliya.adapter.sample.page.Refresh2Header;
+import com.google.android.material.appbar.AppBarLayout;
 
 import java.util.ArrayList;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * 测试下拉刷新与AppBar冲突

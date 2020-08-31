@@ -1,6 +1,5 @@
 package com.aliya.adapter.sample.adapter;
 
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -8,6 +7,8 @@ import android.widget.TextView;
 import com.aliya.adapter.sample.R;
 
 import java.util.List;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * 原始Adapter常用方式 - 示例

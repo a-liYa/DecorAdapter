@@ -1,12 +1,13 @@
 package com.aliya.adapter.sample.holder;
 
-import androidx.annotation.NonNull;
 import android.text.TextUtils;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.aliya.adapter.page.PageItem;
 import com.aliya.adapter.sample.R;
+
+import androidx.annotation.NonNull;
 
 /**
  * 页眉的实现 - 示例

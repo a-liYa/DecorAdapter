@@ -1,6 +1,5 @@
 package com.aliya.adapter.sample.adapter;
 
-import androidx.annotation.NonNull;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -9,6 +8,8 @@ import com.aliya.adapter.RecyclerViewHolder;
 import com.aliya.adapter.sample.R;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
 
 /**
  * RecyclerAdapter 的简单示例

@@ -2,9 +2,6 @@ package com.aliya.adapter.sample.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 
 import com.aliya.adapter.RecyclerAdapter;
@@ -17,6 +14,10 @@ import com.aliya.adapter.sample.holder.HeaderHolderSample;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * 空页面 示例 - Activity

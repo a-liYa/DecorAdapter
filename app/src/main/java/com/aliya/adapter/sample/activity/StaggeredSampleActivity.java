@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.aliya.adapter.DecorAdapter;
 import com.aliya.adapter.click.OnItemClickListener;
 import com.aliya.adapter.click.OnItemLongClickListener;
+import com.aliya.adapter.divider.StaggeredBuilder;
 import com.aliya.adapter.sample.R;
 import com.aliya.adapter.sample.adapter.OriginalAdapterSample;
 
@@ -31,6 +32,7 @@ public class StaggeredSampleActivity extends AppCompatActivity {
         recycle = findViewById(R.id.recycler);
         recycle.setLayoutManager(
                 new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        recycle.addItemDecoration(new StaggeredBuilder(this).setSpace(5).setIncludeEdge(true).build());
         List<String> list = new ArrayList<>();
 
         for (int i = 0; i < 21; i++) {

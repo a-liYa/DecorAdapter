@@ -134,8 +134,8 @@ class Adapter extends RecyclerAdapter<Entity> {
 
 参见：  
 
-* 实现一 [RefreshHeader](./app/src/main/java/com/aliya/adapter/sample/page/RefreshHeader.java)
-* 实现二 [Refresh2Header](./app/src/main/java/com/aliya/adapter/sample/page/Refresh2Header.java)
+* 实现一 [RefreshHeader](app/src/main/java/com/aliya/adapter/sample/page/RefreshHeader.java)
+* 实现二 [Refresh2Header](app/src/main/java/com/aliya/adapter/sample/page/Refresh2Header.java)
 
 ### 分割线的用法
 
@@ -149,3 +149,7 @@ recycleView.addItemDecoration(
 		.build()
 );
 ```
+
+### UML
+
+![UML](doc/DecorAdapter_UML.png)

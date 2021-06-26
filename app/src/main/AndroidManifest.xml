@@ -49,6 +49,9 @@
         <activity
             android:name=".activity.Test2Activity"
             android:label="测试 header footer 异常" />
+        <activity
+            android:name=".activity.AnimationActivity"
+            android:label="测试 RecyclerView 动画效果" />
     </application>
 
 </manifest>

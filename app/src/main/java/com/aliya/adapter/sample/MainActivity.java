@@ -12,6 +12,7 @@ import com.aliya.adapter.RecyclerViewHolder;
 import com.aliya.adapter.divider.ListBuilder;
 import com.aliya.adapter.sample.activity.AdapterDiffDataSampleActivity;
 import com.aliya.adapter.sample.activity.AdapterUnifyDataSampleActivity;
+import com.aliya.adapter.sample.activity.AnimationActivity;
 import com.aliya.adapter.sample.activity.DecorAdapterGridSampleActivity;
 import com.aliya.adapter.sample.activity.DecorAdapterListSampleActivity;
 import com.aliya.adapter.sample.activity.DecorAdapterLoadMoreSampleActivity;
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         items.add(new Entity("测试 - 下拉刷新", TestRefreshActivity.class));
         items.add(new Entity("测试 - footer加载 异常", TestActivity.class));
         items.add(new Entity("测试 - footer加载 异常，三方库", Test2Activity.class));
+        items.add(new Entity("测试 RecyclerView 动画效果", AnimationActivity.class));
     }
 
     @Override

@@ -27,5 +27,3 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     compileOnly deps.androidx.recyclerview
 }
-
-apply from: "${rootDir}/publish.gradle"

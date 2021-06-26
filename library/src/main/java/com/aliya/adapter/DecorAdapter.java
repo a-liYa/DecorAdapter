@@ -63,7 +63,7 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
             if (tag instanceof ViewHolder) {
                 ViewHolder holder = (ViewHolder) tag;
                 if (mOnItemClickListener != null || holder instanceof ItemClickCallback) {
-                    int position = holder.getLayoutPosition();
+                    int position = holder.getBindingAdapterPosition();
                     if (position == RecyclerView.NO_POSITION) {
                         return; // 说明已经是废弃的Item
                     }
@@ -90,7 +90,7 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
             if (tag instanceof ViewHolder) {
                 ViewHolder holder = (ViewHolder) tag;
                 if (mOnItemLongClickListener != null || holder instanceof ItemLongClickCallback) {
-                    int position = holder.getLayoutPosition();
+                    int position = holder.getBindingAdapterPosition();
                     if (position == RecyclerView.NO_POSITION) {
                         return false; // 说明已经是废弃的Item
                     }
@@ -449,7 +449,7 @@ public class DecorAdapter extends RecyclerView.Adapter implements CompatAdapter 
         }
         ViewGroup.LayoutParams lp = holder.itemView.getLayoutParams();
         if (lp instanceof StaggeredGridLayoutManager.LayoutParams) {
-            if (isInnerPosition(holder.getLayoutPosition())) {
+            if (isInnerPosition(holder.getBindingAdapterPosition())) {
                 ((StaggeredGridLayoutManager.LayoutParams) lp).setFullSpan(true);
             }
         }

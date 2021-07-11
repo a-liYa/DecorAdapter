@@ -27,6 +27,7 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':library')
+    implementation project(':decor-adapter')
     implementation deps.androidx.appcompat
     implementation deps.androidx.recyclerview
     implementation deps.androidx.constraintlayout

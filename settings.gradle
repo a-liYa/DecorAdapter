@@ -1,1 +1,2 @@
+include ':decor-adapter'
 include ':app', ':library'

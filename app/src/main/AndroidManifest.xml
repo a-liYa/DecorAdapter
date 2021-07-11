@@ -52,6 +52,10 @@
         <activity
             android:name=".activity.AnimationActivity"
             android:label="测试 RecyclerView 动画效果" />
+
+        <activity
+            android:name=".v2.RecyclerAdapterSampleActivity"
+            android:label="RecyclerAdapter 示例" />
     </application>
 
 </manifest>

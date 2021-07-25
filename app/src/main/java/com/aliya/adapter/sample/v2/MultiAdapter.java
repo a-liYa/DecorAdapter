@@ -1,5 +1,6 @@
 package com.aliya.adapter.sample.v2;
 
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.aliya.adapter.sample.R;
@@ -56,6 +57,11 @@ public class MultiAdapter extends RecyclerAdapter {
         return new NullHolder(parent);
     }
 
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        super.onBindViewHolder(holder, position);
+    }
+
     class StringHolder extends RecyclerViewHolder<String> {
 
         private final ItemDemoSampleBinding mViewBinding;
@@ -100,5 +106,13 @@ public class MultiAdapter extends RecyclerAdapter {
             super.onBindData(data);
             mViewBinding.tv.setText("我是Null类型 - " + data);
         }
+    }
+
+    class EmptyHolder extends RecyclerView.ViewHolder {
+
+        public EmptyHolder(@NonNull View itemView) {
+            super(itemView);
+        }
+
     }
 }

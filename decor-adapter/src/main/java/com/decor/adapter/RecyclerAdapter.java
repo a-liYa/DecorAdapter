@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 /**
  * {@link RecyclerView.Adapter}的装饰者
  * <p>
- * 实现功能：
+ * 扩展功能：
  * 1. 设置OnItemClick     {@link #setOnItemClickListener(OnItemClickListener)}
  * 2. 设置OnItemLongClick {@link #setOnItemLongClickListener(OnItemLongClickListener)}
  *

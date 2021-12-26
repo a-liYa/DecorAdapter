@@ -55,6 +55,15 @@ public abstract class RecyclerViewHolder<T> extends RecyclerView.ViewHolder {
     public void bindView(T data) {
     }
 
+
+    /**
+     * 回收资源的最好时机
+     * 1. 在清除 ViewHolder 的内部数据并将其发送给 RecycledViewPool 之前回调此方法，
+     * 2. 如果从 RecycledViewPool 中取出复用的 ViewHolder 需要重新调用 onBindViewHolder 绑定数据
+     */
+    public void onViewRecycled() {
+    }
+
     /**
      * Inflate a new view hierarchy from the specified xml resource
      *
@@ -67,5 +76,4 @@ public abstract class RecyclerViewHolder<T> extends RecyclerView.ViewHolder {
     protected static View inflate(@LayoutRes int resource, ViewGroup parent, boolean attachToRoot) {
         return LayoutInflater.from(parent.getContext()).inflate(resource, parent, attachToRoot);
     }
-
 }

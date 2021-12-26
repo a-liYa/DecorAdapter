@@ -124,6 +124,13 @@ public abstract class RecyclerAdapter<T> extends DecorAdapter {
     }
 
     @Override
+    public void onViewRecycled(ViewHolder holder) {
+        if (holder instanceof RecyclerViewHolder) {
+            ((RecyclerViewHolder)holder).onViewRecycled();
+        }
+    }
+
+    @Override
     public final int getItemViewType(int position) {
         int viewType = super.getItemViewType(position);
         if (viewType == DEFAULT_VIEW_TYPE) {
